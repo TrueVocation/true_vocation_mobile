@@ -5,3 +5,5 @@ import 'internal/application.dart';
 void main() {
   runApp(Application());
 }
+
+//toktanay kak ono est
