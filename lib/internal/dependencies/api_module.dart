@@ -3,7 +3,7 @@ import 'package:true_vocation_mobile/data/api/api_util.dart';
 import 'package:true_vocation_mobile/data/api/service/university_service.dart';
 
 class ApiModule {
-  static ApiUtil _apiUtil;
+  static late ApiUtil _apiUtil;
 
   static ApiUtil apiUtil(){
     if (_apiUtil == null){

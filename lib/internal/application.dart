@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:true_vocation_mobile/presentation/home_page.dart';
+import 'package:true_vocation_mobile/presentation/home/home_page.dart';
 
 class Application extends StatelessWidget {
   const Application({Key? key}) : super(key: key);

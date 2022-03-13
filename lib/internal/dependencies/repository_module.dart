@@ -4,7 +4,7 @@ import 'package:true_vocation_mobile/domain/repository/university_repository.dar
 import 'package:true_vocation_mobile/internal/dependencies/api_module.dart';
 
 class RepositoryModule {
-  static UniversityRepository _universityRepository;
+  static late UniversityRepository _universityRepository;
 
   static UniversityRepository universityRepository(){
     if (_universityRepository == null) {
