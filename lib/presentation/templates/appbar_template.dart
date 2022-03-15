@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:true_vocation_mobile/utils/colors.dart';
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomAppBar({Key? key, this.name, this.leading}) : super(key: key);
+
+  final bool? leading;
+  final String? name;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: AppColors.backgroundColor,
+      centerTitle: true,
+      title: Text(name!),
+      titleTextStyle: TextStyle(
+        color: AppColors.blackColor,
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'Roboto',
+      ),
+      elevation: 0,
+      bottomOpacity: 0,
+      toolbarHeight: 64,
+      automaticallyImplyLeading: false,
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_rounded),
+        color: leading! ? AppColors.blackColor : AppColors.transparent,
+        onPressed: () => Navigator.pop(context),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(64);
+}
