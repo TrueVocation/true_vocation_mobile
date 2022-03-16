@@ -23,10 +23,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       bottomOpacity: 0,
       toolbarHeight: 64,
       automaticallyImplyLeading: false,
-      leading: IconButton(
+      leading: leading!
+          ? IconButton(
         icon: const Icon(Icons.arrow_back_rounded),
-        color: leading! ? AppColors.blackColor : AppColors.transparent,
+        color: AppColors.blackColor,
         onPressed: () => Navigator.pop(context),
+      )
+          : IconButton(
+        icon: const Icon(Icons.arrow_back_rounded),
+        color: AppColors.transparent,
+        onPressed: () {},
       ),
     );
   }
