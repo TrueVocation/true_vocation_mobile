@@ -40,35 +40,32 @@ class _HomeState extends State<Home> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-          child: Container(
-            child: bottomNavigationBar(),
-            color: AppColors.whiteColor,
-          )),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+        child: Container(
+          child: bottomNavigationBar(),
+          color: AppColors.whiteColor,
+        )),
     );
   }
 
   Widget bottomNavigationBar() {
-    return Container(
-      margin: const EdgeInsets.only(left: 32, right: 32),
-      child: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Главная"),
-          BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: "Закладки"),
-          BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: "Новости"),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.greenColor,
-        unselectedItemColor: AppColors.greyColor,
-        onTap: _onItemTapped,
-        elevation: 0,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        iconSize: 24,
-      ),
+    return BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Главная"),
+        BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: "Закладки"),
+        BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: "Новости"),
+      ],
+      currentIndex: _selectedIndex,
+      selectedItemColor: AppColors.greenColor,
+      unselectedItemColor: AppColors.greyColor,
+      onTap: _onItemTapped,
+      elevation: 0,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      iconSize: 24,
     );
   }
 }

@@ -26,9 +26,9 @@ class _MainNewsPageState extends State<MainNewsPage> {
             children: [
               Container(
                 margin: const EdgeInsets.only(right: 24),
-                child: const Text(
+                child: Text(
                   'На сегодня',
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: AppColors.greyColor),
                 ),
               ),
             ],
