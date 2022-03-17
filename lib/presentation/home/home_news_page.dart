@@ -16,9 +16,10 @@ class _HomeNewsPageState extends State<HomeNewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         name: "Новости",
         leading: false,
+        color: AppColors.backgroundColor,
       ),
       backgroundColor: AppColors.transparent,
       body: CustomPageScroll(
