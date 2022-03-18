@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:true_vocation_mobile/presentation/news/news_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
+import 'package:true_vocation_mobile/presentation/test/preview.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 
 class HomePage extends StatelessWidget {
@@ -36,7 +37,7 @@ class HomePage extends StatelessWidget {
         onTap: (){
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const MainNewsPage()),
+            MaterialPageRoute(builder: (context) => const PreviewTestPage()),
           );
         },
         child: const CustomContainer(
@@ -45,7 +46,7 @@ class HomePage extends StatelessWidget {
           width: 50,
           child: Center(
             child: Text(
-              'Item 3',
+              'Тест',
             ),
           ),
         ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:true_vocation_mobile/presentation/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/home/home_news_page.dart';
 import 'package:true_vocation_mobile/presentation/home/home_page.dart';
-import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
+import 'package:true_vocation_mobile/utils/icons.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -36,23 +38,44 @@ class _HomeState extends State<Home> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-        child: Container(
-          child: bottomNavigationBar(),
-          color: AppColors.whiteColor,
-        )),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          child: Container(
+            child: bottomNavigationBar(),
+            color: AppColors.whiteColor,
+          )),
     );
   }
 
   Widget bottomNavigationBar() {
     return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Главная"),
-        BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: "Закладки"),
-        BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: "Новости"),
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+            icon: CustomSvgIcon(
+              preset: AppIcons.homeIcon,
+              color: _selectedIndex == 0
+                  ? AppColors.greenColor
+                  : AppColors.greyColor,
+            ),
+            label: "Главная"),
+        BottomNavigationBarItem(
+            icon: CustomSvgIcon(
+              preset: AppIcons.bookmarksIcon,
+              color: _selectedIndex == 1
+                  ? AppColors.greenColor
+                  : AppColors.greyColor,
+            ),
+            label: "Главная"),
+        BottomNavigationBarItem(
+            icon: CustomSvgIcon(
+              preset: AppIcons.newsIcon,
+              color: _selectedIndex == 2
+                  ? AppColors.greenColor
+                  : AppColors.greyColor,
+            ),
+            label: "Главная"),
       ],
       currentIndex: _selectedIndex,
       selectedItemColor: AppColors.greenColor,

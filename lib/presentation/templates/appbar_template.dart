@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:true_vocation_mobile/presentation/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../../utils/icons.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({Key? key, this.name, this.leading, this.color}) : super(key: key);
@@ -26,7 +29,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       leading: leading!
           ? IconButton(
-        icon: const Icon(Icons.arrow_back_rounded),
+        icon: CustomSvgIcon(
+          preset: AppIcons.backArrow2,
+        ),
         color: AppColors.blackColor,
         onPressed: () => Navigator.pop(context),
       )
