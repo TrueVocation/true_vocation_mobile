@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:true_vocation_mobile/presentation/news/news_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_illustration_widget.dart';
 import 'package:true_vocation_mobile/presentation/test/test_page.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/illustrations.dart';
@@ -29,7 +30,9 @@ class _PreviewTestPageState extends State<PreviewTestPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Center(
-              child: Image.asset(AppIllustration.previewTest),
+              child: CustomIllustration(
+                preset: AppIllustration.previewTest,
+              ),
             ),
             Column(
               children: [

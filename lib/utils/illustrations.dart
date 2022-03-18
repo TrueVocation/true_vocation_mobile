@@ -1,3 +1,5 @@
 class AppIllustration {
-  static String previewTest = "assets/illustration/preview_test.png";
+  static String way = "assets/illustration/";
+  static String previewTest = "preview_test.png";
+  static String nothingHere = "nothing_here.png";
 }

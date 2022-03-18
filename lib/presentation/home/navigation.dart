@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:true_vocation_mobile/presentation/custom_svg_icon.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/home/home_news_page.dart';
 import 'package:true_vocation_mobile/presentation/home/home_page.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';

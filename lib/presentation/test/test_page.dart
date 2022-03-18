@@ -63,16 +63,15 @@ class _MainTestPageState extends State<MainTestPage> {
       body: CustomPageScroll(
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+            margin: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
             child: ListTile(
               contentPadding: const EdgeInsets.symmetric(horizontal: 4),
-              leading: Icon(Icons.info_outline),
+              leading: Icon(Icons.info_outline, color: AppColors.greyColor,),
               title: Text(
                 'Вам предлагается продолжить 24 фразы, выбирая из трёх вариантов ответов в каждом. Закончите утверждение, выбрав наиболее подходящий именно для Вас ответ. Отвечайте максимально честно, не пытаясь подстроиться под желания окружающих, т.к. от этого напрямую зависит достоверность результата.',
                 style: TextStyle(
                   color: AppColors.greyColor,
                   fontSize: 12,
-                  fontFamily: 'Roboto'
                 ),
               ),
             ),
@@ -92,15 +91,17 @@ class _MainTestPageState extends State<MainTestPage> {
         final question = questions[index];
         return Column(
           children: <Widget>[
-            Text(
-              question.question,
-              style: TextStyle(
-                color: AppColors.blackColor,
-                fontSize: 16,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.normal
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Text(
+                question.question,
+                style: TextStyle(
+                  color: AppColors.blackColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
             getAnswers(question.answers, index),
           ],
@@ -142,7 +143,6 @@ class _MainTestPageState extends State<MainTestPage> {
         style: TextStyle(
             color: map[questionIndex] != answerIndex ?  AppColors.blackColor : AppColors.blueColor,
             fontSize: 14,
-            fontFamily: 'Roboto',
             fontWeight: FontWeight.normal
         ),
       ),

@@ -10,6 +10,7 @@ class Application extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'True Vocation',
       theme: ThemeData(
+        fontFamily: 'Roboto',
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
