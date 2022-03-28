@@ -48,7 +48,6 @@ class _MainTestPageState extends State<MainTestPage> {
     ], 'В книге или кинофильме меня больше всего привлекает:'),
   ];
 
-  int? _value;
   var map = {};
 
   @override
@@ -116,7 +115,7 @@ class _MainTestPageState extends State<MainTestPage> {
       borderRadius: const BorderRadius.all(Radius.circular(20)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
+        children: [
           ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             padding: const EdgeInsets.symmetric(vertical: 8),

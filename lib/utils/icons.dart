@@ -6,4 +6,5 @@ class AppIcons {
   static String newsIcon = "news.svg";
   static String backArrow = "back_arrow.svg";
   static String backArrow2 = "back_arrow2.svg";
+  static String search = "search.svg";
 }
