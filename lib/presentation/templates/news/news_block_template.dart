@@ -15,13 +15,14 @@ class NewsBlockTemplate extends StatelessWidget {
           ),
           context: context,
           builder: (BuildContext context) {
-            return const CustomModalBottomSheet(
-              children: <Widget>[
+            return CustomModalBottomSheet(
+              children: [
                 Icon(
                   Icons.horizontal_rule_rounded,
                   size: 48,
+                  color: AppColors.greyColor,
                 ),
-                Text(
+                const Text(
                   'Правительство выделило 20 000 грантов на научно-технические направления',
                   style: TextStyle(
                       fontSize: 14,
@@ -29,10 +30,10 @@ class NewsBlockTemplate extends StatelessWidget {
                       fontFamily: 'Roboto'),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
-                Expanded(
+                const Expanded(
                   flex: 1,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
@@ -47,7 +48,7 @@ class NewsBlockTemplate extends StatelessWidget {
                       Президент поручил до конца 2022 года обеспечить строительство новых студенческих общежитий не менее чем на 75 тысяч мест. Это позволит полностью решить проблему с местами на ближайшие годы.
                       ''',
                       style: TextStyle(fontSize: 12, fontFamily: 'Roboto'),
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.start,
                     ),
                   ),
                 ),

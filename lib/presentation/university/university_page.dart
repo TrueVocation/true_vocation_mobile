@@ -4,6 +4,7 @@ import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
+import 'package:true_vocation_mobile/presentation/university/about_university.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 
@@ -169,7 +170,7 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         'Международный университет информационных технологий — ведущее высшее учебное заведение в Центрально - Азиатском регионе в области подготовки квалифицированных, международно - признанных IT специалистов.',
         'г. Алматы, ул. Манаса 34/1',
         'код ВУЗа: 190',
-        'https://w0.pngwave.com/png/21/482/international-it-university-polytechnic-university-of-turin-tashkent-university-of-information-technologies-university-of-valencia-i-t-logo-png-clip-art.png',
+        'https://cdn-icons-png.flaticon.com/512/2231/2231696.png',
         '900 000',
         false,
         true,
@@ -264,44 +265,54 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
               separatorBuilder: (_, index) => const SizedBox(
                 height: 8,
               ),
-              itemBuilder: (context, index) => CustomContainer(
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Expanded(
-                          child: ClipRRect(
-                            child: Image.network(universities[index].logo),
-                            borderRadius: const BorderRadius.all(Radius.circular(5)),
-                          )
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Expanded(
-                        flex: 3,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              universities[index].name,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(color: AppColors.blackColor, fontWeight: FontWeight.normal, fontSize: 14, fontFamily: 'Roboto'),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              'Количество специальностей: ' + universities[index].specialities.length.toString(),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: AppColors.greyColor, fontWeight: FontWeight.normal, fontSize: 12, fontFamily: 'Roboto'),
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AboutUniversity(
+                      university: universities[index],
+                    )),
+                  );
+                },
+                child: CustomContainer(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                            child: ClipRRect(
+                              child: Image.network(universities[index].logo),
+                              borderRadius: const BorderRadius.all(Radius.circular(5)),
                             )
-                          ],
                         ),
-                      )
-                    ],
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                universities[index].name,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(color: AppColors.blackColor, fontWeight: FontWeight.normal, fontSize: 14, fontFamily: 'Roboto'),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                'Количество специальностей: ' + universities[index].specialities.length.toString(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: AppColors.greyColor, fontWeight: FontWeight.normal, fontSize: 12, fontFamily: 'Roboto'),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
