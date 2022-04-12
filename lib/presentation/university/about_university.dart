@@ -5,6 +5,7 @@ import 'package:true_vocation_mobile/domain/model/university.dart';
 import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
+import 'package:true_vocation_mobile/utils/shadows.dart';
 
 class AboutUniversity extends StatelessWidget {
   const AboutUniversity({Key? key, this.university}) : super(key: key);
@@ -95,26 +96,30 @@ class AboutUniversity extends StatelessWidget {
   }
 
   Widget logo() {
-    return ClipRRect(
-      child: SizedBox(
-        height: 128,
-        width: 128,
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.blackColor.withOpacity(0.1),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Image.network(
-                university!.logo,
-              ),
-            ),
+    return Container(
+      width: 128,
+      height: 128,
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        color: AppColors.transparent,
+        boxShadow: [
+          BoxShadow(
+            blurStyle: BlurStyle.outer,
+            color: AppColors.blackColor.withOpacity(0.04),
+            blurRadius: 2,
+          ),
+        ],
+      ),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaY: 2, sigmaX: 2),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Image.network(
+            university!.logo,
           ),
         ),
       ),
-      borderRadius: BorderRadius.circular(10),
     );
   }
 }

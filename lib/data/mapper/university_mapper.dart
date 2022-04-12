@@ -4,8 +4,17 @@ import 'package:true_vocation_mobile/domain/model/university.dart';
 class UniversityMapper {
   static University fromApi(ApiUniversity university) {
     return University(
-      name: university.name,
-
+        university.name,
+        university.description,
+        university.address,
+        university.code,
+        university.logo,
+        university.averagePrice,
+        university.hostel,
+        university.militaryDepartment,
+        university.status,
+        university.specialities,
+        university.images,
     );
   }
 }

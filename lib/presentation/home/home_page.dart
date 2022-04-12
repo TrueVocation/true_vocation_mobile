@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:true_vocation_mobile/presentation/news/news_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/test/preview.dart';
@@ -32,10 +31,10 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  List<Widget> getCards(BuildContext context){
+  List<Widget> getCards(BuildContext context) {
     return <Widget>[
       GestureDetector(
-        onTap: (){
+        onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const PreviewTestPage()),
@@ -53,7 +52,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       GestureDetector(
-        onTap: (){
+        onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const MainUniversityPage()),

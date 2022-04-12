@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:true_vocation_mobile/presentation/news/news_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_illustration_widget.dart';
 import 'package:true_vocation_mobile/presentation/test/test_page.dart';
@@ -24,7 +23,8 @@ class _PreviewTestPageState extends State<PreviewTestPage> {
         color: AppColors.yellowColor,
       ),
       body: Container(
-        padding: const EdgeInsets.only(left: 32, right: 32, top: 48, bottom: 48),
+        padding:
+            const EdgeInsets.only(left: 32, right: 32, top: 48, bottom: 48),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -46,7 +46,9 @@ class _PreviewTestPageState extends State<PreviewTestPage> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 12,),
+                const SizedBox(
+                  height: 12,
+                ),
                 Text(
                   'известный профориентационный тест, отличающийся простотой прохождения и достоверностью результатов. Подходит для школьников, выпускников школ, абитуриентов и даже взрослых людей. Исследует 6 склонностей к различным направлениям профессиональной деятельности с учётом степени их выраженности.',
                   style: TextStyle(

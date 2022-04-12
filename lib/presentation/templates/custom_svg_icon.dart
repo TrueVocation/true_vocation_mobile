@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 
 class CustomSvgIcon extends StatelessWidget {
@@ -12,7 +11,7 @@ class CustomSvgIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(
-      AppIcons.way+preset!,
+      AppIcons.way + preset!,
       color: color,
     );
   }
