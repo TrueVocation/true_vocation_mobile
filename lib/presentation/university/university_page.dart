@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:true_vocation_mobile/domain/model/speciality.dart';
 import 'package:true_vocation_mobile/domain/model/university.dart';
 import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
@@ -16,7 +17,6 @@ class MainUniversityPage extends StatefulWidget {
 }
 
 class _MainUniversityPageState extends State<MainUniversityPage> {
-  
   List<University> universities = [
     University(
         'Международной Университет Информационных Технологий',
@@ -27,18 +27,18 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         '900 000',
         false,
         true,
-        'акционированный',
-        [
-          Speciality('Вычеслительная Техника и Программное Обеспечение'),
-          Speciality('Информационные Системы'),
-          Speciality('Системная Информационная Безопасность'),
-        ],
-        [
-          Picture('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-        ]
-    ),
+        'акционированный', [
+      Speciality('Вычеслительная Техника и Программное Обеспечение', '', ''),
+      Speciality('Информационные Системы', '', ''),
+      Speciality('Системная Информационная Безопасность', '', ''),
+    ], [
+      Picture(
+          'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+    ]),
     University(
         'Международный университет информационных технологий',
         'Международный университет информационных технологий — ведущее высшее учебное заведение в Центрально - Азиатском регионе в области подготовки квалифицированных, международно - признанных IT специалистов.',
@@ -48,18 +48,18 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         '900 000',
         false,
         true,
-        'акционированный',
-        [
-          Speciality('Вычеслительная Техника и Программное Обеспечение'),
-          Speciality('Информационные Системы'),
-          Speciality('Системная Информационная Безопасность'),
-        ],
-        [
-          Picture('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-        ]
-    ),
+        'акционированный', [
+      Speciality('Вычеслительная Техника и Программное Обеспечение', '', ''),
+      Speciality('Информационные Системы', '', ''),
+      Speciality('Системная Информационная Безопасность', '', ''),
+    ], [
+      Picture(
+          'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+    ]),
     University(
         'IITU',
         'Международный университет информационных технологий — ведущее высшее учебное заведение в Центрально - Азиатском регионе в области подготовки квалифицированных, международно - признанных IT специалистов.',
@@ -69,18 +69,18 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         '900 000',
         false,
         true,
-        'акционированный',
-        [
-          Speciality('Вычеслительная Техника и Программное Обеспечение'),
-          Speciality('Информационные Системы'),
-          Speciality('Системная Информационная Безопасность'),
-        ],
-        [
-          Picture('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-        ]
-    ),
+        'акционированный', [
+      Speciality('Вычеслительная Техника и Программное Обеспечение', '', ''),
+      Speciality('Информационные Системы', '', ''),
+      Speciality('Системная Информационная Безопасность', '', ''),
+    ], [
+      Picture(
+          'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+    ]),
     University(
         'Международной Университет Информационных Технологий',
         'Международный университет информационных технологий — ведущее высшее учебное заведение в Центрально - Азиатском регионе в области подготовки квалифицированных, международно - признанных IT специалистов.',
@@ -90,18 +90,18 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         '900 000',
         false,
         true,
-        'акционированный',
-        [
-          Speciality('Вычеслительная Техника и Программное Обеспечение'),
-          Speciality('Информационные Системы'),
-          Speciality('Системная Информационная Безопасность'),
-        ],
-        [
-          Picture('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-        ]
-    ),
+        'акционированный', [
+      Speciality('Вычеслительная Техника и Программное Обеспечение', '', ''),
+      Speciality('Информационные Системы', '', ''),
+      Speciality('Системная Информационная Безопасность', '', ''),
+    ], [
+      Picture(
+          'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+    ]),
     University(
         'Международный университет информационных технологий',
         'Международный университет информационных технологий — ведущее высшее учебное заведение в Центрально - Азиатском регионе в области подготовки квалифицированных, международно - признанных IT специалистов.',
@@ -111,18 +111,18 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         '900 000',
         false,
         true,
-        'акционированный',
-        [
-          Speciality('Вычеслительная Техника и Программное Обеспечение'),
-          Speciality('Информационные Системы'),
-          Speciality('Системная Информационная Безопасность'),
-        ],
-        [
-          Picture('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-        ]
-    ),
+        'акционированный', [
+      Speciality('Вычеслительная Техника и Программное Обеспечение', '', ''),
+      Speciality('Информационные Системы', '', ''),
+      Speciality('Системная Информационная Безопасность', '', ''),
+    ], [
+      Picture(
+          'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+    ]),
     University(
         'IITU',
         'Международный университет информационных технологий — ведущее высшее учебное заведение в Центрально - Азиатском регионе в области подготовки квалифицированных, международно - признанных IT специалистов.',
@@ -132,18 +132,18 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         '900 000',
         false,
         true,
-        'акционированный',
-        [
-          Speciality('Вычеслительная Техника и Программное Обеспечение'),
-          Speciality('Информационные Системы'),
-          Speciality('Системная Информационная Безопасность'),
-        ],
-        [
-          Picture('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-        ]
-    ),
+        'акционированный', [
+      Speciality('Вычеслительная Техника и Программное Обеспечение', '', ''),
+      Speciality('Информационные Системы', '', ''),
+      Speciality('Системная Информационная Безопасность', '', ''),
+    ], [
+      Picture(
+          'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+    ]),
     University(
         'Международной Университет Информационных Технологий',
         'Международный университет информационных технологий — ведущее высшее учебное заведение в Центрально - Азиатском регионе в области подготовки квалифицированных, международно - признанных IT специалистов.',
@@ -153,18 +153,18 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         '900 000',
         false,
         true,
-        'акционированный',
-        [
-          Speciality('Вычеслительная Техника и Программное Обеспечение'),
-          Speciality('Информационные Системы'),
-          Speciality('Системная Информационная Безопасность'),
-        ],
-        [
-          Picture('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-        ]
-    ),
+        'акционированный', [
+      Speciality('Вычеслительная Техника и Программное Обеспечение', '', ''),
+      Speciality('Информационные Системы', '', ''),
+      Speciality('Системная Информационная Безопасность', '', ''),
+    ], [
+      Picture(
+          'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+    ]),
     University(
         'Международный университет информационных технологий',
         'Международный университет информационных технологий — ведущее высшее учебное заведение в Центрально - Азиатском регионе в области подготовки квалифицированных, международно - признанных IT специалистов.',
@@ -174,18 +174,18 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         '900 000',
         false,
         true,
-        'акционированный',
-        [
-          Speciality('Вычеслительная Техника и Программное Обеспечение'),
-          Speciality('Информационные Системы'),
-          Speciality('Системная Информационная Безопасность'),
-        ],
-        [
-          Picture('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-        ]
-    ),
+        'акционированный', [
+      Speciality('Вычеслительная Техника и Программное Обеспечение', '', ''),
+      Speciality('Информационные Системы', '', ''),
+      Speciality('Системная Информационная Безопасность', '', ''),
+    ], [
+      Picture(
+          'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+    ]),
     University(
         'IITU',
         'Международный университет информационных технологий — ведущее высшее учебное заведение в Центрально - Азиатском регионе в области подготовки квалифицированных, международно - признанных IT специалистов.',
@@ -195,20 +195,20 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         '900 000',
         false,
         true,
-        'акционированный',
-        [
-          Speciality('Вычеслительная Техника и Программное Обеспечение'),
-          Speciality('Информационные Системы'),
-          Speciality('Системная Информационная Безопасность'),
-        ],
-        [
-          Picture('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-          Picture('https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
-        ]
-    ),
+        'акционированный', [
+      Speciality('Вычеслительная Техника и Программное Обеспечение', '', ''),
+      Speciality('Информационные Системы', '', ''),
+      Speciality('Системная Информационная Безопасность', '', ''),
+    ], [
+      Picture(
+          'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+      Picture(
+          'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
+    ]),
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -231,17 +231,17 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
                   autocorrect: false,
                   autofocus: false,
                   decoration: InputDecoration(
-                    icon: CustomSvgIcon(
-                      preset: AppIcons.search,
-                      color: AppColors.greyColor,
-                    ),
-                    hintText: 'Поиск по имени',
-                    hintStyle: TextStyle(color: AppColors.greyColor, fontSize: 14),
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none
-                  ),
+                      icon: CustomSvgIcon(
+                        preset: AppIcons.search,
+                        color: AppColors.greyColor,
+                      ),
+                      hintText: 'Поиск по имени',
+                      hintStyle:
+                          TextStyle(color: AppColors.greyColor, fontSize: 14),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none),
                 ),
               ),
             ),
@@ -252,12 +252,12 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
     );
   }
 
-  Widget getUniversities(){
+  Widget getUniversities() {
     return Expanded(
       child: CustomPageScroll(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 24, right: 24 ,bottom: 24),
+            padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
             child: ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -266,27 +266,28 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
                 height: 8,
               ),
               itemBuilder: (context, index) => GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AboutUniversity(
-                      university: universities[index],
-                    )),
+                    MaterialPageRoute(
+                        builder: (context) => AboutUniversity(
+                              university: universities[index],
+                            )),
                   );
                 },
                 child: CustomContainer(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Expanded(
                             child: ClipRRect(
-                              child: Image.network(universities[index].logo),
-                              borderRadius: const BorderRadius.all(Radius.circular(5)),
-                            )
-                        ),
+                          child: Image.network(universities[index].logo),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(5)),
+                        )),
                         const SizedBox(
                           width: 16,
                         ),
@@ -298,15 +299,27 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
                               Text(
                                 universities[index].name,
                                 textAlign: TextAlign.start,
-                                style: TextStyle(color: AppColors.blackColor, fontWeight: FontWeight.normal, fontSize: 14, fontFamily: 'Roboto'),
+                                style: TextStyle(
+                                    color: AppColors.blackColor,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 14,
+                                    fontFamily: 'Roboto'),
                               ),
                               const SizedBox(
                                 height: 8,
                               ),
                               Text(
-                                'Количество специальностей: ' + universities[index].specialities.length.toString(),
+                                'Количество специальностей: ' +
+                                    universities[index]
+                                        .specialities
+                                        .length
+                                        .toString(),
                                 textAlign: TextAlign.center,
-                                style: TextStyle(color: AppColors.greyColor, fontWeight: FontWeight.normal, fontSize: 12, fontFamily: 'Roboto'),
+                                style: TextStyle(
+                                    color: AppColors.greyColor,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 12,
+                                    fontFamily: 'Roboto'),
                               )
                             ],
                           ),

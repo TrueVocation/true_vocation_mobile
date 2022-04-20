@@ -1,4 +1,6 @@
 
+import 'package:true_vocation_mobile/domain/model/speciality.dart';
+
 import '../../../domain/model/university.dart';
 
 class ApiUniversity {

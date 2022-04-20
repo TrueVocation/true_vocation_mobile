@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:true_vocation_mobile/presentation/speciality/speciality_main_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/test/preview.dart';
@@ -62,20 +63,28 @@ class HomePage extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(20)),
           height: 50,
           width: 50,
-          child: Center(
+          child: Center( 
             child: Text(
               'ВУЗы',
             ),
           ),
         ),
       ),
-      const CustomContainer(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        height: 50,
-        width: 50,
-        child: Center(
-          child: Text(
-            'Item 3',
+      GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MainSpecialityPage()),
+          );
+        },
+        child: const CustomContainer(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          height: 50,
+          width: 50,
+          child: Center(
+            child: Text(
+              'Специальности',
+            ),
           ),
         ),
       ),

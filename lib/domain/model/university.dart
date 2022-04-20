@@ -1,4 +1,6 @@
 
+import 'package:true_vocation_mobile/domain/model/speciality.dart';
+
 class University {
   final String name;
   final String description;
@@ -19,10 +21,4 @@ class Picture {
   final String url;
 
   Picture(this.url);
-}
-
-class Speciality {
-  final String name;
-
-  Speciality(this.name);
 }

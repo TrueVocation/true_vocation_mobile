@@ -102,11 +102,11 @@ class AboutUniversity extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(10)),
-        color: AppColors.transparent,
+        color: AppColors.whiteColor.withOpacity(0.1),
         boxShadow: [
           BoxShadow(
             blurStyle: BlurStyle.outer,
-            color: AppColors.blackColor.withOpacity(0.04),
+            color: AppShadows.color.withOpacity(0.1),
             blurRadius: 2,
           ),
         ],

@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.true_vocation_mobile">
-   <application
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application
         android:label="true_vocation_mobile"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
