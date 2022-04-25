@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:true_vocation_mobile/domain/model/regions.dart';
+import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/domain/model/speciality.dart';
 import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_dialog_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
@@ -16,16 +20,20 @@ class MainSpecialityPage extends StatefulWidget {
 
 class _MainSpecialityPageState extends State<MainSpecialityPage> {
   List<Speciality> list = [
-    Speciality("International Business Management	Finance",
-        '100 000 - 200 000 тг.', 'Высокий'),
-    Speciality("Financial Investments & Derivatives	Macroeconomics",
-        '350 000 - 400 000 тг.', 'Высокий'),
-    Speciality("Business Consulting", '750 000 - 900 000 тг.', 'Высокий'),
-    Speciality("Advertising", '300 000 - 500 000 тг.', 'Средний'),
-    Speciality("Business Economics", '100 000 - 200 000 тг.', 'Низкий'),
-    Speciality("Business Law", '1 000 000 - 1 500 000 тг.', 'Средний'),
-    Speciality("Business Ethics", '600 000 - 700 000 тг.', 'Высокий'),
-    Speciality("Business Ethics", '600 000 - 700 000 тг.', 'Высокий'),
+    Speciality("International Business Management	Finance", '100 000 - 200 000 тг.', 'Высокое'),
+    Speciality("Financial Investments & Derivatives	Macroeconomics", '350 000 - 400 000 тг.', 'Высокое'),
+    Speciality("Business Consulting", '750 000 - 900 000 тг.', 'Высокое'),
+    Speciality("Advertising", '300 000 - 500 000 тг.', 'Среднее'),
+    Speciality("Business Economics", '100 000 - 200 000 тг.', 'Низкое'),
+    Speciality("Business Law", '1 000 000 - 1 500 000 тг.', 'Среднее'),
+    Speciality("Business Ethics", '600 000 - 700 000 тг.', 'Высокое'),
+    Speciality("Business Ethics", '600 000 - 700 000 тг.', 'Высокое'),
+  ];
+
+  final List<Region> regions = [
+    Region('Алматы'),
+    Region('Нур-Султан'),
+    Region('Шымкент'),
   ];
 
   @override
@@ -41,28 +49,82 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
-            child: CustomContainer(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: TextFormField(
-                  autocorrect: false,
-                  autofocus: false,
-                  decoration: InputDecoration(
-                      icon: CustomSvgIcon(
-                        preset: AppIcons.search,
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              children: [
+                CustomContainer(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: TextFormField(
+                      autocorrect: false,
+                      autofocus: false,
+                      decoration: InputDecoration(
+                          icon: CustomSvgIcon(
+                            preset: AppIcons.search,
+                            color: AppColors.greyColor,
+                          ),
+                          hintText: 'Поиск по названию',
+                          hintStyle:
+                              TextStyle(color: AppColors.greyColor, fontSize: 14),
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: ListTile(
+                    title: Text(
+                      'Результаты',
+                      style: TextStyle(color: AppColors.blackColor, fontWeight: FontWeight.w500),
+                    ),
+                    subtitle: Text(
+                      'было найдено ' + list.length.toString() + ' совпадений',
+                      style: TextStyle(
+                        color: AppColors.greyColor,
+                        fontWeight: FontWeight.normal
+                      ),
+                    ),
+                    trailing: GestureDetector(
+                      onTap: (){
+                        showDialog(
+                            context: context,
+                            builder: (context){
+                              var _singleNotifier = Provider.of<SingleNotifier>(context);
+                              return CustomDialog(
+                                child: Column(
+                                  children: [
+                                    ListView.builder(
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      padding: const EdgeInsets.symmetric(vertical: 8),
+                                      shrinkWrap: true,
+                                      itemCount: regions.length,
+                                      itemBuilder: (BuildContext context, int regionIndex) {
+                                        final region = regions[regionIndex];
+                                        return Column(
+                                          children: [
+                                            _buildItem(region.name, regionIndex, _singleNotifier)
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                        },
+                        );
+                      },
+                      child: CustomSvgIcon(
+                        preset: AppIcons.filter,
                         color: AppColors.greyColor,
                       ),
-                      hintText: 'Поиск по названию',
-                      hintStyle:
-                          TextStyle(color: AppColors.greyColor, fontSize: 14),
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none),
-                ),
-              ),
+                    ),
+                  ),
+                )
+              ],
             ),
           ),
           getSpeciality(),
@@ -168,11 +230,31 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
     );
   }
 
+  Widget _buildItem(String name, var regionIndex, _singleNotifier) {
+    return RadioListTile<int>(
+      title: Text(
+        name,
+        style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.normal
+        ),
+      ),
+      activeColor: AppColors.blueColor,
+      value: regionIndex,
+      groupValue: _singleNotifier.currentRegion,
+      onChanged: (value) {
+        setState(() {
+
+        });
+      },
+    );
+  }
+
   Color getColor(String value) {
     switch (value) {
-      case 'Низкий':
+      case 'Низкое':
         return AppColors.redColor;
-      case 'Средний':
+      case 'Среднее':
         return AppColors.yellowColor;
       default:
         return AppColors.greenColor;

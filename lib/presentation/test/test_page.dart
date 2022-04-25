@@ -152,7 +152,7 @@ class _MainTestPageState extends State<MainTestPage> {
           map[questionIndex] = value;
           answerIndex = map[questionIndex];
           if (kDebugMode) {
-            print("before map : $map");
+            print("after map : $map");
           }
         });
       },
