@@ -1,5 +1,6 @@
 class Region {
-  final String name;
+  String id;
+  String name;
 
-  Region(this.name);
+  Region(this.id, this.name);
 }

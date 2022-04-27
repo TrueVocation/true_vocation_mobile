@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:true_vocation_mobile/domain/model/regions.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/domain/model/speciality.dart';
+import 'package:true_vocation_mobile/presentation/speciality/about_speciality.dart';
 import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_dialog_template.dart';
@@ -30,10 +31,10 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
     Speciality("Business Ethics", '600 000 - 700 000 тг.', 'Высокое'),
   ];
 
-  final List<Region> regions = [
-    Region('Алматы'),
-    Region('Нур-Султан'),
-    Region('Шымкент'),
+  List<Region> regions = [
+    Region('1', 'Алматы'),
+    Region('2', 'Нур-Султан'),
+    Region('3', 'Шымкент'),
   ];
 
   @override
@@ -65,8 +66,8 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
                             color: AppColors.greyColor,
                           ),
                           hintText: 'Поиск по названию',
-                          hintStyle:
-                              TextStyle(color: AppColors.greyColor, fontSize: 14),
+                          hintStyle: TextStyle(
+                              color: AppColors.greyColor, fontSize: 14),
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
@@ -79,42 +80,61 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
                   child: ListTile(
                     title: Text(
                       'Результаты',
-                      style: TextStyle(color: AppColors.blackColor, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          color: AppColors.blackColor,
+                          fontWeight: FontWeight.w500),
                     ),
                     subtitle: Text(
                       'было найдено ' + list.length.toString() + ' совпадений',
                       style: TextStyle(
-                        color: AppColors.greyColor,
-                        fontWeight: FontWeight.normal
-                      ),
+                          color: AppColors.greyColor,
+                          fontWeight: FontWeight.normal),
                     ),
                     trailing: GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         showDialog(
-                            context: context,
-                            builder: (context){
-                              var _singleNotifier = Provider.of<SingleNotifier>(context);
-                              return CustomDialog(
-                                child: Column(
-                                  children: [
-                                    ListView.builder(
-                                      physics: const NeverScrollableScrollPhysics(),
-                                      padding: const EdgeInsets.symmetric(vertical: 8),
-                                      shrinkWrap: true,
-                                      itemCount: regions.length,
-                                      itemBuilder: (BuildContext context, int regionIndex) {
-                                        final region = regions[regionIndex];
-                                        return Column(
-                                          children: [
-                                            _buildItem(region.name, regionIndex, _singleNotifier)
-                                          ],
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              );
-                        },
+                          context: context,
+                          builder: (context) {
+                            var _singleNotifier = Provider.of<SingleNotifier>(context);
+                            return CustomDialog(
+                              child: Column(
+                                children: [
+                                  ListView.builder(
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    padding: const EdgeInsets.symmetric(vertical: 8),
+                                    shrinkWrap: true,
+                                    itemCount: 1,
+                                    itemBuilder: (BuildContext context, int regionIndex) {
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: regions.map((e) => RadioListTile<Region>(
+                                          title: Text(
+                                            e.name,
+                                            style: TextStyle(
+                                              color: AppColors.blackColor,
+                                              fontSize: 14,
+                                              fontWeight:
+                                                  FontWeight.normal,
+                                            ),
+                                          ),
+                                          activeColor:
+                                              AppColors.blueColor,
+                                          value: e,
+                                          groupValue: _singleNotifier.currentRegion,
+                                          selected: _singleNotifier.currentRegion == e,
+                                          onChanged: (value) {
+                                            if (value != _singleNotifier.currentRegion) {
+                                              _singleNotifier.updateRegion(value!);
+                                              Navigator.of(context).pop();
+                                            }
+                                          })).toList(),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
                         );
                       },
                       child: CustomSvgIcon(
@@ -148,12 +168,12 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
               ),
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () {
-/*                  Navigator.push(
+                  Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AboutUniversity(
-                      university: universities[index],
+                    MaterialPageRoute(builder: (context) => AboutSpeciality(
+                      speciality: list[index],
                     )),
-                  );*/
+                  );
                 },
                 child: CustomContainer(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -227,26 +247,6 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
           )
         ],
       ),
-    );
-  }
-
-  Widget _buildItem(String name, var regionIndex, _singleNotifier) {
-    return RadioListTile<int>(
-      title: Text(
-        name,
-        style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.normal
-        ),
-      ),
-      activeColor: AppColors.blueColor,
-      value: regionIndex,
-      groupValue: _singleNotifier.currentRegion,
-      onChanged: (value) {
-        setState(() {
-
-        });
-      },
     );
   }
 
