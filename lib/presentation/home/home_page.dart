@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:true_vocation_mobile/presentation/authorization/authorization_page.dart';
 import 'package:true_vocation_mobile/presentation/speciality/speciality_main_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/test/preview.dart';
@@ -15,6 +16,7 @@ class HomePage extends StatelessWidget {
         color: AppColors.backgroundColor,
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
           Container(
             decoration: BoxDecoration(
@@ -55,18 +57,29 @@ class HomePage extends StatelessWidget {
                   ),
                 LayoutId(
                   id: 2,
-                  child: const ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                    child: Image(
-                      image: NetworkImage(
-                          'https://mfiles.alphacoders.com/631/631312.jpg'),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(50)),
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const AuthorizationPage()),
+                        );
+                      },
+                      child: const Image(
+                        image: NetworkImage(
+                            'https://mfiles.alphacoders.com/631/631312.jpg'),
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          Center(
+          const SizedBox(
+            height: 24,
+          ),
+          Expanded(
             child: GridView.count(
               // Create a grid with 2 columns. If you change the scrollDirection to
               // horizontal, this produces 2 rows.

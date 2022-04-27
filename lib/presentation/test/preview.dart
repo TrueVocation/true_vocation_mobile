@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_illustration_widget.dart';
 import 'package:true_vocation_mobile/presentation/test/test_page.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
@@ -60,20 +61,33 @@ class _PreviewTestPageState extends State<PreviewTestPage> {
                 ),
               ],
             ),
-            RaisedButton(
-              color: AppColors.blueColor,
-              textColor: AppColors.whiteColor,
-              child: const Text('Пройти тест'),
+            ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MainTestPage()),
-                );
+                  toMainTestPage();
               },
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(AppColors.blueColor),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ))),
+              child: const SizedBox(
+                height: 48,
+                width: double.maxFinite,
+                child: Center(
+                  child: Text('Пройти тест'),
+                ),
+              ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void toMainTestPage(){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const MainTestPage()),
     );
   }
 }

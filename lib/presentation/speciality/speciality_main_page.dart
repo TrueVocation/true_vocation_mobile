@@ -8,6 +8,7 @@ import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_dialog_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
@@ -53,27 +54,10 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
-                CustomContainer(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: TextFormField(
-                      autocorrect: false,
-                      autofocus: false,
-                      decoration: InputDecoration(
-                          icon: CustomSvgIcon(
-                            preset: AppIcons.search,
-                            color: AppColors.greyColor,
-                          ),
-                          hintText: 'Поиск по названию',
-                          hintStyle: TextStyle(
-                              color: AppColors.greyColor, fontSize: 14),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none),
-                    ),
-                  ),
+                CustomTextFormField(
+                  icon: AppIcons.search,
+                  hintText: 'Поиск по названию',
+                  maskType: 'phoneNumber',
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),

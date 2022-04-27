@@ -4,6 +4,7 @@ import 'package:true_vocation_mobile/domain/model/university.dart';
 import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/presentation/university/about_university.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
@@ -223,27 +224,11 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
-            child: CustomContainer(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: TextFormField(
-                  autocorrect: false,
-                  autofocus: false,
-                  decoration: InputDecoration(
-                      icon: CustomSvgIcon(
-                        preset: AppIcons.search,
-                        color: AppColors.greyColor,
-                      ),
-                      hintText: 'Поиск по имени',
-                      hintStyle:
-                          TextStyle(color: AppColors.greyColor, fontSize: 14),
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none),
-                ),
-              ),
+            child: CustomTextFormField(
+              hintText: 'Поиск по имени',
+              icon: AppIcons.search,
+              maskType: '',
+              keyboardType: TextInputType.text,
             ),
           ),
           getUniversities(),
