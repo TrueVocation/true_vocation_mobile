@@ -1,17 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/presentation/authorization/sign_up_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
+import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({Key? key, this.phoneNumber}) : super(key: key);
 
   final String? phoneNumber;
 
   @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    phoneController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
+    var _singleNotifier = Provider.of<SingleNotifier>(context);
+    phoneController.text = _singleNotifier.login;
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -78,22 +98,46 @@ class SignInPage extends StatelessWidget {
               key: _formKey,
               child: Column(
                 children: [
-                  const CustomTextFormField(
-                    icon: '',
-                    labelText: 'Номер телефона',
-                    maskType: 'phoneNumber',
-                    keyboardType: TextInputType.number,
-                    autoFocus: false,
+                  CustomTextFormField(
+                    child: TextFormField(
+                      controller: phoneController,
+
+                      obscureText: false,
+                      keyboardType: TextInputType.number,
+                      autofocus: false,
+                      validator: (value) {
+                        if (value!.length > 10 && value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      inputFormatters: [TextInputMasks.phoneNumber],
+                      decoration: InputDecoration(
+                          labelText: 'Номер телефона',
+                          labelStyle: TextStyle(color: AppColors.greyColor, fontSize: 14),
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none),
+                    ),
                   ),
                   const SizedBox(
                     height: 16,
                   ),
-                  const CustomTextFormField(
-                    icon: '',
-                    labelText: 'Пароль',
-                    maskType: 'password',
-                    keyboardType: TextInputType.text,
-                    autoFocus: false,
+                  CustomTextFormField(
+                    child: TextFormField(
+                      controller: passwordController,
+                      obscureText: true,
+                      keyboardType: TextInputType.text,
+                      autofocus: false,
+                      decoration: InputDecoration(
+                          labelText: 'Пароль',
+                          labelStyle: TextStyle(color: AppColors.greyColor, fontSize: 14),
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none),
+                    ),
                   ),
                   const SizedBox(
                     height: 48,
@@ -101,6 +145,7 @@ class SignInPage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()){
+                        _singleNotifier.updateLoginValue(phoneController.text);
                         Navigator.push(
                           context,
                           MaterialPageRoute(

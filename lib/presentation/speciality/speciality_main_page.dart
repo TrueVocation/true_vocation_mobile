@@ -12,6 +12,7 @@ import 'package:true_vocation_mobile/presentation/templates/custom_text_form_fie
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
+import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
 class MainSpecialityPage extends StatefulWidget {
   const MainSpecialityPage({Key? key}) : super(key: key);
@@ -37,9 +38,11 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
     Region('2', 'Нур-Султан'),
     Region('3', 'Шымкент'),
   ];
+  final myController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: CustomAppBar(
         name: 'Специальности',
@@ -55,9 +58,30 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
             child: Column(
               children: [
                 CustomTextFormField(
-                  icon: AppIcons.search,
-                  hintText: 'Поиск по названию',
-                  maskType: 'phoneNumber',
+                  child: TextFormField(
+                    controller: myController,
+                    obscureText: false,
+                    keyboardType: TextInputType.text,
+                    autofocus: false,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      return null;
+                    },
+                    inputFormatters: [TextInputMasks.defaultMask],
+                    decoration: InputDecoration(
+                        icon: CustomSvgIcon(
+                          preset: AppIcons.search,
+                          color: AppColors.greyColor,
+                        ),
+                        labelText: 'Поиск по имени',
+                        labelStyle: TextStyle(color: AppColors.greyColor, fontSize: 14),
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),

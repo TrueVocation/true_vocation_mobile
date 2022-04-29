@@ -209,6 +209,8 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
           'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'),
     ]),
   ];
+  final myController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -225,10 +227,23 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
           Padding(
             padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
             child: CustomTextFormField(
-              hintText: 'Поиск по имени',
-              icon: AppIcons.search,
-              maskType: '',
-              keyboardType: TextInputType.text,
+              child: TextFormField(
+                controller: myController,
+                obscureText: false,
+                keyboardType: TextInputType.text,
+                autofocus: false,
+                decoration: InputDecoration(
+                    icon: CustomSvgIcon(
+                      preset: AppIcons.search,
+                      color: AppColors.greyColor,
+                    ),
+                    labelText: 'Поиск по названию',
+                    labelStyle: TextStyle(color: AppColors.greyColor, fontSize: 14),
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none),
+              ),
             ),
           ),
           getUniversities(),
