@@ -16,7 +16,6 @@ class HomePage extends StatelessWidget {
         color: AppColors.backgroundColor,
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.max,
         children: [
           Container(
             decoration: BoxDecoration(
@@ -27,7 +26,7 @@ class HomePage extends StatelessWidget {
               color: AppColors.darkPurple,
             ),
             child: CustomMultiChildLayout(
-              delegate: MyMultiChildLayoutDelegate(),
+              delegate: AppBarMultiChildLayoutDelegate(),
               children: [
                 LayoutId(
                     id: 1,
@@ -76,18 +75,30 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(
-            height: 24,
-          ),
-          Expanded(
-            child: GridView.count(
-              // Create a grid with 2 columns. If you change the scrollDirection to
-              // horizontal, this produces 2 rows.
-              crossAxisCount: 2,
-              crossAxisSpacing: 24,
-              mainAxisSpacing: 24,
-              padding: const EdgeInsets.only(left: 48, right: 48),
-              children: getCards(context),
+          Container(
+            color: AppColors.transparent,
+            child: CustomMultiChildLayout(
+              delegate: BodyMultiChildLayoutDelegate(),
+              children: [
+                LayoutId(
+                  id: 1,
+                  child: GridView.count(
+                    scrollDirection: Axis.horizontal,
+                    crossAxisCount: 1,
+                    mainAxisSpacing: 16,
+                    padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24, top: 24),
+                    children: getCards(context),
+                  ),
+                ),
+                LayoutId(
+                  id: 2,
+                  child: CustomContainer(
+                    margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                    color: AppColors.blueColor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -104,13 +115,15 @@ class HomePage extends StatelessWidget {
             MaterialPageRoute(builder: (context) => const PreviewTestPage()),
           );
         },
-        child: const CustomContainer(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          height: 50,
-          width: 50,
-          child: Center(
-            child: Text(
-              'Тест',
+        child: Container(
+          child: CustomContainer(
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            child: Column(
+              children: const [
+                Text(
+                  'Тест',
+                ),
+              ],
             ),
           ),
         ),
@@ -124,8 +137,6 @@ class HomePage extends StatelessWidget {
         },
         child: const CustomContainer(
           borderRadius: BorderRadius.all(Radius.circular(20)),
-          height: 50,
-          width: 50,
           child: Center(
             child: Text(
               'ВУЗы',
@@ -142,8 +153,6 @@ class HomePage extends StatelessWidget {
         },
         child: const CustomContainer(
           borderRadius: BorderRadius.all(Radius.circular(20)),
-          height: 50,
-          width: 50,
           child: Center(
             child: Text(
               'Специальности',
@@ -153,8 +162,6 @@ class HomePage extends StatelessWidget {
       ),
       const CustomContainer(
         borderRadius: BorderRadius.all(Radius.circular(20)),
-        height: 50,
-        width: 50,
         child: Center(
           child: Text(
             'Item 3',
@@ -165,7 +172,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class MyMultiChildLayoutDelegate extends MultiChildLayoutDelegate {
+class AppBarMultiChildLayoutDelegate extends MultiChildLayoutDelegate {
   @override
   Size getSize(BoxConstraints constraints) =>
       Size(constraints.biggest.width, 256);
@@ -176,11 +183,40 @@ class MyMultiChildLayoutDelegate extends MultiChildLayoutDelegate {
       final greetingMaxWidth = size.width;
       final greetingSize = layoutChild(
           1, BoxConstraints.loose(Size(greetingMaxWidth, size.height)));
-      final greetingYOffset = size.height / 2 - greetingSize.height / 2;
+      final greetingYOffset = size.height / 2 - greetingSize.height;
 
       layoutChild(2, BoxConstraints.loose(const Size(64, 64)));
       positionChild(1, Offset(24, greetingYOffset));
       positionChild(2, Offset(size.width - 64 - 24, greetingYOffset-8));
+    }
+  }
+
+  @override
+  bool shouldRelayout(covariant MultiChildLayoutDelegate oldDelegate) {
+    // TODO: implement shouldRelayout
+    return true;
+  }
+}
+
+class BodyMultiChildLayoutDelegate extends MultiChildLayoutDelegate {
+  @override
+  Size getSize(BoxConstraints constraints) =>
+      Size(constraints.biggest.width, 224);
+
+  @override
+  void performLayout(Size size) {
+    if (hasChild(1) && hasChild(2)) {
+      final cardsMaxWidth = size.width;
+      final cardsSize = layoutChild(
+          1, BoxConstraints.loose(Size(cardsMaxWidth, size.height)));
+      final cardsYOffset = size.height / 2 - cardsSize.height;
+      positionChild(1, Offset(0, cardsYOffset));
+
+      final textMaxWidth = size.width;
+      final textSize = layoutChild(
+          2, BoxConstraints.loose(Size(textMaxWidth, size.height)));
+      final textYOffset = cardsYOffset + textSize.height - 24;
+      positionChild(2, Offset(0, textYOffset));
     }
   }
 
