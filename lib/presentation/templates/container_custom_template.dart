@@ -3,7 +3,7 @@ import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/shadows.dart';
 
 class CustomContainer extends StatelessWidget {
-  const CustomContainer({Key? key, this.child, this.margin, this.borderRadius, this.height, this.width, this.border, this.color})
+  const CustomContainer({Key? key, this.child, this.margin, this.borderRadius, this.height, this.width, this.border, this.color, this.shadowColor})
       : super(key: key);
 
   final Widget? child;
@@ -13,6 +13,7 @@ class CustomContainer extends StatelessWidget {
   final double? width;
   final bool? border;
   final Color? color;
+  final Color? shadowColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class CustomContainer extends StatelessWidget {
         color: color ?? AppColors.whiteColor,
         boxShadow:[
             BoxShadow(
-              color: AppShadows.color,
+              color: shadowColor == null ? AppShadows.color : shadowColor!,
               offset: AppShadows.offset,
               blurRadius: AppShadows.blur
               )

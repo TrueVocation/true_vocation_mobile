@@ -9,7 +9,7 @@ class CustomPageScroll extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.backgroundColor,
+      color: AppColors.whiteColor,
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
