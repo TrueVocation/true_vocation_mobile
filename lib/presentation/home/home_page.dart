@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:true_vocation_mobile/domain/model/professions.dart';
 import 'package:true_vocation_mobile/presentation/authorization/authorization_page.dart';
@@ -42,7 +41,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: AppColors.transparent,
         elevation: 0,
         bottomOpacity: 0,
-        toolbarHeight: 96,
+        toolbarHeight: 128,
         automaticallyImplyLeading: false,
       ),
       backgroundColor: AppColors.whiteColor,
@@ -573,14 +572,17 @@ class _HomePageState extends State<HomePage> {
               'Hello,',
               style: TextStyle(
                   color: AppColors.blackColor,
-                  fontSize: 24,
+                  fontSize: 28,
                   fontWeight: FontWeight.w300),
+            ),
+            const SizedBox(
+              height: 4,
             ),
             Text(
               name,
               style: TextStyle(
                   color: AppColors.blackColor,
-                  fontSize: 20,
+                  fontSize: 24,
                   fontWeight: FontWeight.w500),
             ),
           ],
