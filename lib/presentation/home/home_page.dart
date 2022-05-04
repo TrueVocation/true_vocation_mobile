@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:true_vocation_mobile/domain/model/professions.dart';
 import 'package:true_vocation_mobile/presentation/authorization/authorization_page.dart';
+import 'package:true_vocation_mobile/presentation/professions/about_professions_page.dart';
 import 'package:true_vocation_mobile/presentation/speciality/speciality_main_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
@@ -500,42 +501,37 @@ class _HomePageState extends State<HomePage> {
       separatorBuilder: (_, index) => const SizedBox(
         height: 8,
       ),
-      itemBuilder: (context, index) => GestureDetector(
-        onTap: () {
-/*          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => AboutUniversity(
-                  university: universities[index],
-                )),
-          );*/
-        },
-        child: CustomContainer(
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8 ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                 Text(
-                   listProf[index].name,
-                   style: TextStyle(
-                     color: AppColors.blackColor,
-                     fontSize: 16,
-                     fontWeight: FontWeight.normal,
-                   ),
+      itemBuilder: (context, index) => CustomContainer(
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8 ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+               Text(
+                 listProf[index].name,
+                 style: TextStyle(
+                   color: AppColors.blackColor,
+                   fontSize: 16,
+                   fontWeight: FontWeight.normal,
                  ),
-                IconButton(
-                  icon: CustomSvgIcon(
-                    preset: AppIcons.arrowCircle,
-                    color: AppColors.purple,
-                  ),
-                  onPressed: () {
-
-                  },
-                )
-              ],
-            ),
+               ),
+              IconButton(
+                icon: CustomSvgIcon(
+                  preset: AppIcons.arrowCircle,
+                  color: AppColors.purple,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AboutProfession(
+                          profession: listProf[index],
+                        )),
+                  );
+                },
+              )
+            ],
           ),
         ),
       ),
