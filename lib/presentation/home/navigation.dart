@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.backgroundColorV2,
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: ClipRRect(
           borderRadius: const BorderRadius.only(

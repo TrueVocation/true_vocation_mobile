@@ -215,11 +215,11 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.backgroundColorV2,
       appBar: CustomAppBar(
         name: 'ВУЗы',
         leading: true,
-        color: AppColors.backgroundColor,
+        color: AppColors.backgroundColorV2,
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,

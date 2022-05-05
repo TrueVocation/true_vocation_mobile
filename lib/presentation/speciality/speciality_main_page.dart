@@ -23,7 +23,7 @@ class MainSpecialityPage extends StatefulWidget {
 
 class _MainSpecialityPageState extends State<MainSpecialityPage> {
   List<Speciality> list = [
-    Speciality("International Business Management	Finance", '100 000 - 200 000 тг.', 'Высокое'),
+    Speciality("International Business", '100 000 - 200 000 тг.', 'Высокое'),
     Speciality("Financial Investments & Derivatives	Macroeconomics", '350 000 - 400 000 тг.', 'Высокое'),
     Speciality("Business Consulting", '750 000 - 900 000 тг.', 'Высокое'),
     Speciality("Advertising", '300 000 - 500 000 тг.', 'Среднее'),
@@ -47,9 +47,9 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
       appBar: CustomAppBar(
         name: 'Специальности',
         leading: true,
-        color: AppColors.backgroundColor,
+        color: AppColors.backgroundColorV2,
       ),
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.backgroundColorV2,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [

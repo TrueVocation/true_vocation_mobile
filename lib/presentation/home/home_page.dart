@@ -39,14 +39,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: appBar('Ainura Karzhaubayeva', context),
-        backgroundColor: AppColors.transparent,
+        backgroundColor: AppColors.whiteColor,
         elevation: 0,
         bottomOpacity: 0,
         toolbarHeight: 128,
         automaticallyImplyLeading: false,
       ),
-      backgroundColor: AppColors.whiteColor,
       body: CustomPageScroll(
+        color: AppColors.whiteColor,
         physics: const ClampingScrollPhysics(),
         children: [
           Padding(
@@ -430,7 +430,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           CustomContainer(
-            color: AppColors.whiteColor.withOpacity(0.1),
+            color: AppColors.backgroundColorV2.withOpacity(0.3),
             shadowColor: AppShadows.color.withOpacity(0.1),
             borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
             width: double.maxFinite,
