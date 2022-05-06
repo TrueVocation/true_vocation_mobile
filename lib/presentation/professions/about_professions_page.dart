@@ -94,7 +94,7 @@ class _AboutProfessionState extends State<AboutProfession> {
       shrinkWrap: true,
       itemCount: list.length,
       separatorBuilder: (_, index) => const SizedBox(
-        height: 8,
+        height: 12,
       ),
       itemBuilder: (context, index) => CustomContainer(
         shadowColor: AppColors.purple.withOpacity(0.1),

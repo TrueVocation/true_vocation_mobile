@@ -336,7 +336,7 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
       itemCount: universities.length,
       separatorBuilder: (_, index) =>
       const SizedBox(
-        height: 8,
+        height: 12,
       ),
       itemBuilder: (context, index) =>
           CustomContainer(
@@ -406,7 +406,7 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
       itemCount: listProf.length,
       separatorBuilder: (_, index) =>
       const SizedBox(
-        height: 8,
+        height: 12,
       ),
       itemBuilder: (context, index) =>
           CustomContainer(

@@ -80,7 +80,7 @@ class _AboutUniversityState extends State<AboutUniversity> {
       itemCount: list.length,
       separatorBuilder: (_, index) =>
       const SizedBox(
-        height: 8,
+        height: 12,
       ),
       itemBuilder: (context, index) =>
           CustomContainer(
