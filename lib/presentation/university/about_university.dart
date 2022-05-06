@@ -1,123 +1,159 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:true_vocation_mobile/domain/model/speciality.dart';
 import 'package:true_vocation_mobile/domain/model/university.dart';
-import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
+import 'package:true_vocation_mobile/presentation/speciality/about_speciality.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_tabs_widget.dart';
+import 'package:true_vocation_mobile/presentation/templates/detail_page_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
-import 'package:true_vocation_mobile/utils/shadows.dart';
+import 'package:true_vocation_mobile/utils/icons.dart';
 
-class AboutUniversity extends StatelessWidget {
+class AboutUniversity extends StatefulWidget {
   const AboutUniversity({Key? key, this.university}) : super(key: key);
   final University? university;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        name: 'О ВУЗе',
-        color: AppColors.backgroundColor,
-        leading: true,
-      ),
-      backgroundColor: AppColors.backgroundColor,
-      body: Stack(children: [
-        body(),
-        Positioned(
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: logo(),
-            ),
-          ),
-        ),
-      ]),
-    );
-  }
+  State<AboutUniversity> createState() => _AboutUniversityState();
+}
 
-  Widget body() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24, top: 80),
-      child: CustomContainer(
-        width: 500,
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        child: Padding(
-          padding: const EdgeInsets.all(0.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 16, right: 16, bottom: 16, top: 88),
-                child: Column(
-                  children: [
-                    Text(
-                      university!.name,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: AppColors.blackColor,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          fontFamily: 'Roboto'),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Text(
-                      university!.address,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: AppColors.greyColor,
-                          fontWeight: FontWeight.normal,
-                          fontSize: 12,
-                          fontFamily: 'Roboto'),
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      university!.code,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: AppColors.greyColor,
-                          fontWeight: FontWeight.normal,
-                          fontSize: 12,
-                          fontFamily: 'Roboto'),
-                    ),
-                  ],
-                ),
+class _AboutUniversityState extends State<AboutUniversity> {
+
+  List<Speciality> list = [
+    Speciality('ВТиПО', '900 000', 'Высокое'),
+    Speciality('ИС', '600 000', 'Среднее'),
+    Speciality('СИБ', '850 000', 'Высокое'),
+    Speciality('РЭТ', '450 000', 'Среднее'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return DetailPageTemplate(
+      objectName: widget.university!.name,
+      fontSize: 18,
+      objectNameShort: widget.university!.address,
+      fontSizeShort: 14,
+      appBarName: 'О ВУЗе',
+      iconPreset: AppIcons.uni,
+      tabLength: 2,
+      tabs: const [
+        CustomTabs(name: 'Подробнее'),
+        CustomTabs(name: 'Специальности'),
+      ],
+      tabBarView: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          child: CustomPageScroll(
+            color: AppColors.whiteColor,
+            children: const [
+              Text(
+                  'gbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjv'
               ),
             ],
           ),
         ),
+        CustomPageScroll(
+          color: AppColors.whiteColor,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: getSpec(),
+            ),
+          ],
+        ),
+      ],
+      appBarBody: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          getIcon(AppIcons.location),
+          getIcon(AppIcons.call),
+        ],
       ),
     );
   }
 
-  Widget logo() {
-    return Container(
-      width: 128,
-      height: 128,
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        color: AppColors.whiteColor.withOpacity(0.1),
-        boxShadow: [
-          BoxShadow(
-            blurStyle: BlurStyle.outer,
-            color: AppShadows.color.withOpacity(0.1),
-            blurRadius: 2,
-          ),
-        ],
+  Widget getSpec() {
+    return ListView.separated(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: list.length,
+      separatorBuilder: (_, index) =>
+      const SizedBox(
+        height: 8,
       ),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaY: 2, sigmaX: 2),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Image.network(
-            university!.logo,
+      itemBuilder: (context, index) =>
+          CustomContainer(
+            shadowColor: AppColors.purple.withOpacity(0.1),
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 256,
+                        child: Text(
+                          list[index].name,
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: AppColors.blackColor,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 14,
+                              fontFamily: 'Roboto'),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        'Цена обучения: ' + list[index].price,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: AppColors.greyColor,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 12
+                        ),
+                      )
+                    ],
+                  ),
+                  IconButton(
+                    icon: CustomSvgIcon(
+                      preset: AppIcons.arrowCircle,
+                      color: AppColors.purple,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                            AboutSpeciality(
+                              speciality: list[index],
+                            ),
+                        ),
+                      );
+                    },
+                  )
+                ],
+              ),
+            ),
           ),
+    );
+  }
+
+  Widget getIcon(icon) {
+    return CustomContainer(
+      borderRadius: BorderRadius.circular(100),
+      color: AppColors.purple,
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: CustomSvgIcon(
+          preset: icon,
+          color: AppColors.whiteColor,
+          size: 24,
         ),
       ),
     );

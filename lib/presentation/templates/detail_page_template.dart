@@ -8,23 +8,27 @@ class DetailPageTemplate extends StatefulWidget {
   const DetailPageTemplate({
     Key? key,
     required this.objectName,
+    this.fontSize,
     required this.objectNameShort,
+    this.fontSizeShort,
     required this.appBarName,
     required this.iconPreset,
+    required this.tabLength,
     required this.tabs,
     required this.tabBarView,
     required this.appBarBody,
-    required this.tabLength,
   }) : super(key: key);
 
   final String? objectName;
   final String? appBarName;
+  final double? fontSize;
+  final double? fontSizeShort;
   final String? objectNameShort;
   final String? iconPreset;
+  final int? tabLength;
   final List<Widget>? tabs;
   final List<Widget>? tabBarView;
   final Widget? appBarBody;
-  final int? tabLength;
 
   @override
   State<DetailPageTemplate> createState() => _DetailPageTemplateState();
@@ -51,25 +55,25 @@ class _DetailPageTemplateState extends State<DetailPageTemplate> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: 256,
+                      width: 280,
                       child: Text(
                         widget.objectName!,
                         style: TextStyle(
                           color: AppColors.blackColor,
-                          fontSize: 24,
+                          fontSize: widget.fontSize ?? 24,
                           fontWeight: FontWeight.w500),
                       ),
                     ),
                     const SizedBox(
-                      height: 4,
+                      height: 8,
                     ),
                     SizedBox(
-                      width: 256,
+                      width: 280,
                       child: Text(
                         widget.objectNameShort!,
                         style: TextStyle(
                           color: AppColors.greyColor,
-                          fontSize: 18,
+                          fontSize: widget.fontSizeShort ?? 18,
                           fontWeight: FontWeight.w400),
                       ),
                     ),

@@ -6,6 +6,7 @@ import 'package:true_vocation_mobile/domain/model/speciality.dart';
 import 'package:true_vocation_mobile/presentation/speciality/about_speciality.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_tabs_widget.dart';
 import 'package:true_vocation_mobile/presentation/templates/detail_page_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
@@ -62,29 +63,9 @@ class _AboutProfessionState extends State<AboutProfession> {
       objectNameShort: widget.profession!.name,
       iconPreset: AppIcons.prof,
       tabLength: 2,
-      tabs: [
-        Tab(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: const Align(
-              alignment: Alignment.center,
-              child: Text("Подробнее"),
-            ),
-          ),
-        ),
-        Tab(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: const Align(
-              alignment: Alignment.center,
-              child: Text("Специальности"),
-            ),
-          ),
-        ),
+      tabs: const [
+        CustomTabs(name: 'Подробнее'),
+        CustomTabs(name: 'Специальности'),
       ],
       tabBarView: [
         Padding(

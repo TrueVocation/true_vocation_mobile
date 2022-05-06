@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:true_vocation_mobile/domain/model/professions.dart';
 import 'package:true_vocation_mobile/domain/model/speciality.dart';
 import 'package:true_vocation_mobile/domain/model/subjects.dart';
 import 'package:true_vocation_mobile/domain/model/university.dart';
 import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_tabs_widget.dart';
 import 'package:true_vocation_mobile/presentation/templates/detail_page_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/presentation/university/about_university.dart';
@@ -245,6 +247,13 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
         ]),
   ];
 
+  List<Professions> listProf = [
+    Professions('Software Developer'),
+    Professions('UI/UX designer'),
+    Professions('Data Analyst'),
+    Professions('Quality Assurance'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return DetailPageTemplate(
@@ -280,30 +289,11 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
         ],
       ),
       iconPreset: AppIcons.spec,
-      tabLength: 2,
-      tabs: [
-        Tab(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: const Align(
-              alignment: Alignment.center,
-              child: Text("Подробнее"),
-            ),
-          ),
-        ),
-        Tab(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: const Align(
-              alignment: Alignment.center,
-              child: Text("Университеты"),
-            ),
-          ),
-        ),
+      tabLength: 3,
+      tabs: const [
+        CustomTabs(name: 'Подробнее'),
+        CustomTabs(name: 'Вузы'),
+        CustomTabs(name: 'Профессии'),
       ],
       tabBarView: [
         Padding(
@@ -326,6 +316,15 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
             ),
           ],
         ),
+        CustomPageScroll(
+          color: AppColors.whiteColor,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: getProf(),
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -334,7 +333,7 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
     return ListView.separated(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: list.length,
+      itemCount: universities.length,
       separatorBuilder: (_, index) =>
       const SizedBox(
         height: 8,
@@ -390,6 +389,60 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
                                 AboutUniversity(
                                   university: universities[index],
                                 )),
+                      );
+                    },
+                  )
+                ],
+              ),
+            ),
+          ),
+    );
+  }
+
+  Widget getProf() {
+    return ListView.separated(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: listProf.length,
+      separatorBuilder: (_, index) =>
+      const SizedBox(
+        height: 8,
+      ),
+      itemBuilder: (context, index) =>
+          CustomContainer(
+            shadowColor: AppColors.purple.withOpacity(0.1),
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 256,
+                    child: Text(
+                      listProf[index].name,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: AppColors.blackColor,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 14,
+                          fontFamily: 'Roboto'),
+                    ),
+                  ),
+                  IconButton(
+                    icon: CustomSvgIcon(
+                      preset: AppIcons.arrowCircle,
+                      color: AppColors.purple,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                            AboutUniversity(
+                              university: universities[index],
+                            ),
+                        ),
                       );
                     },
                   )

@@ -9,6 +9,8 @@ class AppIcons {
   static String arrowCircle = "arrow-circle-right.svg";
   static String search = "search.svg";
   static String filter = "filter.svg";
+  static String call = "call.svg";
+  static String location = "location.svg";
   static String cardIcon = "card_icon.svg";
   static String faq = "faq.svg";
   static String prof = "prof.svg";

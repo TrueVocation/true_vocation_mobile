@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 
 class CustomSvgIcon extends StatelessWidget {
-  const CustomSvgIcon({Key? key, this.preset, this.color, this.size}) : super(key: key);
+  const CustomSvgIcon({Key? key, required this.preset, this.color, this.size}) : super(key: key);
 
   final String? preset;
   final Color? color;
