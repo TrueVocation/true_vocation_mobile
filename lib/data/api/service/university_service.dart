@@ -1,18 +1,22 @@
 import 'package:dio/dio.dart';
-import 'package:true_vocation_mobile/data/api/model/api_university.dart';
-import 'package:true_vocation_mobile/data/api/request/get_university_body.dart';
+import 'package:true_vocation_mobile/domain/model/university.dart';
+import 'package:true_vocation_mobile/utils/constants.dart';
 
 class UniversityService {
-  static const _BASE_URL = "https";
+  final Dio _dio = Dio();
 
-  final Dio _dio = Dio(BaseOptions(baseUrl: _BASE_URL));
-
-  Future<ApiUniversity> getUniversity(GetUniversityBody body) async {
+  Future<University> getUniversity(var id) async {
     final response = await _dio.get(
-        '/json',
-        queryParameters: body.toApi()
+      '/university/$id',
     );
 
-    return ApiUniversity.fromApi(response.data);
+    return University.fromApi(response.data);
+  }
+
+  Future<List<University>> getUniversities(int page) async {
+    final response =
+        await _dio.get(ApiConstants.baseUrl+'/api/universities?page=0&size=10&sort=id&order=desc');
+
+    return (response.data as List).map((e) => University.fromApi(e)).toList();
   }
 }

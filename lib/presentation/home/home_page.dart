@@ -211,6 +211,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     GestureDetector(
                       onTap: () {
+                        FocusManager.instance.primaryFocus?.unfocus();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
