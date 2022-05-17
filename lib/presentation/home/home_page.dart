@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:true_vocation_mobile/domain/model/professions.dart';
 import 'package:true_vocation_mobile/presentation/authorization/authorization_page.dart';
 import 'package:true_vocation_mobile/presentation/professions/about_professions_page.dart';
+import 'package:true_vocation_mobile/presentation/professions/profession_main_page.dart';
 import 'package:true_vocation_mobile/presentation/speciality/speciality_main_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/presentation/test/preview.dart';
-import 'package:true_vocation_mobile/presentation/university/university_page.dart';
+import 'package:true_vocation_mobile/presentation/university/university_main_page.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 import 'package:true_vocation_mobile/utils/shadows.dart';
@@ -215,7 +216,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const MainUniversityPage()),
+                              builder: (context) => const ProfessionMainPage()),
                         );
                       },
                       child: CustomContainer(
