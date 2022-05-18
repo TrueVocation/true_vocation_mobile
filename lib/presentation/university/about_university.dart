@@ -20,12 +20,7 @@ class AboutUniversity extends StatefulWidget {
 
 class _AboutUniversityState extends State<AboutUniversity> {
 
-  List<Speciality> list = [
-    Speciality('ВТиПО', '900 000', 'Высокое'),
-    Speciality('ИС', '600 000', 'Среднее'),
-    Speciality('СИБ', '850 000', 'Высокое'),
-    Speciality('РЭТ', '450 000', 'Среднее'),
-  ];
+  List<Speciality> list = [];
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +105,7 @@ class _AboutUniversityState extends State<AboutUniversity> {
                         height: 8,
                       ),
                       Text(
-                        'Цена обучения: ' + list[index].price,
+                        'Цена обучения: ' + list[index].price.toString() + 'тг.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: AppColors.greyColor,

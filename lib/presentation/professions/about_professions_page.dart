@@ -22,12 +22,7 @@ class AboutProfession extends StatefulWidget {
 }
 
 class _AboutProfessionState extends State<AboutProfession> {
-  List<Speciality> list = [
-    Speciality('CSSE', '0', 'employment'),
-    Speciality('IS', '0', 'employment'),
-    Speciality('RET', '0', 'employment'),
-    Speciality('SIB', '0', 'employment'),
-  ];
+  List<Speciality> list = [];
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +41,12 @@ class _AboutProfessionState extends State<AboutProfession> {
                 fontFamily: 'Roboto'),
           ),
           CustomContainer(
-            color: getColorProf('Низкое').withOpacity(0.7),
+            color: getColorProf(widget.profession!.employability).withOpacity(0.7),
             borderRadius: BorderRadius.circular(10),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child: Text(
-                'Низкое',
+                widget.profession!.employability,
                 style: TextStyle(
                     color: AppColors.whiteColor, fontWeight: FontWeight.normal),
               ),
@@ -134,7 +129,7 @@ class _AboutProfessionState extends State<AboutProfession> {
                         width: 4,
                       ),
                       Text(
-                        list[index].price,
+                        list[index].price.toString() + 'тг.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: AppColors.greyColor,
@@ -169,9 +164,9 @@ class _AboutProfessionState extends State<AboutProfession> {
 
   Color getColorProf(String value) {
     switch (value) {
-      case 'Низкое':
+      case 'низкое':
         return AppColors.redColor;
-      case 'Среднее':
+      case 'среднее':
         return AppColors.yellowColor;
       default:
         return AppColors.greenColor;

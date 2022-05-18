@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:true_vocation_mobile/data/api/service/university_service.dart';
 import 'package:true_vocation_mobile/domain/model/regions.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
@@ -25,6 +26,10 @@ class MainUniversityPage extends StatefulWidget {
 class _MainUniversityPageState extends State<MainUniversityPage> {
   late List<University> list = [];
 
+  bool loading = true;
+  int page = 0;
+  final RefreshController _refreshController = RefreshController(initialRefresh: false);
+
   @override
   void initState() {
     super.initState();
@@ -33,7 +38,28 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
 
   void _getData() async {
     list = (await UniversityService().getUniversities(0)).cast<University>();
-    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {
+      loading = false;
+    }));
+  }
+
+  void _onRefresh() async{
+    page = 0;
+    _getData();
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async{
+    page++;
+    List<University> newList = await UniversityService().getUniversities(page);
+    list.addAll(newList);
+    if(newList.isEmpty) {
+      setState(() {
+        LoadStatus.noMore;
+        _refreshController.loadNoData();
+      });
+    }
+    _refreshController.loadComplete();
   }
 
   List<Region> regions = [
@@ -171,7 +197,7 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
               ],
             ),
           ),
-          getUniversities(),
+          loading == true ? const Center(child: CircularProgressIndicator()) : getUniversities(),
         ],
       ),
     );
@@ -179,82 +205,92 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
 
   Widget getUniversities() {
     return Expanded(
-      child: CustomPageScroll(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
-            child: ListView.separated(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: list.length,
-              separatorBuilder: (_, index) => const SizedBox(
-                height: 8,
-              ),
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AboutUniversity(
-                        university: list[index],
+      child: SmartRefresher(
+        controller: _refreshController,
+        onLoading: _onLoading,
+        onRefresh: _onRefresh,
+        enablePullUp: true,
+        child: CustomPageScroll(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+              child: ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: list.length,
+                separatorBuilder: (_, index) => const SizedBox(
+                  height: 8,
+                ),
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AboutUniversity(
+                          university: list[index],
+                        ),
                       ),
-                    ),
-                  );
-                },
-                child: CustomContainer(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Expanded(
-                          child: ClipRRect(
-                            child: Image.network(list[index].logo),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(5)),
+                    );
+                  },
+                  child: CustomContainer(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Expanded(
+                            child: ClipRRect(
+                              child: CustomSvgIcon(
+                                preset: AppIcons.uni,
+                                size: 36,
+                                color: AppColors.greyColor,
+                              ),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(5)),
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                list[index].name,
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    color: AppColors.blackColor,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 14,
-                                    fontFamily: 'Roboto'),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                'Количество специальностей: ',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: AppColors.greyColor,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 12,
-                                    fontFamily: 'Roboto'),
-                              ),
-                            ],
+                          const SizedBox(
+                            width: 16,
                           ),
-                        )
-                      ],
+                          Expanded(
+                            flex: 3,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  list[index].name,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      color: AppColors.blackColor,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 14,
+                                      fontFamily: 'Roboto'),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  'Количество специальностей: ' + list[index].specialityCount.toString(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: AppColors.greyColor,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 12,
+                                      fontFamily: 'Roboto'),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

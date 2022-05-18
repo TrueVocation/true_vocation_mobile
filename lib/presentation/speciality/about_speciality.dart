@@ -30,12 +30,7 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
 
   late List<University> universities = [];
 
-  List<Professions> listProf = [
-    Professions('Software Developer'),
-    Professions('UI/UX designer'),
-    Professions('Data Analyst'),
-    Professions('Quality Assurance'),
-  ];
+  List<Professions> listProf = [];
 
   @override
   Widget build(BuildContext context) {

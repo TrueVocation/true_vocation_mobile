@@ -23,13 +23,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  List<Professions> listProf = [
-    Professions('Data Scientist'),
-    Professions('Frontend developer'),
-    Professions('Backend Developer'),
-    Professions('Tech Lead'),
-    Professions('Project Manager'),
-  ];
+  List<Professions> listProf = [];
 
   @override
   Widget build(BuildContext context) {
@@ -216,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ProfessionMainPage()),
+                              builder: (context) => const MainProfessionPage()),
                         );
                       },
                       child: CustomContainer(
