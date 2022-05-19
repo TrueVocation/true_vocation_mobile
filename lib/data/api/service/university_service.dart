@@ -10,9 +10,9 @@ class UniversityService {
     return University.fromApi(response.data);
   }
 
-  Future<List<University>> getUniversities(int page) async {
+  Future<List<University>> getUniversities(int page, size) async {
     final response = await ApiConstants.dio
-        .get('/api/universities?page=$page&size=10&sort=id&order=desc');
+        .get('/api/universities?page=$page&size=$size&sort=id&order=desc');
 
     return (response.data as List).map((e) => University.fromApi(e)).toList();
   }

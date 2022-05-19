@@ -4,9 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/presentation/authorization/sign_in_page.dart';
 import 'package:true_vocation_mobile/presentation/authorization/sign_up_page.dart';
-import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
+import 'package:true_vocation_mobile/utils/routes.dart';
 import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
 class AuthorizationPage extends StatefulWidget {
@@ -35,6 +36,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
         leading: true,
         name: '',
         color: AppColors.backgroundColor,
+        routeName: ApiRoutes.mainPage,
       ),
       backgroundColor: AppColors.backgroundColor,
       body: Padding(

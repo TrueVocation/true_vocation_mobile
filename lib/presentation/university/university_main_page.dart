@@ -5,14 +5,16 @@ import 'package:true_vocation_mobile/data/api/service/university_service.dart';
 import 'package:true_vocation_mobile/domain/model/regions.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/domain/model/university.dart';
-import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_dialog_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_refresh_template.dart';
 import 'package:true_vocation_mobile/presentation/university/about_university.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
+import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
@@ -28,7 +30,8 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
 
   bool loading = true;
   int page = 0;
-  final RefreshController _refreshController = RefreshController(initialRefresh: false);
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -37,29 +40,39 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
   }
 
   void _getData() async {
-    list = (await UniversityService().getUniversities(0)).cast<University>();
-    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {
-      loading = false;
-    }));
+    list = (await UniversityService()
+            .getUniversities(page, ApiConstants.getListSize))
+        .cast<University>();
+    Future.delayed(const Duration(seconds: 1)).then(
+      (value) => setState(
+        () {
+          loading = false;
+        },
+      ),
+    );
   }
 
-  void _onRefresh() async{
+  void _onRefresh() async {
     page = 0;
     _getData();
     _refreshController.refreshCompleted();
+    _refreshController.loadComplete();
   }
 
-  void _onLoading() async{
+  void _onLoading() async {
     page++;
-    List<University> newList = await UniversityService().getUniversities(page);
+    List<University> newList = await UniversityService()
+        .getUniversities(page, ApiConstants.getListSize);
     list.addAll(newList);
-    if(newList.isEmpty) {
+    if (newList.isEmpty) {
       setState(() {
-        LoadStatus.noMore;
         _refreshController.loadNoData();
       });
+    } else {
+      setState(() {
+        _refreshController.loadComplete();
+      });
     }
-    _refreshController.loadComplete();
   }
 
   List<Region> regions = [
@@ -197,7 +210,9 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
               ],
             ),
           ),
-          loading == true ? const Center(child: CircularProgressIndicator()) : getUniversities(),
+          loading == true
+              ? const Center(child: CircularProgressIndicator())
+              : getUniversities(),
         ],
       ),
     );
@@ -205,11 +220,10 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
 
   Widget getUniversities() {
     return Expanded(
-      child: SmartRefresher(
+      child: RefreshTemplate(
         controller: _refreshController,
         onLoading: _onLoading,
         onRefresh: _onRefresh,
-        enablePullUp: true,
         child: CustomPageScroll(
           children: [
             Padding(
@@ -271,7 +285,8 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
                                   height: 8,
                                 ),
                                 Text(
-                                  'Количество специальностей: ' + list[index].specialityCount.toString(),
+                                  'Количество специальностей: ' +
+                                      list[index].specialityCount.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: AppColors.greyColor,

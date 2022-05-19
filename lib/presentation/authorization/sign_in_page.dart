@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/presentation/authorization/sign_up_page.dart';
-import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
+import 'package:true_vocation_mobile/utils/routes.dart';
 import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
 class SignInPage extends StatefulWidget {
@@ -38,6 +39,7 @@ class _SignInPageState extends State<SignInPage> {
         name: '',
         color: AppColors.backgroundColor,
         leading: true,
+        routeName: ApiRoutes.loginPage,
       ),
       backgroundColor: AppColors.backgroundColor,
       body: Padding(

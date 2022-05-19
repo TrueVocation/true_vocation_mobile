@@ -6,17 +6,17 @@ import 'package:true_vocation_mobile/domain/model/professions.dart';
 import 'package:true_vocation_mobile/domain/model/regions.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/presentation/professions/about_professions_page.dart';
-import 'package:true_vocation_mobile/presentation/templates/appbar_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_dialog_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_refresh_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 import 'package:true_vocation_mobile/utils/text_input_masks.dart';
-import 'dart:math' as math;
 
 class MainProfessionPage extends StatefulWidget {
   const MainProfessionPage({Key? key}) : super(key: key);
@@ -26,12 +26,12 @@ class MainProfessionPage extends StatefulWidget {
 }
 
 class _ProfessionMainPage1State extends State<MainProfessionPage> {
-
   List<Professions> list = [];
 
   bool loading = true;
   int page = 0;
-  final RefreshController _refreshController = RefreshController(initialRefresh: false);
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -40,29 +40,39 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
   }
 
   void _getData() async {
-    list = (await ProfessionService().getProfessions(page)).cast<Professions>();
-    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {
-      loading = false;
-    }));
+    list = (await ProfessionService()
+            .getProfessions(page, ApiConstants.getListSize))
+        .cast<Professions>();
+    Future.delayed(const Duration(seconds: 1)).then(
+      (value) => setState(
+        () {
+          loading = false;
+        },
+      ),
+    );
   }
 
-  void _onRefresh() async{
+  void _onRefresh() async {
     page = 0;
     _getData();
     _refreshController.refreshCompleted();
+    _refreshController.loadComplete();
   }
 
-  void _onLoading() async{
+  void _onLoading() async {
     page++;
-    List<Professions> newList = await ProfessionService().getProfessions(page);
+    List<Professions> newList = await ProfessionService()
+        .getProfessions(page, ApiConstants.getListSize);
     list.addAll(newList);
-    if(newList.isEmpty) {
+    if (newList.isEmpty) {
       setState(() {
-        LoadStatus.noMore;
         _refreshController.loadNoData();
       });
+    } else {
+      setState(() {
+        _refreshController.loadComplete();
+      });
     }
-    _refreshController.loadComplete();
   }
 
   final myController = TextEditingController();
@@ -109,7 +119,8 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
                           color: AppColors.greyColor,
                         ),
                         labelText: 'Поиск по имени',
-                        labelStyle: TextStyle(color: AppColors.greyColor, fontSize: 14),
+                        labelStyle:
+                            TextStyle(color: AppColors.greyColor, fontSize: 14),
                         border: InputBorder.none,
                         focusedBorder: InputBorder.none,
                         enabledBorder: InputBorder.none,
@@ -136,39 +147,51 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
                         showDialog(
                           context: context,
                           builder: (context) {
-                            var _singleNotifier = Provider.of<SingleNotifier>(context);
+                            var _singleNotifier =
+                                Provider.of<SingleNotifier>(context);
                             return CustomDialog(
                               child: Column(
                                 children: [
                                   ListView.builder(
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    padding: const EdgeInsets.symmetric(vertical: 8),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 8),
                                     shrinkWrap: true,
                                     itemCount: 1,
-                                    itemBuilder: (BuildContext context, int regionIndex) {
+                                    itemBuilder: (BuildContext context,
+                                        int regionIndex) {
                                       return Column(
                                         mainAxisSize: MainAxisSize.min,
-                                        children: regions.map((e) => RadioListTile<Region>(
-                                            title: Text(
-                                              e.name,
-                                              style: TextStyle(
-                                                color: AppColors.blackColor,
-                                                fontSize: 14,
-                                                fontWeight:
-                                                FontWeight.normal,
-                                              ),
-                                            ),
-                                            activeColor:
-                                            AppColors.blueColor,
-                                            value: e,
-                                            groupValue: _singleNotifier.currentRegion,
-                                            selected: _singleNotifier.currentRegion == e,
-                                            onChanged: (value) {
-                                              if (value != _singleNotifier.currentRegion) {
-                                                _singleNotifier.updateRegion(value!);
-                                                Navigator.of(context).pop();
-                                              }
-                                            })).toList(),
+                                        children: regions
+                                            .map((e) => RadioListTile<Region>(
+                                                title: Text(
+                                                  e.name,
+                                                  style: TextStyle(
+                                                    color: AppColors.blackColor,
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                ),
+                                                activeColor:
+                                                    AppColors.blueColor,
+                                                value: e,
+                                                groupValue: _singleNotifier
+                                                    .currentRegion,
+                                                selected: _singleNotifier
+                                                        .currentRegion ==
+                                                    e,
+                                                onChanged: (value) {
+                                                  if (value !=
+                                                      _singleNotifier
+                                                          .currentRegion) {
+                                                    _singleNotifier
+                                                        .updateRegion(value!);
+                                                    Navigator.of(context).pop();
+                                                  }
+                                                }))
+                                            .toList(),
                                       );
                                     },
                                   ),
@@ -188,7 +211,9 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
               ],
             ),
           ),
-          loading == true ? const Center(child: CircularProgressIndicator()) : getProfessions(),
+          loading == true
+              ? const Center(child: CircularProgressIndicator())
+              : getProfessions(),
         ],
       ),
     );
@@ -196,11 +221,10 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
 
   Widget getProfessions() {
     return Expanded(
-      child: SmartRefresher(
+      child: RefreshTemplate(
         controller: _refreshController,
         onRefresh: _onRefresh,
         onLoading: _onLoading,
-        enablePullUp: true,
         child: CustomPageScroll(
           children: [
             Padding(
@@ -216,9 +240,10 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AboutProfession(
-                        profession: list[index],
-                      )),
+                      MaterialPageRoute(
+                          builder: (context) => AboutProfession(
+                                profession: list[index],
+                              )),
                     );
                   },
                   child: CustomContainer(
@@ -268,8 +293,8 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
     );
   }
 
-  Color getRandomColor(){
-    switch (colorFlag){
+  Color getRandomColor() {
+    switch (colorFlag) {
       case 0:
         colorFlag = 1;
         return AppColors.blueColor;

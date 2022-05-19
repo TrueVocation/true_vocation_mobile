@@ -1,5 +1,7 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:true_vocation_mobile/data/api/service/profession_service.dart';
 import 'package:true_vocation_mobile/domain/model/professions.dart';
 import 'package:true_vocation_mobile/presentation/authorization/authorization_page.dart';
 import 'package:true_vocation_mobile/presentation/professions/about_professions_page.dart';
@@ -11,6 +13,7 @@ import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_tem
 import 'package:true_vocation_mobile/presentation/test/preview.dart';
 import 'package:true_vocation_mobile/presentation/university/university_main_page.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
+import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 import 'package:true_vocation_mobile/utils/shadows.dart';
 
@@ -22,15 +25,35 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   List<Professions> listProf = [];
+  bool loading = true;
+  int page = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _getData();
+  }
+
+  void _getData() async {
+    listProf = (await ProfessionService()
+            .getProfessions(page, ApiConstants.getListSize))
+        .cast<Professions>();
+    Future.delayed(const Duration(seconds: 1)).then(
+      (value) => setState(
+        () {
+          loading = false;
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     double cardHeight = 120;
     double cardWight = 164;
     double iconSize = 52;
-    
+
     return Scaffold(
       appBar: AppBar(
         title: appBar('Ainura Karzhaubayeva', context),
@@ -66,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                         color: AppColors.blueColor,
                         shadowColor: getShadowColor(AppColors.blueColor),
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(20)),
+                            const BorderRadius.all(Radius.circular(20)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -79,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                                     size: iconSize,
                                     preset: AppIcons.cardIcon,
                                     color:
-                                    AppColors.whiteColor.withOpacity(0.5),
+                                        AppColors.whiteColor.withOpacity(0.5),
                                   ),
                                   const SizedBox(
                                     height: 4,
@@ -99,8 +122,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(
-                                      color:
-                                      getDarkColor(),
+                                      color: getDarkColor(),
                                       borderRadius: const BorderRadius.only(
                                           topLeft: Radius.circular(36),
                                           bottomLeft: Radius.circular(36),
@@ -138,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                         color: AppColors.yellowColor,
                         shadowColor: getShadowColor(AppColors.yellowColor),
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(20)),
+                            const BorderRadius.all(Radius.circular(20)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -151,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                                     size: iconSize,
                                     preset: AppIcons.cardIcon,
                                     color:
-                                    AppColors.whiteColor.withOpacity(0.5),
+                                        AppColors.whiteColor.withOpacity(0.5),
                                   ),
                                   const SizedBox(
                                     height: 4,
@@ -171,8 +193,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(
-                                      color:
-                                      getDarkColor(),
+                                      color: getDarkColor(),
                                       borderRadius: const BorderRadius.only(
                                           topLeft: Radius.circular(36),
                                           bottomLeft: Radius.circular(36),
@@ -219,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                         color: AppColors.redColor,
                         shadowColor: getShadowColor(AppColors.redColor),
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(20)),
+                            const BorderRadius.all(Radius.circular(20)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -232,7 +253,7 @@ class _HomePageState extends State<HomePage> {
                                     size: iconSize,
                                     preset: AppIcons.cardIcon,
                                     color:
-                                    AppColors.whiteColor.withOpacity(0.5),
+                                        AppColors.whiteColor.withOpacity(0.5),
                                   ),
                                   const SizedBox(
                                     height: 4,
@@ -252,8 +273,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(
-                                      color:
-                                      getDarkColor(),
+                                      color: getDarkColor(),
                                       borderRadius: const BorderRadius.only(
                                           topLeft: Radius.circular(36),
                                           bottomLeft: Radius.circular(36),
@@ -291,7 +311,7 @@ class _HomePageState extends State<HomePage> {
                         shadowColor: getShadowColor(AppColors.greyColor),
                         color: AppColors.greyColor,
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(20)),
+                            const BorderRadius.all(Radius.circular(20)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -305,7 +325,7 @@ class _HomePageState extends State<HomePage> {
                                     size: iconSize,
                                     preset: AppIcons.cardIcon,
                                     color:
-                                    AppColors.whiteColor.withOpacity(0.5),
+                                        AppColors.whiteColor.withOpacity(0.5),
                                   ),
                                   const SizedBox(
                                     height: 4,
@@ -325,8 +345,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(
-                                      color:
-                                      getDarkColor(),
+                                      color: getDarkColor(),
                                       borderRadius: const BorderRadius.only(
                                           topLeft: Radius.circular(36),
                                           bottomLeft: Radius.circular(36),
@@ -372,9 +391,13 @@ class _HomePageState extends State<HomePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 getText('What do you want'),
-                                const SizedBox(height: 2,),
+                                const SizedBox(
+                                  height: 2,
+                                ),
                                 getText('to know your'),
-                                const SizedBox(height: 2,),
+                                const SizedBox(
+                                  height: 2,
+                                ),
                                 getText('interesting?')
                               ],
                             ),
@@ -386,12 +409,16 @@ class _HomePageState extends State<HomePage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const PreviewTestPage()),
+                                          builder: (context) =>
+                                              const PreviewTestPage()),
                                     );
                                   },
                                   style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all(AppColors.whiteColor),
-                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              AppColors.whiteColor),
+                                      shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
                                       ))),
                                   child: SizedBox(
@@ -401,8 +428,7 @@ class _HomePageState extends State<HomePage> {
                                         'Get started',
                                         style: TextStyle(
                                             color: AppColors.darkPurple,
-                                            fontSize: 16
-                                        ),
+                                            fontSize: 16),
                                       ),
                                     ),
                                   ),
@@ -433,7 +459,8 @@ class _HomePageState extends State<HomePage> {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaY: 12, sigmaX: 12),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                 child: Column(
                   children: [
                     Row(
@@ -445,40 +472,43 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               'Profession of the',
                               style: TextStyle(
-                                color: AppColors.blackColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500
-                              ),
+                                  color: AppColors.blackColor,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500),
                             ),
                             Text(
                               'future',
                               style: TextStyle(
-                                color: AppColors.blackColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500
-                              ),
+                                  color: AppColors.blackColor,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ],
                         ),
                         TextButton(
-                            onPressed: (){
-
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const MainProfessionPage()),
+                              );
                             },
                             child: Text(
                               'See all',
                               style: TextStyle(
-                                color: AppColors.greyColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal
-                              ),
-                            )
-                        ),
+                                  color: AppColors.greyColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal),
+                            )),
                       ],
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    getProf(),
+                    loading == true
+                        ? const Center(child: CircularProgressIndicator())
+                        : getProf(),
                   ],
                 ),
               ),
@@ -489,7 +519,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget getProf(){
+  Widget getProf() {
     return ListView.separated(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -497,51 +527,50 @@ class _HomePageState extends State<HomePage> {
       separatorBuilder: (_, index) => const SizedBox(
         height: 8,
       ),
-      itemBuilder: (context, index) => CustomContainer(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8 ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-               Text(
-                 listProf[index].name,
-                 style: TextStyle(
-                   color: AppColors.blackColor,
-                   fontSize: 16,
-                   fontWeight: FontWeight.normal,
-                 ),
-               ),
-              IconButton(
-                icon: CustomSvgIcon(
+      itemBuilder: (context, index) => GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AboutProfession(
+                      profession: listProf[index],
+                    )),
+          );
+        },
+        child: CustomContainer(
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  listProf[index].name,
+                  style: TextStyle(
+                    color: AppColors.blackColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                CustomSvgIcon(
                   preset: AppIcons.arrowCircle,
                   color: AppColors.purple,
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AboutProfession(
-                          profession: listProf[index],
-                        )),
-                  );
-                },
-              )
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Text getText(String text){
+  Text getText(String text) {
     return Text(
       text,
       style: TextStyle(
           color: AppColors.whiteColor,
           fontSize: 18,
-          fontWeight: FontWeight.w500
-      ),
+          fontWeight: FontWeight.w500),
     );
   }
 

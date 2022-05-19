@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
-import '../../utils/icons.dart';
+import 'package:true_vocation_mobile/utils/icons.dart';
+
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({Key? key, this.name, this.leading, this.color})
-      : super(key: key);
+  const CustomAppBar({
+    Key? key,
+    this.name,
+    this.leading,
+    this.color,
+    this.routeName,
+  }) : super(key: key);
 
   final bool? leading;
   final String? name;
   final Color? color;
+  final String? routeName;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +40,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 preset: AppIcons.backArrow2,
               ),
               color: AppColors.blackColor,
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => routeName == null
+                  ? Navigator.pop(context)
+                  : Navigator.of(context, rootNavigator: true)
+                      .pushReplacementNamed(routeName!),
             )
           : const Text(''),
     );
