@@ -4,6 +4,7 @@ import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_illustration_widget.dart';
 import 'package:true_vocation_mobile/presentation/test/test_page.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
+import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/illustrations.dart';
 
 class PreviewTestPage extends StatefulWidget {
@@ -25,7 +26,7 @@ class _PreviewTestPageState extends State<PreviewTestPage> {
       ),
       body: Container(
         padding:
-            const EdgeInsets.only(left: 32, right: 32, top: 48, bottom: 48),
+            const EdgeInsets.only(left: ApiConstants.mainHorizontalPadding, right: ApiConstants.mainHorizontalPadding, top: 48, bottom: 48),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

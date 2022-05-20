@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
+import 'package:true_vocation_mobile/utils/constants.dart';
 
 class DetailPageTemplate extends StatefulWidget {
   const DetailPageTemplate({
@@ -47,7 +48,8 @@ class _DetailPageTemplateState extends State<DetailPageTemplate> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            padding: const EdgeInsets.symmetric(
+                horizontal: ApiConstants.mainHorizontalPadding, vertical: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -59,9 +61,9 @@ class _DetailPageTemplateState extends State<DetailPageTemplate> {
                       child: Text(
                         widget.objectName!,
                         style: TextStyle(
-                          color: AppColors.blackColor,
-                          fontSize: widget.fontSize ?? 24,
-                          fontWeight: FontWeight.w500),
+                            color: AppColors.blackColor,
+                            fontSize: widget.fontSize ?? 24,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
                     const SizedBox(
@@ -74,7 +76,8 @@ class _DetailPageTemplateState extends State<DetailPageTemplate> {
                         style: TextStyle(
                           color: AppColors.greyColor,
                           fontSize: widget.fontSizeShort ?? 18,
-                          fontWeight: FontWeight.w400),
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                   ],
@@ -96,14 +99,17 @@ class _DetailPageTemplateState extends State<DetailPageTemplate> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+            padding: const EdgeInsets.only(
+                left: ApiConstants.mainHorizontalPadding,
+                right: ApiConstants.mainHorizontalPadding,
+                bottom: 24),
             child: widget.appBarBody!,
           ),
           Expanded(
             child: CustomContainer(
               color: AppColors.whiteColor,
               borderRadius:
-              const BorderRadius.vertical(top: Radius.circular(20)),
+                  const BorderRadius.vertical(top: Radius.circular(20)),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: DefaultTabController(
@@ -121,9 +127,7 @@ class _DetailPageTemplateState extends State<DetailPageTemplate> {
                         tabs: widget.tabs!,
                       ),
                       Expanded(
-                        child: TabBarView(
-                          children: widget.tabBarView!
-                        ),
+                        child: TabBarView(children: widget.tabBarView!),
                       ),
                     ],
                   ),

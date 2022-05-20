@@ -5,5 +5,6 @@ class ApiConstants {
   static const int getListSize = 5;
   static const String baseUrl = "http://10.10.14.18:8080";
   static const double listPageIconOpacity = 0.7;
+  static const double mainHorizontalPadding = 24;
   //static const String baseUrl = "https://true-vocation-2022.herokuapp.com";
 }

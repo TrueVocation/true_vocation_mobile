@@ -8,6 +8,7 @@ import 'package:true_vocation_mobile/presentation/professions/about_professions_
 import 'package:true_vocation_mobile/presentation/professions/profession_main_page.dart';
 import 'package:true_vocation_mobile/presentation/speciality/speciality_main_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_container_button_tabbar_view.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/presentation/test/preview.dart';
@@ -68,7 +69,8 @@ class _HomePageState extends State<HomePage> {
         physics: const ClampingScrollPhysics(),
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+            padding: const EdgeInsets.symmetric(
+                horizontal: ApiConstants.mainHorizontalPadding, vertical: 24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -532,31 +534,29 @@ class _HomePageState extends State<HomePage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => AboutProfession(
-                      profession: listProf[index],
-                    )),
+              builder: (context) => AboutProfession(
+                profession: listProf[index],
+              ),
+            ),
           );
         },
-        child: CustomContainer(
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  listProf[index].name,
-                  style: TextStyle(
-                    color: AppColors.blackColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
-                  ),
+        child: CustomContainerButtonTabbarView(
+          function: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AboutProfession(
+                  profession: listProf[index],
                 ),
-                CustomSvgIcon(
-                  preset: AppIcons.arrowCircle,
-                  color: AppColors.purple,
-                ),
-              ],
+              ),
+            );
+          },
+          child: Text(
+            listProf[index].name,
+            style: TextStyle(
+              color: AppColors.blackColor,
+              fontSize: 16,
+              fontWeight: FontWeight.normal,
             ),
           ),
         ),

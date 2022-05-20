@@ -6,6 +6,7 @@ import 'package:true_vocation_mobile/presentation/templates/custom_appbar_templa
 import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
+import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/routes.dart';
 import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
@@ -46,7 +47,8 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(
+            horizontal: ApiConstants.mainHorizontalPadding),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [

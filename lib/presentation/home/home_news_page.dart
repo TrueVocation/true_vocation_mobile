@@ -6,6 +6,7 @@ import 'package:true_vocation_mobile/presentation/templates/custom_illustration_
 import 'package:true_vocation_mobile/presentation/templates/news/news_template_widget.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
+import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/illustrations.dart';
 
 class HomeNewsPage extends StatefulWidget {
@@ -16,7 +17,6 @@ class HomeNewsPage extends StatefulWidget {
 }
 
 class _HomeNewsPageState extends State<HomeNewsPage> {
-
   final int? count = 0;
 
   @override
@@ -32,33 +32,35 @@ class _HomeNewsPageState extends State<HomeNewsPage> {
     );
   }
 
-  Widget getNothing(){
+  Widget getNothing() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(
+              horizontal: ApiConstants.mainHorizontalPadding),
           child: Column(
             children: [
               CustomIllustration(
                 preset: AppIllustration.nothingHere,
               ),
-              const SizedBox(height: 24,),
+              const SizedBox(
+                height: 24,
+              ),
               Text(
                 'На сегодная новостей нет',
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.normal,
                     fontFamily: 'Roboto',
-                    color: AppColors.blackColor
-                ),
+                    color: AppColors.blackColor),
               ),
             ],
           ),
         ),
         CustomButton(
-          onPressed: (){
+          onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const MainNewsPage()),
@@ -73,14 +75,15 @@ class _HomeNewsPageState extends State<HomeNewsPage> {
     );
   }
 
-  Widget getTodayNews(count){
+  Widget getTodayNews(count) {
     return CustomPageScroll(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Container(
-              margin: const EdgeInsets.only(right: 24),
+              margin: const EdgeInsets.only(
+                  right: ApiConstants.mainHorizontalPadding),
               child: Text(
                 'На сегодня',
                 style: TextStyle(color: AppColors.greyColor),
@@ -92,12 +95,12 @@ class _HomeNewsPageState extends State<HomeNewsPage> {
           itemCount: count,
         ),
         CustomButton(
-            onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const MainNewsPage()),
-              );
-            },
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const MainNewsPage()),
+            );
+          },
           text: 'Все новости',
           borderColor: AppColors.blueColor,
         ),

@@ -6,15 +6,16 @@ import 'package:true_vocation_mobile/domain/model/regions.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/domain/model/speciality.dart';
 import 'package:true_vocation_mobile/presentation/speciality/about_speciality.dart';
-import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_dialog_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_refresh_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
-import 'package:true_vocation_mobile/presentation/templates/custom_refresh_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
+import 'package:true_vocation_mobile/utils/functions.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
@@ -99,7 +100,8 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(
+                horizontal: ApiConstants.mainHorizontalPadding),
             child: Column(
               children: [
                 CustomTextFormField(
@@ -209,7 +211,7 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -230,7 +232,10 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
         child: CustomPageScroll(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+              padding: const EdgeInsets.only(
+                  left: ApiConstants.mainHorizontalPadding,
+                  right: ApiConstants.mainHorizontalPadding,
+                  bottom: 24),
               child: ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -243,9 +248,10 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AboutSpeciality(
-                                speciality: list[index],
-                              )),
+                        builder: (context) => AboutSpeciality(
+                          speciality: list[index],
+                        ),
+                      ),
                     );
                   },
                   child: CustomContainer(
@@ -275,10 +281,11 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
                                   list[index].name,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
-                                      color: AppColors.blackColor,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 14,
-                                      fontFamily: 'Roboto'),
+                                    color: AppColors.blackColor,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 14,
+                                    fontFamily: 'Roboto',
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 4,
@@ -287,10 +294,11 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
                                   list[index].price.toString() + 'тг.',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: AppColors.greyColor,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 14,
-                                      fontFamily: 'Roboto'),
+                                    color: AppColors.greyColor,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 14,
+                                    fontFamily: 'Roboto',
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 8,
@@ -301,10 +309,11 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
                                       'Трудоустройство:',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          color: AppColors.greyColor,
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 12,
-                                          fontFamily: 'Roboto'),
+                                        color: AppColors.greyColor,
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 12,
+                                        fontFamily: 'Roboto',
+                                      ),
                                     ),
                                     const SizedBox(
                                       width: 4,
@@ -313,11 +322,12 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
                                       list[index].employment,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          color:
-                                              getColor(list[index].employment),
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 12,
-                                          fontFamily: 'Roboto'),
+                                        color: ApiFunctions.getColorEmployee(
+                                            list[index].employment),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 12,
+                                        fontFamily: 'Roboto',
+                                      ),
                                     )
                                   ],
                                 )
@@ -348,17 +358,6 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
       default:
         colorFlag = 0;
         return AppColors.redColor;
-    }
-  }
-
-  Color getColor(String value) {
-    switch (value) {
-      case 'низкое':
-        return AppColors.redColor;
-      case 'среднее':
-        return AppColors.yellowColor;
-      default:
-        return AppColors.greenColor;
     }
   }
 }

@@ -14,6 +14,7 @@ import 'package:true_vocation_mobile/presentation/templates/detail_page_template
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
+import 'package:true_vocation_mobile/utils/functions.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 
 class AboutProfession extends StatefulWidget {
@@ -94,14 +95,17 @@ class _AboutProfessionState extends State<AboutProfession> {
           ),
           CustomContainer(
             color:
-                getColorProf(widget.profession!.employability).withOpacity(0.7),
+                ApiFunctions.getColorEmployee(widget.profession!.employability)
+                    .withOpacity(0.7),
             borderRadius: BorderRadius.circular(10),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child: Text(
                 widget.profession!.employability,
                 style: TextStyle(
-                    color: AppColors.whiteColor, fontWeight: FontWeight.normal),
+                  color: AppColors.whiteColor,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             ),
           )
@@ -117,7 +121,8 @@ class _AboutProfessionState extends State<AboutProfession> {
       ],
       tabBarView: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: const EdgeInsets.symmetric(
+              horizontal: ApiConstants.mainHorizontalPadding, vertical: 16),
           child: CustomPageScroll(color: AppColors.whiteColor, children: const [
             Text(
                 'gbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjv'),
@@ -209,16 +214,5 @@ class _AboutProfessionState extends State<AboutProfession> {
         },
       ),
     );
-  }
-
-  Color getColorProf(String value) {
-    switch (value) {
-      case 'низкое':
-        return AppColors.redColor;
-      case 'среднее':
-        return AppColors.yellowColor;
-      default:
-        return AppColors.greenColor;
-    }
   }
 }

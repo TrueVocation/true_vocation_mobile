@@ -16,6 +16,7 @@ import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_tem
 import 'package:true_vocation_mobile/presentation/university/about_university.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
+import 'package:true_vocation_mobile/utils/functions.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 
 class AboutSpeciality extends StatefulWidget {
@@ -111,8 +112,9 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
 
   void _onLoadingProf() async {
     page++;
-    List<Professions> newList = await ProfessionService().getProfessionsBySpeciality(
-        page, ApiConstants.getListSize, widget.speciality!.id);
+    List<Professions> newList = await ProfessionService()
+        .getProfessionsBySpeciality(
+            page, ApiConstants.getListSize, widget.speciality!.id);
     listProf.addAll(newList);
     if (newList.isEmpty) {
       setState(() {
@@ -144,7 +146,8 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
                 fontFamily: 'Roboto'),
           ),
           CustomContainer(
-            color: getColor(widget.speciality!.employment).withOpacity(0.7),
+            color: ApiFunctions.getColorEmployee(widget.speciality!.employment)
+                .withOpacity(0.7),
             borderRadius: BorderRadius.circular(10),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -166,7 +169,8 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
       ],
       tabBarView: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: const EdgeInsets.symmetric(
+              horizontal: ApiConstants.mainHorizontalPadding, vertical: 16),
           child: CustomPageScroll(
             color: AppColors.whiteColor,
             children: const [
@@ -183,8 +187,9 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
             color: AppColors.whiteColor,
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: ApiConstants.mainHorizontalPadding,
+                    vertical: 16),
                 child: loading == true
                     ? const Center(
                         child: CircularProgressIndicator(),
@@ -202,11 +207,13 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
             color: AppColors.whiteColor,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: ApiConstants.mainHorizontalPadding,
+                    vertical: 16),
                 child: loading == true
                     ? const Center(
-                  child: CircularProgressIndicator(),
-                )
+                        child: CircularProgressIndicator(),
+                      )
                     : getProf(),
               ),
             ],
@@ -341,16 +348,5 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
         ),
       )*/
     );
-  }
-
-  Color getColor(String value) {
-    switch (value) {
-      case 'Низкое':
-        return AppColors.redColor;
-      case 'Среднее':
-        return AppColors.yellowColor;
-      default:
-        return AppColors.greenColor;
-    }
   }
 }

@@ -96,7 +96,7 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: ApiConstants.mainHorizontalPadding),
             child: Column(
               children: [
                 CustomTextFormField(
@@ -227,7 +227,7 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         child: CustomPageScroll(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+              padding: const EdgeInsets.only(left: ApiConstants.mainHorizontalPadding, right: ApiConstants.mainHorizontalPadding, bottom: 24),
               child: ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,

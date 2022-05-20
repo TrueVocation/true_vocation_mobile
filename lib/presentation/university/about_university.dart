@@ -90,7 +90,8 @@ class _AboutUniversityState extends State<AboutUniversity> {
       ],
       tabBarView: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: const EdgeInsets.symmetric(
+              horizontal: ApiConstants.mainHorizontalPadding, vertical: 16),
           child: CustomPageScroll(
             color: AppColors.whiteColor,
             children: const [
@@ -108,8 +109,9 @@ class _AboutUniversityState extends State<AboutUniversity> {
             color: AppColors.whiteColor,
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: ApiConstants.mainHorizontalPadding,
+                    vertical: 16),
                 child: loading == true
                     ? const Center(
                         child: CircularProgressIndicator(),
