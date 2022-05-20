@@ -15,4 +15,11 @@ class ProfessionService {
 
     return (response.data as List).map((e) => Professions.fromApi(e)).toList();
   }
+
+  Future<List<Professions>> getProfessionsBySpeciality(int page, size, id) async {
+    final response =
+    await ApiConstants.dio.get('/api/professions-by-speciality/$id?page=$page&size=$size&sort=id&order=desc');
+
+    return (response.data as List).map((e) => Professions.fromApi(e)).toList();
+  }
 }

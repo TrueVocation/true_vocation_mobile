@@ -16,4 +16,11 @@ class UniversityService {
 
     return (response.data as List).map((e) => University.fromApi(e)).toList();
   }
+
+  Future<List<University>> getUniversitiesBySpecialtyId(int page, size, id) async {
+    final response = await ApiConstants.dio
+        .get('/api/universities-by-speciality/$id?page=$page&size=$size&sort=id&order=desc');
+
+    return (response.data as List).map((e) => University.fromApi(e)).toList();
+  }
 }

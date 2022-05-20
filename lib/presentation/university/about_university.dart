@@ -5,6 +5,7 @@ import 'package:true_vocation_mobile/domain/model/speciality.dart';
 import 'package:true_vocation_mobile/domain/model/university.dart';
 import 'package:true_vocation_mobile/presentation/speciality/about_speciality.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_container_button_tabbar_view.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_refresh_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_tabs_widget.dart';
@@ -23,13 +24,12 @@ class AboutUniversity extends StatefulWidget {
 }
 
 class _AboutUniversityState extends State<AboutUniversity> {
-
   late List<Speciality> list = [];
 
   bool loading = true;
   int page = 0;
   final RefreshController _refreshController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -38,12 +38,12 @@ class _AboutUniversityState extends State<AboutUniversity> {
   }
 
   void _getData() async {
-    list = (await SpecialityService()
-        .getSpecialitiesByUniversity(page, ApiConstants.getListSize, widget.university!.id))
+    list = (await SpecialityService().getSpecialitiesByUniversity(
+            page, ApiConstants.getListSize, widget.university!.id))
         .cast<Speciality>();
     Future.delayed(const Duration(seconds: 1)).then(
-          (value) => setState(
-            () {
+      (value) => setState(
+        () {
           loading = false;
         },
       ),
@@ -60,7 +60,8 @@ class _AboutUniversityState extends State<AboutUniversity> {
   void _onLoading() async {
     page++;
     List<Speciality> newList = await SpecialityService()
-        .getSpecialitiesByUniversity(page, ApiConstants.getListSize, widget.university!.id);
+        .getSpecialitiesByUniversity(
+            page, ApiConstants.getListSize, widget.university!.id);
     list.addAll(newList);
     if (newList.isEmpty) {
       setState(() {
@@ -94,22 +95,29 @@ class _AboutUniversityState extends State<AboutUniversity> {
             color: AppColors.whiteColor,
             children: const [
               Text(
-                  'gbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjv'
+                'gbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjv',
               ),
             ],
           ),
         ),
-        CustomPageScroll(
-          color: AppColors.whiteColor,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              child:
-              loading == true
-                  ? const Center(child: CircularProgressIndicator())
-                  : getSpec(),
-            ),
-          ],
+        RefreshTemplate(
+          controller: _refreshController,
+          onLoading: _onLoading,
+          onRefresh: _onRefresh,
+          child: CustomPageScroll(
+            color: AppColors.whiteColor,
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                child: loading == true
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : getSpec(),
+              ),
+            ],
+          ),
         ),
       ],
       appBarBody: Row(
@@ -123,77 +131,55 @@ class _AboutUniversityState extends State<AboutUniversity> {
   }
 
   Widget getSpec() {
-    return RefreshTemplate(
-      controller: _refreshController,
-      onRefresh: _onRefresh,
-      onLoading: _onLoading,
+    return Expanded(
       child: ListView.separated(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: list.length,
-        separatorBuilder: (_, index) =>
-        const SizedBox(
+        separatorBuilder: (_, index) => const SizedBox(
           height: 12,
         ),
-        itemBuilder: (context, index) =>
-            CustomContainer(
-              shadowColor: AppColors.purple.withOpacity(0.1),
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 256,
-                          child: Text(
-                            list[index].name,
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                color: AppColors.blackColor,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 14,
-                                fontFamily: 'Roboto'),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          'Цена обучения: ' + list[index].price.toString() + 'тг.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: AppColors.greyColor,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 12
-                          ),
-                        )
-                      ],
-                    ),
-                    IconButton(
-                      icon: CustomSvgIcon(
-                        preset: AppIcons.arrowCircle,
-                        color: AppColors.purple,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                              AboutSpeciality(
-                                speciality: list[index],
-                              ),
-                          ),
-                        );
-                      },
-                    )
-                  ],
+        itemBuilder: (context, index) => CustomContainerButtonTabbarView(
+          function: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AboutSpeciality(
+                  speciality: list[index],
                 ),
               ),
-            ),
+            );
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 256,
+                child: Text(
+                  list[index].name,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      color: AppColors.blackColor,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                      fontFamily: 'Roboto'),
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Text(
+                'Цена обучения: ' + list[index].price.toString() + 'тг.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.greyColor,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12,
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
