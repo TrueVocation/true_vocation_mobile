@@ -461,8 +461,9 @@ class _HomePageState extends State<HomePage> {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaY: 12, sigmaX: 12),
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: ApiConstants.mainHorizontalPadding,
+                    vertical: 16),
                 child: Column(
                   children: [
                     Row(

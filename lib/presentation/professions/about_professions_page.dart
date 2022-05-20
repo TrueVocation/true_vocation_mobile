@@ -137,7 +137,7 @@ class _AboutProfessionState extends State<AboutProfession> {
             children: [
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                    const EdgeInsets.symmetric(horizontal: ApiConstants.mainHorizontalPadding, vertical: 16),
                 child: loading == true
                     ? const Center(
                         child: CircularProgressIndicator(),
