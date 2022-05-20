@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:true_vocation_mobile/presentation/news/news_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_illustration_widget.dart';
 import 'package:true_vocation_mobile/presentation/templates/news/news_template_widget.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
@@ -56,17 +57,18 @@ class _HomeNewsPageState extends State<HomeNewsPage> {
             ],
           ),
         ),
-        RaisedButton(
-          color: AppColors.blueColor,
-          textColor: AppColors.whiteColor,
-          child: const Text('Все новости'),
-          onPressed: () {
+        CustomButton(
+          onPressed: (){
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const MainNewsPage()),
             );
           },
-        )
+          radius: 10,
+          text: 'Все новости',
+          color: AppColors.blueColor,
+          width: 156,
+        ),
       ],
     );
   }
@@ -89,19 +91,15 @@ class _HomeNewsPageState extends State<HomeNewsPage> {
         NewsTemplate(
           itemCount: count,
         ),
-        Container(
-          margin: const EdgeInsets.only(bottom: 24),
-          child: RaisedButton(
-            color: AppColors.blueColor,
-            textColor: AppColors.whiteColor,
-            child: const Text('Все новости'),
-            onPressed: () {
+        CustomButton(
+            onPressed: (){
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const MainNewsPage()),
               );
             },
-          ),
+          text: 'Все новости',
+          borderColor: AppColors.blueColor,
         ),
       ],
     );

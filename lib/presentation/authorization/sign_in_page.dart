@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/presentation/authorization/sign_up_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/routes.dart';
@@ -103,7 +104,6 @@ class _SignInPageState extends State<SignInPage> {
                   CustomTextFormField(
                     child: TextFormField(
                       controller: phoneController,
-
                       obscureText: false,
                       keyboardType: TextInputType.number,
                       autofocus: false,
@@ -116,7 +116,8 @@ class _SignInPageState extends State<SignInPage> {
                       inputFormatters: [TextInputMasks.phoneNumber],
                       decoration: InputDecoration(
                           labelText: 'Номер телефона',
-                          labelStyle: TextStyle(color: AppColors.greyColor, fontSize: 14),
+                          labelStyle: TextStyle(
+                              color: AppColors.greyColor, fontSize: 14),
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
@@ -134,7 +135,8 @@ class _SignInPageState extends State<SignInPage> {
                       autofocus: false,
                       decoration: InputDecoration(
                           labelText: 'Пароль',
-                          labelStyle: TextStyle(color: AppColors.greyColor, fontSize: 14),
+                          labelStyle: TextStyle(
+                              color: AppColors.greyColor, fontSize: 14),
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
@@ -144,9 +146,9 @@ class _SignInPageState extends State<SignInPage> {
                   const SizedBox(
                     height: 48,
                   ),
-                  ElevatedButton(
+                  CustomButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()){
+                      if (_formKey.currentState!.validate()) {
                         _singleNotifier.updateLoginValue(phoneController.text);
                         Navigator.push(
                           context,
@@ -155,18 +157,9 @@ class _SignInPageState extends State<SignInPage> {
                         );
                       }
                     },
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(AppColors.blueColor),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ))),
-                    child: const SizedBox(
-                      height: 48,
-                      width: double.maxFinite,
-                      child: Center(
-                        child: Text('Продолжить'),
-                      ),
-                    ),
+                    color: AppColors.blueColor,
+                    radius: 10,
+                    text: 'Продолжить',
                   ),
                 ],
               ),

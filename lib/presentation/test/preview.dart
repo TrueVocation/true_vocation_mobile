@@ -61,33 +61,20 @@ class _PreviewTestPageState extends State<PreviewTestPage> {
                 ),
               ],
             ),
-            ElevatedButton(
+            CustomButton(
               onPressed: () {
-                  toMainTestPage();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MainTestPage()),
+                );
               },
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(AppColors.blueColor),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ))),
-              child: const SizedBox(
-                height: 48,
-                width: double.maxFinite,
-                child: Center(
-                  child: Text('Пройти тест'),
-                ),
-              ),
+              color: AppColors.blueColor,
+              radius: 10,
+              text: 'Пройти тест',
             ),
           ],
         ),
       ),
-    );
-  }
-
-  void toMainTestPage(){
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const MainTestPage()),
     );
   }
 }

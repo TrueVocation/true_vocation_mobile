@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/presentation/authorization/sign_in_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/routes.dart';
@@ -117,7 +118,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       inputFormatters: [TextInputMasks.phoneNumber],
                       decoration: InputDecoration(
                           labelText: 'Номер телефона',
-                          labelStyle: TextStyle(color: AppColors.greyColor, fontSize: 14),
+                          labelStyle: TextStyle(
+                              color: AppColors.greyColor, fontSize: 14),
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
@@ -142,7 +144,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       inputFormatters: [TextInputMasks.defaultMask],
                       decoration: InputDecoration(
                           labelText: 'Пароль',
-                          labelStyle: TextStyle(color: AppColors.greyColor, fontSize: 14),
+                          labelStyle: TextStyle(
+                              color: AppColors.greyColor, fontSize: 14),
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
@@ -167,7 +170,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       inputFormatters: [TextInputMasks.defaultMask],
                       decoration: InputDecoration(
                           labelText: 'Подтвердите пароль',
-                          labelStyle: TextStyle(color: AppColors.greyColor, fontSize: 14),
+                          labelStyle: TextStyle(
+                              color: AppColors.greyColor, fontSize: 14),
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
@@ -177,9 +181,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   const SizedBox(
                     height: 48,
                   ),
-                  ElevatedButton(
+                  CustomButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()){
+                      if (_formKey.currentState!.validate()) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -187,18 +191,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         );
                       }
                     },
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(AppColors.blueColor),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ))),
-                    child: const SizedBox(
-                      height: 48,
-                      width: double.maxFinite,
-                      child: Center(
-                        child: Text('Продолжить'),
-                      ),
-                    ),
+                    color: AppColors.blueColor,
+                    radius: 10,
+                    text: 'Продолжить',
                   ),
                 ],
               ),

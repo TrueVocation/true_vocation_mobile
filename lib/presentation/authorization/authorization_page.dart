@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/presentation/authorization/sign_in_page.dart';
-import 'package:true_vocation_mobile/presentation/authorization/sign_up_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/routes.dart';
@@ -97,38 +97,17 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
                   const SizedBox(
                     height: 24,
                   ),
-                  ElevatedButton(
-                    onLongPress: () {
-                      if (_formKey.currentState!.validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpPage()),
-                        );
-                      }
-                    },
+                  CustomButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignInPage()),
-                        );
-                      }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignInPage()),
+                      );
                     },
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(AppColors.blueColor),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ))),
-                    child: const SizedBox(
-                      height: 48,
-                      width: double.maxFinite,
-                      child: Center(
-                        child: Text('Продолжить'),
-                      ),
-                    ),
+                    color: AppColors.blueColor,
+                    radius: 10,
+                    text: 'Продолжить',
                   ),
                 ],
               ),
