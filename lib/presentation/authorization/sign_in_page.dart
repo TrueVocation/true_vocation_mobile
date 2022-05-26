@@ -7,8 +7,8 @@ import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
+import 'package:true_vocation_mobile/utils/enums.dart';
 import 'package:true_vocation_mobile/utils/routes.dart';
-import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key, this.phoneNumber}) : super(key: key);
@@ -45,7 +45,8 @@ class _SignInPageState extends State<SignInPage> {
       ),
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: ApiConstants.mainHorizontalPadding),
+        padding: const EdgeInsets.symmetric(
+            horizontal: ApiConstants.mainHorizontalPadding),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -103,46 +104,17 @@ class _SignInPageState extends State<SignInPage> {
               child: Column(
                 children: [
                   CustomTextFormField(
-                    child: TextFormField(
-                      controller: phoneController,
-                      obscureText: false,
-                      keyboardType: TextInputType.number,
-                      autofocus: false,
-                      validator: (value) {
-                        if (value!.length > 10 && value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                      inputFormatters: [TextInputMasks.phoneNumber],
-                      decoration: InputDecoration(
-                          labelText: 'Номер телефона',
-                          labelStyle: TextStyle(
-                              color: AppColors.greyColor, fontSize: 14),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none),
-                    ),
+                    labelText: 'Номер телефона',
+                    controller: phoneController,
+                    textMask: MaskTypes.phoneNumber.toString(),
+                    keyboardType: InputTypes.number.toString(),
                   ),
                   const SizedBox(
                     height: 16,
                   ),
                   CustomTextFormField(
-                    child: TextFormField(
-                      controller: passwordController,
-                      obscureText: true,
-                      keyboardType: TextInputType.text,
-                      autofocus: false,
-                      decoration: InputDecoration(
-                          labelText: 'Пароль',
-                          labelStyle: TextStyle(
-                              color: AppColors.greyColor, fontSize: 14),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none),
-                    ),
+                    labelText: 'Пароль',
+                    controller: passwordController,
                   ),
                   const SizedBox(
                     height: 48,

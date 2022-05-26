@@ -16,7 +16,6 @@ import 'package:true_vocation_mobile/presentation/university/about_university.da
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
-import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
 class MainUniversityPage extends StatefulWidget {
   const MainUniversityPage({Key? key}) : super(key: key);
@@ -96,35 +95,13 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: ApiConstants.mainHorizontalPadding),
+            padding: const EdgeInsets.symmetric(
+                horizontal: ApiConstants.mainHorizontalPadding),
             child: Column(
               children: [
                 CustomTextFormField(
-                  child: TextFormField(
-                    controller: myController,
-                    obscureText: false,
-                    keyboardType: TextInputType.text,
-                    autofocus: false,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                    inputFormatters: [TextInputMasks.defaultMask],
-                    decoration: InputDecoration(
-                        icon: CustomSvgIcon(
-                          preset: AppIcons.search,
-                          color: AppColors.greyColor,
-                        ),
-                        labelText: 'Поиск по имени',
-                        labelStyle:
-                            TextStyle(color: AppColors.greyColor, fontSize: 14),
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none),
-                  ),
+                  controller: myController,
+                  labelText: 'Поиск',
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
@@ -227,7 +204,10 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         child: CustomPageScroll(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: ApiConstants.mainHorizontalPadding, right: ApiConstants.mainHorizontalPadding, bottom: 24),
+              padding: const EdgeInsets.only(
+                  left: ApiConstants.mainHorizontalPadding,
+                  right: ApiConstants.mainHorizontalPadding,
+                  bottom: 24),
               child: ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,

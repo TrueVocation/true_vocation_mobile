@@ -1,39 +1,85 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
-import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField(
-      {Key? key,
-      this.child})
-      : super(key: key);
+  const CustomTextFormField({
+    Key? key,
+    required this.controller,
+    this.autofocus,
+    this.textMask,
+    required this.labelText,
+    this.onChanged,
+    this.keyboardType,
+  }) : super(key: key);
 
-  final Widget? child;
+  final TextEditingController? controller;
+  final bool? autofocus;
+  final String? textMask;
+  final String? labelText;
+  final void Function(String)? onChanged;
+  final String? keyboardType;
 
   @override
   Widget build(BuildContext context) {
-
     return CustomContainer(
       border: true,
       borderRadius: const BorderRadius.all(Radius.circular(10)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: child,
+        child: TextFormField(
+          onChanged: onChanged,
+          controller: controller,
+          keyboardType: keyboardType == null
+              ? TextInputType.text
+              : getInputType(keyboardType!),
+          obscureText: false,
+          autofocus: false,
+          validator: (value) {
+            if (value!.isEmpty) {
+              return '* Required field';
+            }
+            return null;
+          },
+          inputFormatters: [
+            textMask == null
+                ? TextInputMasks.defaultMask
+                : getMaskType(textMask!),
+          ],
+          decoration: InputDecoration(
+            labelText: labelText!,
+            labelStyle: TextStyle(color: AppColors.greyColor, fontSize: 14),
+            border: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
+          ),
+        ),
       ),
     );
   }
 
-  static TextInputFormatter getMaskType(String maskType) {
+  TextInputFormatter getMaskType(String maskType) {
     switch (maskType) {
-      case 'phoneNumber':
+      case 'MaskTypes.phoneNumber':
         return TextInputMasks.phoneNumber;
       default:
         return TextInputMasks.defaultMask;
+    }
+  }
+
+  TextInputType getInputType(String keyboardType) {
+    switch (keyboardType) {
+      case 'InputTypes.number':
+        return TextInputType.number;
+      case 'InputTypes.email':
+        return TextInputType.emailAddress;
+      case 'InputTypes.date':
+        return TextInputType.datetime;
+      default:
+        return TextInputType.text;
     }
   }
 }

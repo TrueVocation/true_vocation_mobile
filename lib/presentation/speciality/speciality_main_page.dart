@@ -17,7 +17,6 @@ import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/functions.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
-import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
 class MainSpecialityPage extends StatefulWidget {
   const MainSpecialityPage({Key? key}) : super(key: key);
@@ -105,31 +104,8 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
             child: Column(
               children: [
                 CustomTextFormField(
-                  child: TextFormField(
-                    controller: myController,
-                    obscureText: false,
-                    keyboardType: TextInputType.text,
-                    autofocus: false,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                    inputFormatters: [TextInputMasks.defaultMask],
-                    decoration: InputDecoration(
-                        icon: CustomSvgIcon(
-                          preset: AppIcons.search,
-                          color: AppColors.greyColor,
-                        ),
-                        labelText: 'Поиск по имени',
-                        labelStyle:
-                            TextStyle(color: AppColors.greyColor, fontSize: 14),
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none),
-                  ),
+                  controller: myController,
+                  labelText: 'Поиск',
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),

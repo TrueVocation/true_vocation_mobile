@@ -8,7 +8,6 @@ import 'package:true_vocation_mobile/presentation/templates/custom_text_form_fie
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/routes.dart';
-import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -18,6 +17,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final nameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final birthDateController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
@@ -106,79 +108,9 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Column(
                 children: [
                   CustomTextFormField(
-                    child: TextFormField(
-                      controller: phoneController,
-                      obscureText: false,
-                      keyboardType: TextInputType.number,
-                      autofocus: false,
-                      validator: (value) {
-                        if (value!.length > 10 && value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                      inputFormatters: [TextInputMasks.phoneNumber],
-                      decoration: InputDecoration(
-                          labelText: 'Номер телефона',
-                          labelStyle: TextStyle(
-                              color: AppColors.greyColor, fontSize: 14),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  CustomTextFormField(
-                    child: TextFormField(
-                      controller: passwordController,
-                      obscureText: true,
-                      keyboardType: TextInputType.text,
-                      autofocus: false,
-                      validator: (value) {
-                        if (value!.length > 10 && value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                      inputFormatters: [TextInputMasks.defaultMask],
-                      decoration: InputDecoration(
-                          labelText: 'Пароль',
-                          labelStyle: TextStyle(
-                              color: AppColors.greyColor, fontSize: 14),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  CustomTextFormField(
-                    child: TextFormField(
-                      controller: rePasswordController,
-                      obscureText: true,
-                      keyboardType: TextInputType.text,
-                      autofocus: false,
-                      validator: (value) {
-                        if (value!.length > 10 && value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                      inputFormatters: [TextInputMasks.defaultMask],
-                      decoration: InputDecoration(
-                          labelText: 'Подтвердите пароль',
-                          labelStyle: TextStyle(
-                              color: AppColors.greyColor, fontSize: 14),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none),
-                    ),
+                    controller: nameController,
+                    labelText: 'Ваше имя',
+                    autofocus: true,
                   ),
                   const SizedBox(
                     height: 48,

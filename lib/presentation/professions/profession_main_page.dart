@@ -6,17 +6,16 @@ import 'package:true_vocation_mobile/domain/model/professions.dart';
 import 'package:true_vocation_mobile/domain/model/regions.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/presentation/professions/about_professions_page.dart';
-import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_dialog_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_refresh_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
-import 'package:true_vocation_mobile/presentation/templates/custom_refresh_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
-import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
 class MainProfessionPage extends StatefulWidget {
   const MainProfessionPage({Key? key}) : super(key: key);
@@ -97,35 +96,13 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: ApiConstants.mainHorizontalPadding),
+            padding: const EdgeInsets.symmetric(
+                horizontal: ApiConstants.mainHorizontalPadding),
             child: Column(
               children: [
                 CustomTextFormField(
-                  child: TextFormField(
-                    controller: myController,
-                    obscureText: false,
-                    keyboardType: TextInputType.text,
-                    autofocus: false,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                    inputFormatters: [TextInputMasks.defaultMask],
-                    decoration: InputDecoration(
-                        icon: CustomSvgIcon(
-                          preset: AppIcons.search,
-                          color: AppColors.greyColor,
-                        ),
-                        labelText: 'Поиск по имени',
-                        labelStyle:
-                            TextStyle(color: AppColors.greyColor, fontSize: 14),
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none),
-                  ),
+                  controller: myController,
+                  labelText: 'Поиск',
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16),
@@ -228,7 +205,10 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
         child: CustomPageScroll(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: ApiConstants.mainHorizontalPadding, right: ApiConstants.mainHorizontalPadding, bottom: 24),
+              padding: const EdgeInsets.only(
+                  left: ApiConstants.mainHorizontalPadding,
+                  right: ApiConstants.mainHorizontalPadding,
+                  bottom: 24),
               child: ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,

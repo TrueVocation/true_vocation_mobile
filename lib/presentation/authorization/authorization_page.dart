@@ -8,8 +8,8 @@ import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
+import 'package:true_vocation_mobile/utils/enums.dart';
 import 'package:true_vocation_mobile/utils/routes.dart';
-import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
 class AuthorizationPage extends StatefulWidget {
   const AuthorizationPage({Key? key}) : super(key: key);
@@ -32,6 +32,8 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
   @override
   Widget build(BuildContext context) {
     var _singleNotifier = Provider.of<SingleNotifier>(context);
+    myController.text = _singleNotifier.login;
+
     return Scaffold(
       appBar: CustomAppBar(
         leading: true,
@@ -41,7 +43,8 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
       ),
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: ApiConstants.mainHorizontalPadding),
+        padding: const EdgeInsets.symmetric(
+            horizontal: ApiConstants.mainHorizontalPadding),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -70,41 +73,25 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
               child: Column(
                 children: [
                   CustomTextFormField(
-                    child: TextFormField(
-                      onChanged: (value) {
-                        _singleNotifier.updateLoginValue(myController.text);
-                      },
-                      controller: myController,
-                      obscureText: false,
-                      keyboardType: TextInputType.number,
-                      autofocus: false,
-                      validator: (value) {
-                        if (value!.length > 10 && value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                      inputFormatters: [TextInputMasks.phoneNumber],
-                      decoration: InputDecoration(
-                          labelText: 'Номер телефона',
-                          labelStyle: TextStyle(
-                              color: AppColors.greyColor, fontSize: 14),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none),
-                    ),
+                    controller: myController,
+                    labelText: 'Номер телефона',
+                    autofocus: true,
+                    keyboardType: InputTypes.number.toString(),
+                    textMask: MaskTypes.phoneNumber.toString(),
                   ),
                   const SizedBox(
                     height: 24,
                   ),
                   CustomButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignInPage()),
-                      );
+                      if (_formKey.currentState!.validate()) {
+                        _singleNotifier.updateLoginValue(myController.text);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignInPage()),
+                        );
+                      }
                     },
                     color: AppColors.blueColor,
                     radius: 10,
