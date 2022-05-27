@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:true_vocation_mobile/presentation/home/home_bookmarks_page.dart';
 import 'package:true_vocation_mobile/presentation/home/home_news_page.dart';
 import 'package:true_vocation_mobile/presentation/home/home_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
@@ -17,9 +18,7 @@ class _HomeState extends State<Home> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Text(
-      'Bookmarks',
-    ),
+    HomeBookmarksPage(),
     HomeNewsPage(),
   ];
 
@@ -50,29 +49,32 @@ class _HomeState extends State<Home> {
     return BottomNavigationBar(
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-            icon: CustomSvgIcon(
-              preset: AppIcons.homeIcon,
-              color: _selectedIndex == 0
-                  ? AppColors.greenColor
-                  : AppColors.greyColor,
-            ),
-            label: "Главная"),
+          icon: CustomSvgIcon(
+            preset: AppIcons.homeIcon,
+            color: _selectedIndex == 0
+                ? AppColors.greenColor
+                : AppColors.greyColor,
+          ),
+          label: "Главная",
+        ),
         BottomNavigationBarItem(
-            icon: CustomSvgIcon(
-              preset: AppIcons.bookmarksIcon,
-              color: _selectedIndex == 1
-                  ? AppColors.greenColor
-                  : AppColors.greyColor,
-            ),
-            label: "Главная"),
+          icon: CustomSvgIcon(
+            preset: AppIcons.bookmarksIcon,
+            color: _selectedIndex == 1
+                ? AppColors.greenColor
+                : AppColors.greyColor,
+          ),
+          label: "Закладки",
+        ),
         BottomNavigationBarItem(
-            icon: CustomSvgIcon(
-              preset: AppIcons.newsIcon,
-              color: _selectedIndex == 2
-                  ? AppColors.greenColor
-                  : AppColors.greyColor,
-            ),
-            label: "Главная"),
+          icon: CustomSvgIcon(
+            preset: AppIcons.newsIcon,
+            color: _selectedIndex == 2
+                ? AppColors.greenColor
+                : AppColors.greyColor,
+          ),
+          label: "Новости",
+        ),
       ],
       currentIndex: _selectedIndex,
       selectedItemColor: AppColors.greenColor,

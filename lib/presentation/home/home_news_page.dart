@@ -25,9 +25,9 @@ class _HomeNewsPageState extends State<HomeNewsPage> {
       appBar: CustomAppBar(
         name: "Новости",
         leading: false,
-        color: AppColors.backgroundColor,
+        color: AppColors.whiteColor,
       ),
-      backgroundColor: AppColors.transparent,
+      backgroundColor: AppColors.whiteColor,
       body: count! > 0 ? getTodayNews(count) : getNothing(),
     );
   }

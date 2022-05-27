@@ -142,77 +142,12 @@ class _AboutProfessionState extends State<AboutProfession> {
                     ? const Center(
                         child: CircularProgressIndicator(),
                       )
-                    : getSpec(),
+                    : ApiFunctions.getSpec(list),
               ),
             ],
           ),
         ),
       ],
-    );
-  }
-
-  Widget getSpec() {
-    return ListView.separated(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: list.length,
-      separatorBuilder: (_, index) => const SizedBox(
-        height: 12,
-      ),
-      itemBuilder: (context, index) => CustomContainerButtonTabbarView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              list[index].name,
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                  color: AppColors.blackColor,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 14,
-                  fontFamily: 'Roboto'),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Цена обучения:',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: AppColors.greyColor,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 12,
-                      fontFamily: 'Roboto'),
-                ),
-                const SizedBox(
-                  width: 4,
-                ),
-                Text(
-                  list[index].price.toString() + 'тг.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.greyColor,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 12,
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
-        function: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AboutSpeciality(
-                speciality: list[index],
-              ),
-            ),
-          );
-        },
-      ),
     );
   }
 }

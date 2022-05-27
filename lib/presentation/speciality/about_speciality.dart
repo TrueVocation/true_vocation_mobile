@@ -6,14 +6,11 @@ import 'package:true_vocation_mobile/domain/model/professions.dart';
 import 'package:true_vocation_mobile/domain/model/speciality.dart';
 import 'package:true_vocation_mobile/domain/model/subjects.dart';
 import 'package:true_vocation_mobile/domain/model/university.dart';
-import 'package:true_vocation_mobile/presentation/professions/about_professions_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
-import 'package:true_vocation_mobile/presentation/templates/custom_container_button_tabbar_view.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_refresh_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_tabs_widget.dart';
 import 'package:true_vocation_mobile/presentation/templates/detail_page_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
-import 'package:true_vocation_mobile/presentation/university/about_university.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/functions.dart';
@@ -194,7 +191,7 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
                     ? const Center(
                         child: CircularProgressIndicator(),
                       )
-                    : getUni(),
+                    : ApiFunctions.getUni(listUni),
               ),
             ],
           ),
@@ -214,139 +211,12 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
                     ? const Center(
                         child: CircularProgressIndicator(),
                       )
-                    : getProf(),
+                    : ApiFunctions.getProf(listProf),
               ),
             ],
           ),
         ),
       ],
-    );
-  }
-
-  Widget getUni() {
-    return ListView.separated(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: listUni.length,
-      separatorBuilder: (_, index) => const SizedBox(
-        height: 12,
-      ),
-      itemBuilder: (context, index) => CustomContainerButtonTabbarView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 256,
-              child: Text(
-                listUni[index].name,
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                    color: AppColors.blackColor,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
-                    fontFamily: 'Roboto'),
-              ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(
-              listUni[index].address,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: AppColors.greyColor,
-                fontWeight: FontWeight.normal,
-                fontSize: 12,
-              ),
-            )
-          ],
-        ),
-        function: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AboutUniversity(
-                university: listUni[index],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget getProf() {
-    return ListView.separated(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: listProf.length,
-      separatorBuilder: (_, index) => const SizedBox(
-        height: 12,
-      ),
-      itemBuilder: (context, index) => CustomContainerButtonTabbarView(
-        child: SizedBox(
-          width: 256,
-          child: Text(
-            listProf[index].name,
-            textAlign: TextAlign.start,
-            style: TextStyle(
-                color: AppColors.blackColor,
-                fontWeight: FontWeight.normal,
-                fontSize: 14,
-                fontFamily: 'Roboto'),
-          ),
-        ),
-        function: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AboutProfession(
-                profession: listProf[index],
-              ),
-            ),
-          );
-        },
-      ),
-      /*CustomContainer(
-        shadowColor: AppColors.purple.withOpacity(0.1),
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: 256,
-                child: Text(
-                  listProf[index].name,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: AppColors.blackColor,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
-                      fontFamily: 'Roboto'),
-                ),
-              ),
-              IconButton(
-                icon: CustomSvgIcon(
-                  preset: AppIcons.arrowCircle,
-                  color: AppColors.purple,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AboutProfession(
-                        profession: listProf[index],
-                      ),
-                    ),
-                  );
-                },
-              )
-            ],
-          ),
-        ),
-      )*/
     );
   }
 }

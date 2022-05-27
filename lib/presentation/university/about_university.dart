@@ -13,6 +13,7 @@ import 'package:true_vocation_mobile/presentation/templates/detail_page_template
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
+import 'package:true_vocation_mobile/utils/functions.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 
 class AboutUniversity extends StatefulWidget {
@@ -116,7 +117,7 @@ class _AboutUniversityState extends State<AboutUniversity> {
                     ? const Center(
                         child: CircularProgressIndicator(),
                       )
-                    : getSpec(),
+                    : ApiFunctions.getSpec(list),
               ),
             ],
           ),
@@ -128,60 +129,6 @@ class _AboutUniversityState extends State<AboutUniversity> {
           getIcon(AppIcons.location),
           getIcon(AppIcons.call),
         ],
-      ),
-    );
-  }
-
-  Widget getSpec() {
-    return Expanded(
-      child: ListView.separated(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: list.length,
-        separatorBuilder: (_, index) => const SizedBox(
-          height: 12,
-        ),
-        itemBuilder: (context, index) => CustomContainerButtonTabbarView(
-          function: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => AboutSpeciality(
-                  speciality: list[index],
-                ),
-              ),
-            );
-          },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 256,
-                child: Text(
-                  list[index].name,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: AppColors.blackColor,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
-                      fontFamily: 'Roboto'),
-                ),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(
-                'Цена обучения: ' + list[index].price.toString() + 'тг.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.greyColor,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 12,
-                ),
-              )
-            ],
-          ),
-        ),
       ),
     );
   }
