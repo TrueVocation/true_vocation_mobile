@@ -63,6 +63,7 @@ class _PreviewTestPageState extends State<PreviewTestPage> {
               ],
             ),
             CustomButton(
+              loading: false,
               onPressed: () {
                 Navigator.push(
                   context,

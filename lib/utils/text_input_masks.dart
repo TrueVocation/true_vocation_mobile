@@ -6,6 +6,11 @@ class TextInputMasks {
       filter: { "#": RegExp(r'[0-9]') },
       type: MaskAutoCompletionType.lazy
   );
+  static var date = MaskTextInputFormatter(
+      mask: '##/##/####',
+      filter: { "#": RegExp(r'[0-9]') },
+      type: MaskAutoCompletionType.lazy
+  );
   static var defaultMask = MaskTextInputFormatter(
       type: MaskAutoCompletionType.lazy,
   );

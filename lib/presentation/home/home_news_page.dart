@@ -60,6 +60,7 @@ class _HomeNewsPageState extends State<HomeNewsPage> {
           ),
         ),
         CustomButton(
+          loading: false,
           onPressed: () {
             Navigator.push(
               context,
@@ -95,6 +96,7 @@ class _HomeNewsPageState extends State<HomeNewsPage> {
           itemCount: count,
         ),
         CustomButton(
+          loading: false,
           onPressed: () {
             Navigator.push(
               context,

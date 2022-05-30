@@ -1,5 +1,6 @@
 enum MaskTypes {
-  phoneNumber
+  phoneNumber,
+  date
 }
 
 enum InputTypes {

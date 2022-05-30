@@ -1,26 +1,17 @@
+import 'package:true_vocation_mobile/data/api/repository/university_repository.dart';
 import 'package:true_vocation_mobile/domain/model/university.dart';
-import 'package:true_vocation_mobile/utils/constants.dart';
 
 class UniversityService {
   Future<University> getUniversity(var id) async {
-    final response = await ApiConstants.dio.get(
-      '/api/university/$id',
-    );
-
-    return University.fromApi(response.data);
+    return UniversityRepository().getUniversity(id);
   }
 
   Future<List<University>> getUniversities(int page, size) async {
-    final response = await ApiConstants.dio
-        .get('/api/universities?page=$page&size=$size&sort=id&order=desc');
-
-    return (response.data as List).map((e) => University.fromApi(e)).toList();
+    return UniversityRepository().getUniversities(page, size);
   }
 
-  Future<List<University>> getUniversitiesBySpecialtyId(int page, size, id) async {
-    final response = await ApiConstants.dio
-        .get('/api/universities-by-speciality/$id?page=$page&size=$size&sort=id&order=desc');
-
-    return (response.data as List).map((e) => University.fromApi(e)).toList();
+  Future<List<University>> getUniversitiesBySpecialtyId(
+      int page, size, id) async {
+    return UniversityRepository().getUniversitiesBySpecialtyId(page, size, id);
   }
 }

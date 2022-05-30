@@ -61,37 +61,34 @@ class _SignInPageState extends State<SignInPage> {
               height: 16,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: Text(
-                    'У вас нет аккаунта?',
-                    style: TextStyle(
-                        color: AppColors.greyColor,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                    textAlign: TextAlign.end,
-                  ),
+                Text(
+                  'У вас нет аккаунта?',
+                  style: TextStyle(
+                      color: AppColors.greyColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400),
+                  textAlign: TextAlign.end,
                 ),
                 const SizedBox(
                   width: 8,
                 ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignUpPage()),
-                      );
-                    },
-                    child: Text(
-                      'Зарегистрироваться',
-                      style: TextStyle(
-                          color: AppColors.blackColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500),
-                      textAlign: TextAlign.start,
-                    ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SignUpPage()),
+                    );
+                  },
+                  child: Text(
+                    'Зарегистрироваться',
+                    style: TextStyle(
+                        color: AppColors.blackColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.start,
                   ),
                 ),
               ],
@@ -104,6 +101,7 @@ class _SignInPageState extends State<SignInPage> {
               child: Column(
                 children: [
                   CustomTextFormField(
+                    readOnly: false,
                     labelText: 'Номер телефона',
                     controller: phoneController,
                     textMask: MaskTypes.phoneNumber.toString(),
@@ -113,6 +111,7 @@ class _SignInPageState extends State<SignInPage> {
                     height: 16,
                   ),
                   CustomTextFormField(
+                    readOnly: false,
                     labelText: 'Пароль',
                     controller: passwordController,
                   ),
@@ -120,6 +119,7 @@ class _SignInPageState extends State<SignInPage> {
                     height: 48,
                   ),
                   CustomButton(
+                    loading: false,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _singleNotifier.updateLoginValue(phoneController.text);

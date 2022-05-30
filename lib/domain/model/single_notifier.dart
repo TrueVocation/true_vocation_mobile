@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:true_vocation_mobile/domain/model/regions.dart';
+import 'package:true_vocation_mobile/domain/model/user.dart';
 
 class SingleNotifier extends ChangeNotifier {
   SingleNotifier();
@@ -27,17 +28,24 @@ class SingleNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  String _phone = '';
+  String get phone => _phone;
+  updatePhoneValue(String value) {
+    _phone = value;
+    notifyListeners();
+  }
+
+  DateTime _bDate = DateTime.now();
+  DateTime get bDate => _bDate;
+  updateBDateValue(DateTime value) {
+    _bDate = value;
+    notifyListeners();
+  }
+
   String _password = '';
   String get password => _password;
   updatePasswordValue(String value) {
     _password = value;
-    notifyListeners();
-  }
-
-  String _search = '';
-  String get search => _search;
-  updateSearchValue(String value) {
-    _search = value;
     notifyListeners();
   }
 }

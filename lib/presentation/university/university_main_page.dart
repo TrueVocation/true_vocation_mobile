@@ -100,6 +100,7 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
             child: Column(
               children: [
                 CustomTextFormField(
+                  readOnly: false,
                   controller: myController,
                   labelText: 'Поиск',
                 ),

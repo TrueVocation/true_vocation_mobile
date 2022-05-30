@@ -173,4 +173,8 @@ class ApiFunctions {
       ),
     );
   }
+
+  static String phoneFormatter(String phoneNumber) {
+    return phoneNumber.replaceAll(RegExp(r"\D"), "");
+  }
 }

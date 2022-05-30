@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:true_vocation_mobile/data/api/service/user_service.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/presentation/authorization/sign_in_page.dart';
+import 'package:true_vocation_mobile/presentation/authorization/sign_up_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
@@ -21,6 +23,7 @@ class AuthorizationPage extends StatefulWidget {
 class _AuthorizationPageState extends State<AuthorizationPage> {
   final _formKey = GlobalKey<FormState>();
   final myController = TextEditingController();
+  bool loading = false;
 
   @override
   void dispose() {
@@ -73,6 +76,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
               child: Column(
                 children: [
                   CustomTextFormField(
+                    readOnly: false,
                     controller: myController,
                     labelText: 'Номер телефона',
                     autofocus: true,
@@ -83,16 +87,30 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
                     height: 24,
                   ),
                   CustomButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        _singleNotifier.updateLoginValue(myController.text);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignInPage()),
-                        );
+                        loading = true;
+                        var res = (await UserService().checkUserExistence(myController.text));
+                        if (res) {
+                          loading = false;
+                          _singleNotifier.updateLoginValue(myController.text);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignInPage()),
+                          );
+                        }else{
+                          loading = false;
+                          _singleNotifier.updateLoginValue(myController.text);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpPage()),
+                          );
+                        }
                       }
                     },
+                    loading: loading,
                     color: AppColors.blueColor,
                     radius: 10,
                     text: 'Продолжить',

@@ -101,6 +101,7 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
             child: Column(
               children: [
                 CustomTextFormField(
+                  readOnly: false,
                   controller: myController,
                   labelText: 'Поиск',
                 ),

@@ -5,9 +5,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:true_vocation_mobile/data/api/service/speciality_service.dart';
 import 'package:true_vocation_mobile/domain/model/professions.dart';
 import 'package:true_vocation_mobile/domain/model/speciality.dart';
-import 'package:true_vocation_mobile/presentation/speciality/about_speciality.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
-import 'package:true_vocation_mobile/presentation/templates/custom_container_button_tabbar_view.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_refresh_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_tabs_widget.dart';
 import 'package:true_vocation_mobile/presentation/templates/detail_page_template.dart';
@@ -136,8 +134,9 @@ class _AboutProfessionState extends State<AboutProfession> {
             color: AppColors.whiteColor,
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: ApiConstants.mainHorizontalPadding, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: ApiConstants.mainHorizontalPadding,
+                    vertical: 16),
                 child: loading == true
                     ? const Center(
                         child: CircularProgressIndicator(),

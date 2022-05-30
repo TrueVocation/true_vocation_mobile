@@ -13,6 +13,8 @@ class CustomTextFormField extends StatelessWidget {
     required this.labelText,
     this.onChanged,
     this.keyboardType,
+    this.onTap,
+    required this.readOnly,
   }) : super(key: key);
 
   final TextEditingController? controller;
@@ -20,7 +22,9 @@ class CustomTextFormField extends StatelessWidget {
   final String? textMask;
   final String? labelText;
   final void Function(String)? onChanged;
+  final void Function()? onTap;
   final String? keyboardType;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +34,8 @@ class CustomTextFormField extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: TextFormField(
+          readOnly: readOnly,
+          onTap: onTap,
           onChanged: onChanged,
           controller: controller,
           keyboardType: keyboardType == null
@@ -65,6 +71,8 @@ class CustomTextFormField extends StatelessWidget {
     switch (maskType) {
       case 'MaskTypes.phoneNumber':
         return TextInputMasks.phoneNumber;
+      case 'MaskTypes.date':
+        return TextInputMasks.date;
       default:
         return TextInputMasks.defaultMask;
     }
