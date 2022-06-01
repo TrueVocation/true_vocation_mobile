@@ -15,6 +15,7 @@ import 'package:true_vocation_mobile/presentation/test/preview.dart';
 import 'package:true_vocation_mobile/presentation/university/university_main_page.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
+import 'package:true_vocation_mobile/utils/functions.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 import 'package:true_vocation_mobile/utils/shadows.dart';
 
@@ -454,7 +455,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           CustomContainer(
-            color: AppColors.backgroundColorV2.withOpacity(0.3),
+            color: AppColors.backgroundColor.withOpacity(0.3),
             shadowColor: AppShadows.color.withOpacity(0.1),
             borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
             width: double.maxFinite,
@@ -489,21 +490,19 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                         TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const MainProfessionPage()),
-                              );
-                            },
-                            child: Text(
-                              'See all',
-                              style: TextStyle(
-                                  color: AppColors.greyColor,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.normal),
-                            )),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const MainProfessionPage()),
+                            );
+                          },
+                          child: Text(
+                            'See all',
+                            style: ApiConstants.textButtonStyle,
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(
@@ -526,7 +525,7 @@ class _HomePageState extends State<HomePage> {
     return ListView.separated(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: listProf.length,
+      itemCount: listProf.length ~/ 2,
       separatorBuilder: (_, index) => const SizedBox(
         height: 8,
       ),

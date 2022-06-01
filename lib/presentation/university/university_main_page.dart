@@ -85,11 +85,11 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColorV2,
+      backgroundColor: AppColors.backgroundColor,
       appBar: CustomAppBar(
         name: 'ВУЗы',
         leading: true,
-        color: AppColors.backgroundColorV2,
+        color: AppColors.backgroundColor,
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
@@ -110,14 +110,16 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
                     title: Text(
                       'Результаты',
                       style: TextStyle(
-                          color: AppColors.blackColor,
-                          fontWeight: FontWeight.w500),
+                        color: AppColors.blackColor,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                     subtitle: Text(
                       'было найдено ' + list.length.toString() + ' совпадений',
                       style: TextStyle(
-                          color: AppColors.greyColor,
-                          fontWeight: FontWeight.normal),
+                        color: AppColors.greyColor,
+                        fontWeight: FontWeight.normal,
+                      ),
                     ),
                     trailing: GestureDetector(
                       onTap: () {
@@ -141,7 +143,8 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
                                       return Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: regions
-                                            .map((e) => RadioListTile<Region>(
+                                            .map(
+                                              (e) => RadioListTile<Region>(
                                                 title: Text(
                                                   e.name,
                                                   style: TextStyle(
@@ -167,7 +170,9 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
                                                         .updateRegion(value!);
                                                     Navigator.of(context).pop();
                                                   }
-                                                }))
+                                                },
+                                              ),
+                                            )
                                             .toList(),
                                       );
                                     },
@@ -257,10 +262,10 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
                                   list[index].name,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
-                                      color: AppColors.blackColor,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 14,
-                                      fontFamily: 'Roboto'),
+                                    color: AppColors.blackColor,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 14,
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 8,
@@ -270,10 +275,10 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
                                       list[index].specialityCount.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: AppColors.greyColor,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 12,
-                                      fontFamily: 'Roboto'),
+                                    color: AppColors.greyColor,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ],
                             ),

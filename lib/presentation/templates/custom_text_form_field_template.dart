@@ -14,38 +14,47 @@ class CustomTextFormField extends StatelessWidget {
     this.onChanged,
     this.keyboardType,
     this.onTap,
-    required this.readOnly,
+    this.readOnly,
+    this.obscureText,
+    this.borderColor,
+    this.suffixIcon,
+    this.errorText,
   }) : super(key: key);
 
   final TextEditingController? controller;
   final bool? autofocus;
+  final bool? obscureText;
   final String? textMask;
+  final String? errorText;
   final String? labelText;
   final void Function(String)? onChanged;
   final void Function()? onTap;
   final String? keyboardType;
-  final bool readOnly;
+  final bool? readOnly;
+  final Color? borderColor;
+  final Widget? suffixIcon;
 
   @override
   Widget build(BuildContext context) {
     return CustomContainer(
       border: true,
+      borderColor: borderColor,
       borderRadius: const BorderRadius.all(Radius.circular(10)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: TextFormField(
-          readOnly: readOnly,
+          readOnly: readOnly ?? false,
           onTap: onTap,
           onChanged: onChanged,
           controller: controller,
           keyboardType: keyboardType == null
               ? TextInputType.text
               : getInputType(keyboardType!),
-          obscureText: false,
+          obscureText: obscureText ?? false,
           autofocus: false,
           validator: (value) {
-            if (value!.isEmpty) {
-              return '* Required field';
+            if (value!.isEmpty || errorText != null) {
+              return errorText ?? '* Пустое поле';
             }
             return null;
           },
@@ -55,6 +64,7 @@ class CustomTextFormField extends StatelessWidget {
                 : getMaskType(textMask!),
           ],
           decoration: InputDecoration(
+            suffixIcon: suffixIcon,
             labelText: labelText!,
             labelStyle: TextStyle(color: AppColors.greyColor, fontSize: 14),
             border: InputBorder.none,

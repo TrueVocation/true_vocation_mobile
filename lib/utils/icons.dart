@@ -17,4 +17,6 @@ class AppIcons {
   static String spec = "spec.svg";
   static String uni = "uni.svg";
   static String vector = "vector.svg";
+  static String hide = "hide.svg";
+  static String show = "show.svg";
 }

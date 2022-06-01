@@ -60,6 +60,7 @@ class _HomeNewsPageState extends State<HomeNewsPage> {
           ),
         ),
         CustomButton(
+          borderColor: AppColors.blueColor,
           loading: false,
           onPressed: () {
             Navigator.push(

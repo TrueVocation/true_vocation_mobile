@@ -6,16 +6,20 @@ class CustomButton extends StatelessWidget {
     Key? key,
     required this.onPressed,
     this.text,
-    this.borderColor,
+    required this.borderColor,
     this.color,
     this.radius,
     this.width,
-    required this.loading
+    this.textColor,
+    required this.loading,
+    this.loadingColor,
   }) : super(key: key);
 
   final String? text;
-  final Color? borderColor;
+  final Color borderColor;
   final Color? color;
+  final Color? textColor;
+  final Color? loadingColor;
   final double? radius;
   final double? width;
   final void Function() onPressed;
@@ -30,6 +34,9 @@ class CustomButton extends StatelessWidget {
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radius!),
+            side: BorderSide(
+              color: borderColor,
+            )
           ),
         ),
       ),
@@ -39,10 +46,10 @@ class CustomButton extends StatelessWidget {
         child: Center(
           child: loading == false ? Text(
             text!,
-            style: TextStyle(color: AppColors.whiteColor),
+            style: TextStyle(color: textColor ?? AppColors.whiteColor),
           ) : Center(
             child: CircularProgressIndicator(
-              color: AppColors.whiteColor,
+              color: loadingColor ?? AppColors.whiteColor,
             ),
           ),
         ),

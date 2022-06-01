@@ -92,9 +92,9 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
       appBar: CustomAppBar(
         name: 'Специальности',
         leading: true,
-        color: AppColors.backgroundColorV2,
+        color: AppColors.backgroundColor,
       ),
-      backgroundColor: AppColors.backgroundColorV2,
+      backgroundColor: AppColors.backgroundColor,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [

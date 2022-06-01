@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:true_vocation_mobile/data/api/service/user_service.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
+import 'package:true_vocation_mobile/domain/model/user.dart';
+import 'package:true_vocation_mobile/presentation/authorization/authorization_page.dart';
 import 'package:true_vocation_mobile/presentation/authorization/sign_in_page.dart';
+import 'package:true_vocation_mobile/presentation/home/home_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/enums.dart';
+import 'package:true_vocation_mobile/utils/functions.dart';
+import 'package:true_vocation_mobile/utils/icons.dart';
 import 'package:true_vocation_mobile/utils/routes.dart';
 import 'package:true_vocation_mobile/utils/text_input_masks.dart';
 
@@ -28,6 +35,16 @@ class _SignUpPageState extends State<SignUpPage> {
   final loginController = TextEditingController();
   final passwordController = TextEditingController();
   final rePasswordController = TextEditingController();
+  Color borderColor = AppColors.greyColor;
+  Color borderColorEmail = AppColors.greyColor;
+  Color borderColorLogin = AppColors.greyColor;
+  bool obscureText = true;
+  bool obscureTextRe = true;
+  bool loading = false;
+  String? errorEmail;
+  String? errorLogin;
+
+  int _selectedIndex = 0;
 
   @override
   void dispose() {
@@ -35,6 +52,10 @@ class _SignUpPageState extends State<SignUpPage> {
     phoneController.dispose();
     rePasswordController.dispose();
     passwordController.dispose();
+    nameController.dispose();
+    lastNameController.dispose();
+    loginController.dispose();
+    birthDateController.dispose();
     super.dispose();
   }
 
@@ -42,9 +63,16 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     var _singleNotifier = Provider.of<SingleNotifier>(context);
-    phoneController.text = _singleNotifier.login;
+    phoneController.text = _singleNotifier.phone;
+
+    List<List<Widget>> _widgetOptions = [
+      getUserInfo(_formKey),
+      getContactInfo(_formKey),
+      getPasswordInfo(_formKey),
+    ];
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
         name: '',
         color: AppColors.backgroundColor,
@@ -109,7 +137,7 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Column(
                 children: [
                   Column(
-                    children: getUserInfo(_formKey),
+                    children: _widgetOptions[_selectedIndex],
                   ),
                 ],
               ),
@@ -145,6 +173,7 @@ class _SignUpPageState extends State<SignUpPage> {
         labelText: 'Дата Рождения',
         onTap: () async {
           DateTime? pickedDate = await showDatePicker(
+            fieldHintText: 'Year/Month/Day',
             cancelText: 'Назад',
             confirmText: 'Ок',
             fieldLabelText: 'Выберите дату',
@@ -156,7 +185,7 @@ class _SignUpPageState extends State<SignUpPage> {
             lastDate: DateTime.now(),
           );
           if (pickedDate != null) {
-            String formattedDate = DateFormat('yyyy/MM/dd').format(pickedDate);
+            String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
             setState(() {
               birthDateController.text = formattedDate;
             });
@@ -166,17 +195,16 @@ class _SignUpPageState extends State<SignUpPage> {
       const SizedBox(
         height: 48,
       ),
-      CustomButton(
-        loading: false,
-        onPressed: () {
-          if (_formKey.currentState!.validate()) {
-
-          }
-        },
-        color: AppColors.blueColor,
-        radius: 10,
-        text: 'Продолжить',
-      ),
+      getButtons(_formKey, () {
+        if (_formKey.currentState!.validate()) {
+          _onItemTapped(1);
+        }
+      }, () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const AuthorizationPage()),
+        );
+      }, AppColors.backgroundColor, AppColors.blueColor, AppColors.blueColor)
     ];
   }
 
@@ -185,6 +213,8 @@ class _SignUpPageState extends State<SignUpPage> {
       CustomTextFormField(
         readOnly: false,
         controller: loginController,
+        errorText: errorLogin,
+        borderColor: borderColorLogin,
         labelText: 'Логин',
       ),
       const SizedBox(
@@ -193,7 +223,10 @@ class _SignUpPageState extends State<SignUpPage> {
       CustomTextFormField(
         readOnly: false,
         controller: emailController,
+        errorText: errorEmail,
+        borderColor: borderColorEmail,
         labelText: 'email',
+        keyboardType: InputTypes.email.toString(),
       ),
       const SizedBox(
         height: 12,
@@ -208,27 +241,77 @@ class _SignUpPageState extends State<SignUpPage> {
       const SizedBox(
         height: 48,
       ),
-      CustomButton(
-        loading: false,
-        onPressed: () {
-          if (_formKey.currentState!.validate()) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const SignUpPage()),
-            );
+      getButtons(_formKey, () async {
+        if (_formKey.currentState!.validate()) {
+          setState(() {
+            loading = true;
+          });
+          var email = (await UserService().checkEmail(emailController.text));
+          var login = (await UserService().checkLogin(loginController.text));
+          setState(() {
+            loading = false;
+          });
+          if (email) {
+            setState(() {
+              borderColorEmail = AppColors.redColor;
+              errorEmail = 'Этот email уже используется';
+            });
           }
-        },
-        color: AppColors.blueColor,
-        radius: 10,
-        text: 'Продолжить',
-      ),
+          if (login) {
+            setState(() {
+              borderColorLogin = AppColors.redColor;
+              errorLogin = 'Этот логин уже используется';
+            });
+          }
+          if (email == false && login == false) {
+            _onItemTapped(2);
+          }
+        } else {
+          setState(() {
+            loading = true;
+          });
+          var email = (await UserService().checkEmail(emailController.text));
+          var login = (await UserService().checkLogin(loginController.text));
+          setState(() {
+            loading = false;
+          });
+          if (!email) {
+            setState(() {
+              borderColorEmail = AppColors.greyColor;
+              errorEmail = null;
+            });
+          }
+          if (!login) {
+            setState(() {
+              borderColorLogin = AppColors.greyColor;
+              errorLogin = null;
+            });
+          }
+          if (email == false && login == false) {
+            _onItemTapped(2);
+          }
+        }
+      }, () {
+        _onItemTapped(0);
+      }, AppColors.backgroundColor, AppColors.blueColor, AppColors.blueColor)
     ];
   }
 
   List<Widget> getPasswordInfo(_formKey) {
     return [
       CustomTextFormField(
+        suffixIcon: IconButton(
+          onPressed: () {
+            setState(() {
+              obscureText = !obscureText;
+            });
+          },
+          icon: CustomSvgIcon(
+            preset: obscureText ? AppIcons.show : AppIcons.hide,
+          ),
+        ),
+        obscureText: obscureText,
+        borderColor: borderColor,
         readOnly: false,
         controller: passwordController,
         labelText: 'Пароль',
@@ -237,6 +320,18 @@ class _SignUpPageState extends State<SignUpPage> {
         height: 12,
       ),
       CustomTextFormField(
+        suffixIcon: IconButton(
+          onPressed: () {
+            setState(() {
+              obscureTextRe = !obscureTextRe;
+            });
+          },
+          icon: CustomSvgIcon(
+            preset: obscureTextRe ? AppIcons.show : AppIcons.hide,
+          ),
+        ),
+        borderColor: borderColor,
+        obscureText: obscureTextRe,
         readOnly: false,
         controller: rePasswordController,
         labelText: 'Подтвердите пароль',
@@ -244,21 +339,78 @@ class _SignUpPageState extends State<SignUpPage> {
       const SizedBox(
         height: 48,
       ),
-      CustomButton(
-        loading: false,
-        onPressed: () {
-          if (_formKey.currentState!.validate()) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const SignUpPage()),
+      getButtons(_formKey, () async {
+        if (_formKey.currentState!.validate()) {
+          if (passwordController.text != rePasswordController.text) {
+            changeBorderColor(AppColors.redColor);
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Пароли не совпадают')),
             );
+          } else {
+            changeBorderColor(AppColors.greyColor);
+            setState(() {
+              loading = true;
+            });
+            var res = (await UserService().registrationUser(
+              User(
+                  null,
+                  loginController.text,
+                  ApiFunctions.phoneFormatter(phoneController.text),
+                  birthDateController.text,
+                  nameController.text,
+                  lastNameController.text,
+                  passwordController.text,
+                  emailController.text,
+                  null,
+                  null),
+            ));
+            setState(() {
+              loading = false;
+            });
+            ApiFunctions.getError(res.code, res.title);
           }
-        },
-        color: AppColors.blueColor,
-        radius: 10,
-        text: 'Продолжить',
-      ),
+        }
+      }, () {
+        _onItemTapped(1);
+      }, AppColors.blueColor, AppColors.whiteColor, null)
     ];
+  }
+
+  void changeBorderColor(color) {
+    setState(() {
+      borderColor = color;
+    });
+  }
+
+  Widget getButtons(_formKey, void Function() functionNext,
+      void Function() functionBack, color, textColor, loadingColor) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        TextButton(
+          onPressed: functionBack,
+          child: Text(
+            'Назад',
+            style: ApiConstants.textButtonStyle,
+          ),
+        ),
+        CustomButton(
+          loading: loading,
+          loadingColor: loadingColor,
+          onPressed: functionNext,
+          borderColor: AppColors.blueColor,
+          color: color,
+          radius: 10,
+          text: 'Продолжить',
+          textColor: textColor,
+        ),
+      ],
+    );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }

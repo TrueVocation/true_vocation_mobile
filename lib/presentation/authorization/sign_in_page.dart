@@ -34,9 +34,10 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     var _singleNotifier = Provider.of<SingleNotifier>(context);
-    phoneController.text = _singleNotifier.login;
+    phoneController.text = _singleNotifier.phone;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
         name: '',
         color: AppColors.backgroundColor,
@@ -119,10 +120,11 @@ class _SignInPageState extends State<SignInPage> {
                     height: 48,
                   ),
                   CustomButton(
+                    borderColor: AppColors.blueColor,
                     loading: false,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        _singleNotifier.updateLoginValue(phoneController.text);
+                        _singleNotifier.updatePhoneValue(phoneController.text);
                         Navigator.push(
                           context,
                           MaterialPageRoute(

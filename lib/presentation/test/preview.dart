@@ -63,6 +63,7 @@ class _PreviewTestPageState extends State<PreviewTestPage> {
               ],
             ),
             CustomButton(
+              borderColor: AppColors.blueColor,
               loading: false,
               onPressed: () {
                 Navigator.push(

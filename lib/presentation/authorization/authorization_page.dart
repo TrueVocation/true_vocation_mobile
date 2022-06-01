@@ -11,6 +11,7 @@ import 'package:true_vocation_mobile/presentation/templates/custom_text_form_fie
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/enums.dart';
+import 'package:true_vocation_mobile/utils/functions.dart';
 import 'package:true_vocation_mobile/utils/routes.dart';
 
 class AuthorizationPage extends StatefulWidget {
@@ -35,9 +36,10 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
   @override
   Widget build(BuildContext context) {
     var _singleNotifier = Provider.of<SingleNotifier>(context);
-    myController.text = _singleNotifier.login;
+    myController.text = _singleNotifier.phone;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
         leading: true,
         name: '',
@@ -87,21 +89,28 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
                     height: 24,
                   ),
                   CustomButton(
+                    borderColor: AppColors.blueColor,
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        loading = true;
+                        setState(() {
+                          loading = true;
+                          _singleNotifier.updatePhoneValue(myController.text);
+                        });
                         var res = (await UserService().checkUserExistence(myController.text));
                         if (res) {
-                          loading = false;
-                          _singleNotifier.updateLoginValue(myController.text);
+                          setState(() {
+                            loading = false;
+                          });
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const SignInPage()),
                           );
                         }else{
-                          loading = false;
-                          _singleNotifier.updateLoginValue(myController.text);
+                          setState(() {
+                            loading = false;
+                            _singleNotifier.updatePhoneValue(myController.text);
+                          });
                           Navigator.push(
                             context,
                             MaterialPageRoute(

@@ -42,9 +42,9 @@ class _DetailPageTemplateState extends State<DetailPageTemplate> {
       appBar: CustomAppBar(
         leading: true,
         name: widget.appBarName!,
-        color: AppColors.backgroundColorV2,
+        color: AppColors.backgroundColor,
       ),
-      backgroundColor: AppColors.backgroundColorV2,
+      backgroundColor: AppColors.backgroundColor,
       body: Column(
         children: [
           Padding(

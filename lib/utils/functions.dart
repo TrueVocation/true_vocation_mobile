@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:true_vocation_mobile/data/api/service/university_service.dart';
 import 'package:true_vocation_mobile/domain/model/professions.dart';
 import 'package:true_vocation_mobile/domain/model/speciality.dart';
 import 'package:true_vocation_mobile/domain/model/university.dart';
@@ -8,9 +7,21 @@ import 'package:true_vocation_mobile/presentation/speciality/about_speciality.da
 import 'package:true_vocation_mobile/presentation/templates/custom_container_button_tabbar_view.dart';
 import 'package:true_vocation_mobile/presentation/university/about_university.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
-import 'package:true_vocation_mobile/utils/constants.dart';
+import 'package:true_vocation_mobile/utils/exceptions.dart';
 
 class ApiFunctions {
+
+  static Widget getError(int code, String title){
+    switch (code) {
+      case 500:
+        return ApiExceptions.serverError(code);
+      case 201:
+        return ApiExceptions.successRegistration(code);
+      default:
+        return ApiExceptions.custom(title, code);
+    }
+  }
+
   static Color getColorEmployee(String value){
     switch (value) {
       case 'низкое':
