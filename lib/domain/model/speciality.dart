@@ -1,29 +1,23 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-class Speciality {
-  final int id;
-  final String description;
-  final int totalGrants;
-  final int minScoreGeneral;
-  final int minScoreQuota;
-  final String type;
-  final String name;
-  final int price;
-  final String employment;
+part 'generated/speciality.freezed.dart';
+part 'generated/speciality.g.dart';
 
-  Speciality(this.id, this.description, this.totalGrants, this.minScoreGeneral,
-      this.minScoreQuota, this.type, this.name, this.price, this.employment);
+@freezed
+class Speciality with _$Speciality {
+  const factory Speciality({
+    required int id,
+    required String description,
+    required int totalGrants,
+    required int minScoreGeneral,
+    required int minScoreQuota,
+    required String type,
+    required String name,
+    required int price,
+    required String employment,
+  }) = _Speciality;
 
-  factory Speciality.fromApi(Map<String, dynamic> json) {
-    return Speciality(
-      json['id'],
-      json['description'],
-      json['totalGrants'],
-      json['minScoreGeneral'],
-      json['minScoreQuota'],
-      json['type'],
-      json['name'],
-      json['price'],
-      json['employment'],
-    );
-  }
+  factory Speciality.fromJson(Map<String, Object?> json)
+  => _$SpecialityFromJson(json);
 }

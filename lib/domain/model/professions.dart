@@ -1,19 +1,19 @@
-class Professions {
-  final int id;
-  final String name;
-  final String description;
-  final String employability;
-  final int averageSalary;
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-  Professions(this.id, this.name, this.description, this.employability, this.averageSalary);
+part 'generated/professions.freezed.dart';
+part 'generated/professions.g.dart';
 
-  factory Professions.fromApi(Map<String, dynamic> json) {
-    return Professions(
-      json['id'],
-      json['name'],
-      json['description'],
-      json['employability'],
-      json['averageSalary'],
-    );
-  }
+@freezed
+class Professions with _$Professions {
+  const factory Professions({
+    required int id,
+    required String name,
+    required String description,
+    required String employability,
+    required int averageSalary,
+  }) = _Professions;
+
+  factory Professions.fromJson(Map<String, Object?> json)
+  => _$ProfessionsFromJson(json);
 }

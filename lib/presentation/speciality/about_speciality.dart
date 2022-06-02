@@ -26,9 +26,9 @@ class AboutSpeciality extends StatefulWidget {
 }
 
 class _AboutSpecialityState extends State<AboutSpeciality> {
-  List<Subject> list = [
-    Subject('1', 'Математика'),
-    Subject('2', 'Физика'),
+  List<Subjects> list = [
+    Subjects(id: 1, name: ''),
+    Subjects(id: 2, name: ''),
   ];
 
   late List<University> listUni = [];

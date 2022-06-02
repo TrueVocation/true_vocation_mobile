@@ -1,41 +1,24 @@
-class User {
-  int? id;
-  String? login;
-  String? phoneNumber;
-  String? birthdate;
-  String? firstName;
-  String? lastName;
-  String? password;
-  String? email;
-  String? imageUrl;
-  bool? activated;
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-  User(this.id, this.login, this.phoneNumber, this.birthdate, this.firstName,
-      this.lastName, this.password, this.email, this.imageUrl, this.activated);
+part 'generated/user.freezed.dart';
+part 'generated/user.g.dart';
 
-  User.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    login = json['login'];
-    phoneNumber = json['phoneNumber'];
-    birthdate = json['birthdate'];
-    firstName = json['firstName'];
-    lastName = json['lastName'];
-    email = json['email'];
-    imageUrl = json['imageUrl'];
-    activated = json['activated'];
-  }
+@freezed
+class User with _$User {
+  const factory User({
+    int? id,
+    String? login,
+    String? phoneNumber,
+    String? birthdate,
+    String? firstName,
+    String? lastName,
+    String? password,
+    String? email,
+    String? imageUrl,
+    bool? activated,
+  }) = _User;
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['login'] = login;
-    data['phoneNumber'] = phoneNumber;
-    data['birthdate'] = birthdate;
-    data['firstName'] = firstName;
-    data['lastName'] = lastName;
-    data['password'] = password;
-    data['email'] = email;
-    data['imageUrl'] = imageUrl;
-    data['activated'] = activated;
-    return data;
-  }
+  factory User.fromJson(Map<String, Object?> json)
+  => _$UserFromJson(json);
 }

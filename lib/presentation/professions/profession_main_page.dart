@@ -32,6 +32,8 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
+  get regions => null;
+
   @override
   void initState() {
     super.initState();
@@ -76,12 +78,6 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
 
   final myController = TextEditingController();
   int colorFlag = 0;
-
-  List<Region> regions = [
-    Region('1', 'Алматы'),
-    Region('2', 'Нур-Султан'),
-    Region('3', 'Шымкент'),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -128,53 +124,7 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
                             var _singleNotifier =
                                 Provider.of<SingleNotifier>(context);
                             return CustomDialog(
-                              child: Column(
-                                children: [
-                                  ListView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 8),
-                                    shrinkWrap: true,
-                                    itemCount: 1,
-                                    itemBuilder: (BuildContext context,
-                                        int regionIndex) {
-                                      return Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: regions
-                                            .map((e) => RadioListTile<Region>(
-                                                title: Text(
-                                                  e.name,
-                                                  style: TextStyle(
-                                                    color: AppColors.blackColor,
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
-                                                ),
-                                                activeColor:
-                                                    AppColors.blueColor,
-                                                value: e,
-                                                groupValue: _singleNotifier
-                                                    .currentRegion,
-                                                selected: _singleNotifier
-                                                        .currentRegion ==
-                                                    e,
-                                                onChanged: (value) {
-                                                  if (value !=
-                                                      _singleNotifier
-                                                          .currentRegion) {
-                                                    _singleNotifier
-                                                        .updateRegion(value!);
-                                                    Navigator.of(context).pop();
-                                                  }
-                                                }))
-                                            .toList(),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
+                              child: getFilter(_singleNotifier),
                             );
                           },
                         );
@@ -194,6 +144,52 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
               : getProfessions(),
         ],
       ),
+    );
+  }
+
+  Widget getFilter (_singleNotifier){
+    return ListView.builder(
+      physics:
+      const NeverScrollableScrollPhysics(),
+      padding:
+      const EdgeInsets.symmetric(vertical: 8),
+      shrinkWrap: true,
+      itemCount: 1,
+      itemBuilder: (BuildContext context,
+          int regionIndex) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: regions
+              .map((e) => RadioListTile<Regions>(
+              title: Text(
+                e.name,
+                style: TextStyle(
+                  color: AppColors.blackColor,
+                  fontSize: 14,
+                  fontWeight:
+                  FontWeight.normal,
+                ),
+              ),
+              activeColor:
+              AppColors.blueColor,
+              value: e,
+              groupValue: _singleNotifier
+                  .currentRegion,
+              selected: _singleNotifier
+                  .currentRegion ==
+                  e,
+              onChanged: (value) {
+                if (value !=
+                    _singleNotifier
+                        .currentRegion) {
+                  _singleNotifier
+                      .updateRegion(value!);
+                  Navigator.of(context).pop();
+                }
+              }))
+              .toList(),
+        );
+      },
     );
   }
 

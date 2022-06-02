@@ -7,20 +7,20 @@ class UniversityRepository {
       '/api/university/$id',
     );
 
-    return University.fromApi(response.data);
+    return University.fromJson(response.data);
   }
 
   Future<List<University>> getUniversities(int page, size) async {
     final response = await ApiConstants.dio
         .get('/api/universities?page=$page&size=$size&sort=id&order=desc');
 
-    return (response.data as List).map((e) => University.fromApi(e)).toList();
+    return (response.data as List).map((e) => University.fromJson(e)).toList();
   }
 
   Future<List<University>> getUniversitiesBySpecialtyId(int page, size, id) async {
     final response = await ApiConstants.dio
         .get('/api/universities-by-speciality/$id?page=$page&size=$size&sort=id&order=desc');
 
-    return (response.data as List).map((e) => University.fromApi(e)).toList();
+    return (response.data as List).map((e) => University.fromJson(e)).toList();
   }
 }

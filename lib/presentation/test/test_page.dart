@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:true_vocation_mobile/domain/model/answers.dart';
 import 'package:true_vocation_mobile/domain/model/questions.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
@@ -84,7 +85,7 @@ class _MainTestPageState extends State<MainTestPage> {
     );
   }
 
-  Widget getAnswers(List<Answer> answers, int questionIndex) {
+  Widget getAnswers(List<Answers> answers, int questionIndex) {
     return CustomContainer(
       margin: const EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 24),
       borderRadius: const BorderRadius.all(Radius.circular(20)),

@@ -1,27 +1,16 @@
-class Questions {
-  final int id;
-  final String question;
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-  Questions(this.id, this.question);
+part 'generated/questions.freezed.dart';
+part 'generated/questions.g.dart';
 
-  factory Questions.fromApi(Map<String, dynamic> json) {
-    return Questions(
-      json['id'],
-      json['question'],
-    );
-  }
-}
+@freezed
+class Questions with _$Questions {
+  const factory Questions({
+    required int id,
+    required String question,
+  }) = _Questions;
 
-class Answer {
-  final int id;
-  final String answer;
-
-  Answer(this.id, this.answer);
-
-  factory Answer.fromApi(Map<String, dynamic> json) {
-    return Answer(
-      json['id'],
-      json['answer'],
-    );
-  }
+  factory Questions.fromJson(Map<String, Object?> json)
+  => _$QuestionsFromJson(json);
 }

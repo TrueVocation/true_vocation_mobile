@@ -5,16 +5,16 @@ import 'package:true_vocation_mobile/domain/model/user.dart';
 class SingleNotifier extends ChangeNotifier {
   SingleNotifier();
 
-  Region _currentRegion = Region('1', 'Алматы');
-  Region get currentRegion => _currentRegion;
-  updateRegion(Region value) {
+  Regions _currentRegion = const Regions(id: 1, name: '');
+  Regions get currentRegion => _currentRegion;
+  updateRegion(Regions value) {
     if (value != _currentRegion) {
       _currentRegion = value;
       notifyListeners();
     }
   }
 
-  User _currentUser = User(null, null, null, null, null, null, null, null, null, null);
+  User _currentUser = const User();
   User get currentUser => _currentUser;
   updateUser(User value) {
     if (value != _currentUser) {

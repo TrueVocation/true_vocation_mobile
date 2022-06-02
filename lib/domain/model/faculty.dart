@@ -1,15 +1,17 @@
-class Faculty {
-  final int id;
-  final String name;
-  final String description;
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-  Faculty(this.id, this.name, this.description);
+part 'generated/faculty.freezed.dart';
+part 'generated/faculty.g.dart';
 
-  factory Faculty.fromApi(Map<String, dynamic> json) {
-    return Faculty(
-      json['id'],
-      json['name'],
-      json['description'],
-    );
-  }
+@freezed
+class Faculty with _$Faculty {
+  const factory Faculty({
+    int? id,
+    String? name,
+    int? description,
+  }) = _Faculty;
+
+  factory Faculty.fromJson(Map<String, Object?> json)
+  => _$FacultyFromJson(json);
 }

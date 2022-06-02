@@ -1,13 +1,16 @@
-class Subject {
-  final String id;
-  final String name;
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-  Subject(this.id, this.name);
+part 'generated/subjects.freezed.dart';
+part 'generated/subjects.g.dart';
 
-  factory Subject.fromApi(Map<String, dynamic> json) {
-    return Subject(
-      json['id'],
-      json['name'],
-    );
-  }
+@freezed
+class Subjects with _$Subjects {
+  const factory Subjects({
+    required int id,
+    required String name,
+  }) = _Subjects;
+
+  factory Subjects.fromJson(Map<String, Object?> json)
+  => _$SubjectsFromJson(json);
 }

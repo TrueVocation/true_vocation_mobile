@@ -78,10 +78,10 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
     }
   }
 
-  List<Region> regions = [
-    Region('1', 'Алматы'),
-    Region('2', 'Нур-Султан'),
-    Region('3', 'Шымкент'),
+  List<Regions> regions = [
+    Regions(id: 1, name: ''),
+    Regions(id: 2, name: ''),
+    Regions(id: 3, name: ''),
   ];
   final myController = TextEditingController();
   int colorFlag = 0;
@@ -145,7 +145,7 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
                                       return Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: regions
-                                            .map((e) => RadioListTile<Region>(
+                                            .map((e) => RadioListTile<Regions>(
                                                 title: Text(
                                                   e.name,
                                                   style: TextStyle(
