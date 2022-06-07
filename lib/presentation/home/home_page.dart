@@ -1,8 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:true_vocation_mobile/data/api/service/profession_service.dart';
 import 'package:true_vocation_mobile/domain/model/professions.dart';
+import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
+import 'package:true_vocation_mobile/domain/model/user_info.dart';
 import 'package:true_vocation_mobile/presentation/authorization/authorization_page.dart';
 import 'package:true_vocation_mobile/presentation/professions/about_professions_page.dart';
 import 'package:true_vocation_mobile/presentation/professions/profession_main_page.dart';
@@ -15,7 +18,6 @@ import 'package:true_vocation_mobile/presentation/test/preview.dart';
 import 'package:true_vocation_mobile/presentation/university/university_main_page.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
-import 'package:true_vocation_mobile/utils/functions.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 import 'package:true_vocation_mobile/utils/shadows.dart';
 
@@ -55,10 +57,16 @@ class _HomePageState extends State<HomePage> {
     double cardHeight = 120;
     double cardWight = 164;
     double iconSize = 52;
+    var _singleNotifier = Provider.of<SingleNotifier>(context);
+    UserInfo user = _singleNotifier.currentUser;
 
     return Scaffold(
       appBar: AppBar(
-        title: appBar('Ainura Karzhaubayeva', context),
+        title: appBar(
+          user.user?.firstName ?? 'Unauthorized',
+          context,
+          user,
+        ),
         backgroundColor: AppColors.whiteColor,
         elevation: 0,
         bottomOpacity: 0,
@@ -582,7 +590,7 @@ class _HomePageState extends State<HomePage> {
     return color.withOpacity(0.6);
   }
 
-  Widget appBar(String name, BuildContext context) {
+  Widget appBar(String name, BuildContext context, UserInfo user) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -615,16 +623,23 @@ class _HomePageState extends State<HomePage> {
             borderRadius: const BorderRadius.all(Radius.circular(50)),
             child: GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const AuthorizationPage()),
-                );
+                if (user.id == null){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AuthorizationPage()),
+                  );
+                }
               },
-              child: const Image(
-                image: NetworkImage(
-                    'https://mfiles.alphacoders.com/631/631312.jpg'),
-              ),
+              child: user.user?.imageUrl != null
+                  ? const Image(
+                      image: NetworkImage(
+                          'https://mfiles.alphacoders.com/631/631312.jpg'),
+                    )
+                  : CustomSvgIcon(
+                      preset: AppIcons.login,
+                      color: AppColors.blackColor,
+                    ),
             ),
           ),
         ),

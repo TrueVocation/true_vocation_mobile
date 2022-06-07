@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-part 'generated/faculty.freezed.dart';
-part 'generated/faculty.g.dart';
+part 'faculty.freezed.dart';
+part 'faculty.g.dart';
 
 @freezed
 class Faculty with _$Faculty {

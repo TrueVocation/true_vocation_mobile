@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:true_vocation_mobile/data/api/service/favorite_service.dart';
 import 'package:true_vocation_mobile/data/api/service/speciality_service.dart';
+import 'package:true_vocation_mobile/domain/model/favorites.dart';
+import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/domain/model/speciality.dart';
 import 'package:true_vocation_mobile/domain/model/university.dart';
-import 'package:true_vocation_mobile/presentation/speciality/about_speciality.dart';
+import 'package:true_vocation_mobile/domain/model/user_info.dart';
+import 'package:true_vocation_mobile/presentation/authorization/sign_in_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
-import 'package:true_vocation_mobile/presentation/templates/custom_container_button_tabbar_view.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_icon_text_widget.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_refresh_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_tabs_widget.dart';
@@ -17,8 +22,10 @@ import 'package:true_vocation_mobile/utils/functions.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 
 class AboutUniversity extends StatefulWidget {
-  const AboutUniversity({Key? key, this.university}) : super(key: key);
+  const AboutUniversity({Key? key, this.university, this.user})
+      : super(key: key);
   final University? university;
+  final UserInfo? user;
 
   @override
   State<AboutUniversity> createState() => _AboutUniversityState();
@@ -28,6 +35,7 @@ class _AboutUniversityState extends State<AboutUniversity> {
   late List<Speciality> list = [];
 
   bool loading = true;
+  bool favorite = false;
   int page = 0;
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
@@ -49,6 +57,13 @@ class _AboutUniversityState extends State<AboutUniversity> {
         },
       ),
     );
+
+    favorite = (await FavoriteService().checkFavoritesUniversity(
+      Favorites(
+        university: widget.university,
+        user: ApiConstants.currentUser,
+      ),
+    ));
   }
 
   void _onRefresh() async {
@@ -77,7 +92,10 @@ class _AboutUniversityState extends State<AboutUniversity> {
 
   @override
   Widget build(BuildContext context) {
+    var _singleNotifier = Provider.of<SingleNotifier>(context);
+
     return DetailPageTemplate(
+      university: widget.university,
       objectName: widget.university!.name,
       fontSize: 18,
       objectNameShort: widget.university!.address,
@@ -92,12 +110,60 @@ class _AboutUniversityState extends State<AboutUniversity> {
       tabBarView: [
         Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: ApiConstants.mainHorizontalPadding, vertical: 16),
-          child: CustomPageScroll(
-            color: AppColors.whiteColor,
-            children: const [
+              horizontal: ApiConstants.mainHorizontalPadding, vertical: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
-                'gbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjv',
+                'Описание',
+                style: TextStyle(
+                  color: AppColors.blackColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: CustomPageScroll(
+                      color: AppColors.whiteColor,
+                      children: [
+                        CustomContainer(
+                          color: AppColors.greyColor.withOpacity(0.1),
+                          width: double.maxFinite,
+                          borderRadius: BorderRadius.circular(10),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              widget.university!.description,
+                              style: TextStyle(
+                                color: AppColors.blackColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
+                              ),
+                              softWrap: true,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: ApiConstants.mainHorizontalPadding),
+                      child: CustomPageScroll(
+                        children: getOtherInfo(),
+                        color: AppColors.whiteColor,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -130,7 +196,106 @@ class _AboutUniversityState extends State<AboutUniversity> {
           getIcon(AppIcons.call),
         ],
       ),
+      favorite: favorite,
+      onPressed: () async {
+        if (_singleNotifier.currentUser.id == null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SignInPage(),
+            ),
+          );
+        } else {
+          if (favorite){
+            var res = (await FavoriteService().deleteFavoritesUniversity(
+              Favorites(
+                user: _singleNotifier.currentUser,
+                university: widget.university,
+              ),
+            ));
+            if (res.code == 200) {
+              setState((){
+                favorite = false;
+              });
+            }
+          } else{
+            var res = (await FavoriteService().createFavorite(
+              Favorites(
+                user: _singleNotifier.currentUser,
+                university: widget.university,
+              ),
+            ));
+            if (res.code == 200) {
+              setState((){
+                favorite = true;
+              });
+            }
+          }
+        }
+      },
     );
+  }
+
+  List<Widget> getOtherInfo() {
+    return [
+      CustomIconTextWidget(
+        children: [
+          CustomSvgIcon(
+            preset: AppIcons.spec,
+            color: AppColors.blackColor,
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(
+            widget.university!.specialityCount.toString(),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+      const SizedBox(
+        height: 16,
+      ),
+      if (widget.university!.military)
+        Column(
+          children: [
+            CustomIconTextWidget(
+              children: [
+                CustomSvgIcon(
+                  preset: AppIcons.military,
+                  color: AppColors.blackColor,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                const Text(
+                  'Воен. кафедра',
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 16,
+            )
+          ],
+        ),
+      if (widget.university!.dormitory)
+        CustomIconTextWidget(
+          children: [
+            CustomSvgIcon(
+              preset: AppIcons.dormitory,
+              color: AppColors.blackColor,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            const Text(
+              'Общежитие',
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+    ];
   }
 
   Widget getIcon(icon) {

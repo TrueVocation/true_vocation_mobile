@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-part 'generated/speciality.freezed.dart';
-part 'generated/speciality.g.dart';
+part 'speciality.freezed.dart';
+part 'speciality.g.dart';
 
 @freezed
 class Speciality with _$Speciality {

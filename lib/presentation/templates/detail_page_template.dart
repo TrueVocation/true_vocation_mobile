@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:true_vocation_mobile/data/api/service/favorite_service.dart';
+import 'package:true_vocation_mobile/domain/model/favorites.dart';
+import 'package:true_vocation_mobile/domain/model/news.dart';
+import 'package:true_vocation_mobile/domain/model/professions.dart';
+import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
+import 'package:true_vocation_mobile/domain/model/speciality.dart';
+import 'package:true_vocation_mobile/domain/model/university.dart';
+import 'package:true_vocation_mobile/presentation/authorization/sign_in_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
+import 'package:true_vocation_mobile/utils/icons.dart';
 
 class DetailPageTemplate extends StatefulWidget {
-  const DetailPageTemplate({
+   const DetailPageTemplate({
     Key? key,
     required this.objectName,
     this.fontSize,
@@ -18,6 +28,12 @@ class DetailPageTemplate extends StatefulWidget {
     required this.tabs,
     required this.tabBarView,
     required this.appBarBody,
+    this.university,
+    this.professions,
+    this.speciality,
+    this.news,
+    required this.favorite,
+     required this.onPressed,
   }) : super(key: key);
 
   final String? objectName;
@@ -30,6 +46,12 @@ class DetailPageTemplate extends StatefulWidget {
   final List<Widget>? tabs;
   final List<Widget>? tabBarView;
   final Widget? appBarBody;
+  final University? university;
+  final Professions? professions;
+  final Speciality? speciality;
+  final News? news;
+  final bool favorite;
+  final void Function() onPressed;
 
   @override
   State<DetailPageTemplate> createState() => _DetailPageTemplateState();
@@ -38,7 +60,16 @@ class DetailPageTemplate extends StatefulWidget {
 class _DetailPageTemplateState extends State<DetailPageTemplate> {
   @override
   Widget build(BuildContext context) {
+    var _singleNotifier = Provider.of<SingleNotifier>(context);
+
     return Scaffold(
+      floatingActionButton: IconButton(
+        onPressed: widget.onPressed,
+        icon: CustomSvgIcon(
+          preset: widget.favorite == false ? AppIcons.favoriteAdd : AppIcons.favoriteRemove,
+          color: AppColors.purple,
+        ),
+      ),
       appBar: CustomAppBar(
         leading: true,
         name: widget.appBarName!,

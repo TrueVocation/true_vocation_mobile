@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:true_vocation_mobile/domain/model/regions.dart';
-import 'package:true_vocation_mobile/domain/model/user.dart';
+import 'package:true_vocation_mobile/domain/model/user_info.dart';
 
 class SingleNotifier extends ChangeNotifier {
   SingleNotifier();
@@ -14,9 +14,9 @@ class SingleNotifier extends ChangeNotifier {
     }
   }
 
-  User _currentUser = const User();
-  User get currentUser => _currentUser;
-  updateUser(User value) {
+  UserInfo _currentUser = const UserInfo();
+  UserInfo get currentUser => _currentUser;
+  updateUser(UserInfo value) {
     if (value != _currentUser) {
       _currentUser = value;
       notifyListeners();
@@ -27,6 +27,13 @@ class SingleNotifier extends ChangeNotifier {
   String get phone => _phone;
   updatePhoneValue(String value) {
     _phone = value;
+    notifyListeners();
+  }
+
+  String _token = '';
+  String get token => _token;
+  updateTokenValue(String value) {
+    _token = value;
     notifyListeners();
   }
 }

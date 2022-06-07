@@ -81,6 +81,8 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
 
   @override
   Widget build(BuildContext context) {
+    var _singleNotifier = Provider.of<SingleNotifier>(context);
+
     return Scaffold(
       appBar: CustomAppBar(
         name: 'Профессии',
@@ -141,59 +143,48 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
           ),
           loading == true
               ? const Center(child: CircularProgressIndicator())
-              : getProfessions(),
+              : getProfessions(_singleNotifier.currentUser),
         ],
       ),
     );
   }
 
-  Widget getFilter (_singleNotifier){
+  Widget getFilter(_singleNotifier) {
     return ListView.builder(
-      physics:
-      const NeverScrollableScrollPhysics(),
-      padding:
-      const EdgeInsets.symmetric(vertical: 8),
+      physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       shrinkWrap: true,
       itemCount: 1,
-      itemBuilder: (BuildContext context,
-          int regionIndex) {
+      itemBuilder: (BuildContext context, int regionIndex) {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: regions
               .map((e) => RadioListTile<Regions>(
-              title: Text(
-                e.name,
-                style: TextStyle(
-                  color: AppColors.blackColor,
-                  fontSize: 14,
-                  fontWeight:
-                  FontWeight.normal,
-                ),
-              ),
-              activeColor:
-              AppColors.blueColor,
-              value: e,
-              groupValue: _singleNotifier
-                  .currentRegion,
-              selected: _singleNotifier
-                  .currentRegion ==
-                  e,
-              onChanged: (value) {
-                if (value !=
-                    _singleNotifier
-                        .currentRegion) {
-                  _singleNotifier
-                      .updateRegion(value!);
-                  Navigator.of(context).pop();
-                }
-              }))
+                  title: Text(
+                    e.name,
+                    style: TextStyle(
+                      color: AppColors.blackColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  activeColor: AppColors.blueColor,
+                  value: e,
+                  groupValue: _singleNotifier.currentRegion,
+                  selected: _singleNotifier.currentRegion == e,
+                  onChanged: (value) {
+                    if (value != _singleNotifier.currentRegion) {
+                      _singleNotifier.updateRegion(value!);
+                      Navigator.of(context).pop();
+                    }
+                  }))
               .toList(),
         );
       },
     );
   }
 
-  Widget getProfessions() {
+  Widget getProfessions(user) {
     return Expanded(
       child: RefreshTemplate(
         controller: _refreshController,
@@ -218,9 +209,11 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AboutProfession(
-                                profession: list[index],
-                              )),
+                        builder: (context) => AboutProfession(
+                          profession: list[index],
+                          user: user,
+                        ),
+                      ),
                     );
                   },
                   child: CustomContainer(

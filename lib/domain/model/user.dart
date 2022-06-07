@@ -1,16 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-part 'generated/user.freezed.dart';
-part 'generated/user.g.dart';
+part 'user.freezed.dart';
+part 'user.g.dart';
 
 @freezed
 class User with _$User {
   const factory User({
     int? id,
     String? login,
-    String? phoneNumber,
-    String? birthdate,
     String? firstName,
     String? lastName,
     String? password,

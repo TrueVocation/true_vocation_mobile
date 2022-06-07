@@ -84,6 +84,7 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
 
   @override
   Widget build(BuildContext context) {
+    var _singleNotifier = Provider.of<SingleNotifier>(context);
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: CustomAppBar(
@@ -195,13 +196,13 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
           ),
           loading == true
               ? const Center(child: CircularProgressIndicator())
-              : getUniversities(),
+              : getUniversities(_singleNotifier.currentUser),
         ],
       ),
     );
   }
 
-  Widget getUniversities() {
+  Widget getUniversities(user) {
     return Expanded(
       child: RefreshTemplate(
         controller: _refreshController,
@@ -228,6 +229,7 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
                       MaterialPageRoute(
                         builder: (context) => AboutUniversity(
                           university: list[index],
+                          user: user,
                         ),
                       ),
                     );

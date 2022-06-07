@@ -11,7 +11,6 @@ import 'package:true_vocation_mobile/presentation/templates/custom_text_form_fie
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/enums.dart';
-import 'package:true_vocation_mobile/utils/functions.dart';
 import 'package:true_vocation_mobile/utils/routes.dart';
 
 class AuthorizationPage extends StatefulWidget {
@@ -96,7 +95,8 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
                           loading = true;
                           _singleNotifier.updatePhoneValue(myController.text);
                         });
-                        var res = (await UserService().checkUserExistence(myController.text));
+                        var res = (await UserService()
+                            .checkUserExistence(myController.text));
                         if (res) {
                           setState(() {
                             loading = false;
@@ -106,7 +106,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
                             MaterialPageRoute(
                                 builder: (context) => const SignInPage()),
                           );
-                        }else{
+                        } else {
                           setState(() {
                             loading = false;
                             _singleNotifier.updatePhoneValue(myController.text);

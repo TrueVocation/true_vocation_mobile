@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-part 'generated/regions.freezed.dart';
-part 'generated/regions.g.dart';
+part 'regions.freezed.dart';
+part 'regions.g.dart';
 
 @freezed
 class Regions with _$Regions {

@@ -1,18 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../questions.dart';
+part of 'subjects.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Questions _$$_QuestionsFromJson(Map<String, dynamic> json) => _$_Questions(
+_$_Subjects _$$_SubjectsFromJson(Map<String, dynamic> json) => _$_Subjects(
       id: json['id'] as int,
-      question: json['question'] as String,
+      name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$_QuestionsToJson(_$_Questions instance) =>
+Map<String, dynamic> _$$_SubjectsToJson(_$_Subjects instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'question': instance.question,
+      'name': instance.name,
     };

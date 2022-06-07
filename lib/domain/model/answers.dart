@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-part 'generated/answers.freezed.dart';
-part 'generated/answers.g.dart';
+part 'answers.freezed.dart';
+part 'answers.g.dart';
 
 @freezed
 class Answers with _$Answers {

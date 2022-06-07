@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../answers.dart';
+part of 'answers.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

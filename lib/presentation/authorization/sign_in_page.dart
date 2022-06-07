@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:true_vocation_mobile/data/api/service/user_service.dart';
+import 'package:true_vocation_mobile/domain/model/login.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
+import 'package:true_vocation_mobile/domain/model/user.dart';
+import 'package:true_vocation_mobile/domain/model/user_info.dart';
 import 'package:true_vocation_mobile/presentation/authorization/sign_up_page.dart';
+import 'package:true_vocation_mobile/presentation/home/home_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
@@ -21,7 +26,9 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   final phoneController = TextEditingController();
+  final loginController = TextEditingController();
   final passwordController = TextEditingController();
+  bool loading = false;
 
   @override
   void dispose() {
@@ -103,10 +110,9 @@ class _SignInPageState extends State<SignInPage> {
                 children: [
                   CustomTextFormField(
                     readOnly: false,
-                    labelText: 'Номер телефона',
-                    controller: phoneController,
-                    textMask: MaskTypes.phoneNumber.toString(),
-                    keyboardType: InputTypes.number.toString(),
+                    labelText: 'Ваш логин',
+                    controller: loginController,
+                    keyboardType: InputTypes.text.toString(),
                   ),
                   const SizedBox(
                     height: 16,
@@ -121,15 +127,41 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   CustomButton(
                     borderColor: AppColors.blueColor,
-                    loading: false,
-                    onPressed: () {
+                    loading: loading,
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        _singleNotifier.updatePhoneValue(phoneController.text);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignInPage()),
-                        );
+                        setState(() {
+                          loading = true;
+                        });
+                        var res = (await UserService().authenticateUser(Login(
+                            username: loginController.text,
+                            password: passwordController.text)));
+                        setState(() {
+                          loading = false;
+                        });
+                        if (res.code == 200) {
+                          _singleNotifier.updateTokenValue(res.title);
+                          res = (await UserService()
+                              .getUser(_singleNotifier.token));
+                          if (res.code == 200) {
+                            User user = User.fromJson(res.body);
+                            res = (await UserService()
+                                .getUserInfo(user.id!));
+                            UserInfo userInfo = UserInfo.fromJson(res.body);
+                            _singleNotifier.updateUser(UserInfo(
+                              id: userInfo.id,
+                              phoneNumber: userInfo.phoneNumber,
+                              birthdate: userInfo.birthdate,
+                              user: user,
+                            ));
+                            ApiConstants.currentUser = _singleNotifier.currentUser;
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const HomePage()),
+                            );
+                          }
+                        } else {}
                       }
                     },
                     color: AppColors.blueColor,

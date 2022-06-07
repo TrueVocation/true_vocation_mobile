@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../professions.dart';
+part of 'professions.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

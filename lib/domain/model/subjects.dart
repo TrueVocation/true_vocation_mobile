@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-part 'generated/subjects.freezed.dart';
-part 'generated/subjects.g.dart';
+part 'subjects.freezed.dart';
+part 'subjects.g.dart';
 
 @freezed
 class Subjects with _$Subjects {

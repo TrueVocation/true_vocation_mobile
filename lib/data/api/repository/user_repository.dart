@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
+import 'package:true_vocation_mobile/domain/model/login.dart';
 import 'package:true_vocation_mobile/domain/model/response.dart';
-import 'package:true_vocation_mobile/domain/model/user.dart';
+import 'package:true_vocation_mobile/domain/model/user_info.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
 
 class UserRepository {
@@ -24,14 +26,49 @@ class UserRepository {
     return response.data;
   }
 
-  Future<Response> registrationUser(User user) async {
+  Future<CustomResponse> registrationUser(UserInfo user) async {
     final response = await ApiConstants.dio.post(
         '/api/account/registration', data: user.toJson());
 
     if (response.statusCode! >= 400) {
-      return Response.fromApi(response.data);
+      return CustomResponse.fromJson(response.data);
     } else {
-      return Response('', 200);
+      return const CustomResponse(title: '', code: 200);
+    }
+  }
+
+  Future<CustomResponse> authenticateUser(Login login) async {
+    final response = await ApiConstants.dio.post(
+        '/api/authenticate', data: login.toJson());
+
+    if (response.statusCode! >= 400) {
+      return CustomResponse.fromJson(response.data);
+    } else {
+      return CustomResponse(code: 200, title: response.headers.value('Authorization')!);
+    }
+  }
+
+  Future<CustomResponse> getUser(String token) async {
+    final response = await ApiConstants.dio.get(
+        '/api/account/user', options: Options(
+      headers: {"Authorization": token},
+    ));
+
+    if (response.statusCode! >= 400) {
+      return CustomResponse.fromJson(response.data);
+    } else {
+      return CustomResponse(code: 200, title: response.statusMessage!, body: response.data);
+    }
+  }
+
+  Future<CustomResponse> getUserInfo(int id) async {
+    final response = await ApiConstants.dio.get(
+        '/api/app-users-by-user/$id');
+
+    if (response.statusCode! >= 400) {
+      return CustomResponse.fromJson(response.data);
+    } else {
+      return CustomResponse(code: 200, title: response.statusMessage!, body: response.data);
     }
   }
 }

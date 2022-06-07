@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: CustomSvgIcon(
-            preset: AppIcons.homeIcon,
+            preset: AppIcons.home,
             color: _selectedIndex == 0
                 ? AppColors.greenColor
                 : AppColors.greyColor,
@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
         ),
         BottomNavigationBarItem(
           icon: CustomSvgIcon(
-            preset: AppIcons.bookmarksIcon,
+            preset: AppIcons.bookmark,
             color: _selectedIndex == 1
                 ? AppColors.greenColor
                 : AppColors.greyColor,
@@ -71,7 +71,7 @@ class _HomeState extends State<Home> {
         ),
         BottomNavigationBarItem(
           icon: CustomSvgIcon(
-            preset: AppIcons.newsIcon,
+            preset: AppIcons.news,
             color: _selectedIndex == 2
                 ? AppColors.greenColor
                 : AppColors.greyColor,

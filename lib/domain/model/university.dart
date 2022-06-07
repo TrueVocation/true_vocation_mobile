@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-part 'generated/university.freezed.dart';
-part 'generated/university.g.dart';
+part 'university.freezed.dart';
+part 'university.g.dart';
 
 @freezed
 class University with _$University {

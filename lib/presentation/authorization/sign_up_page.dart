@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:true_vocation_mobile/data/api/service/user_service.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/domain/model/user.dart';
+import 'package:true_vocation_mobile/domain/model/user_info.dart';
 import 'package:true_vocation_mobile/presentation/authorization/authorization_page.dart';
 import 'package:true_vocation_mobile/presentation/authorization/sign_in_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
@@ -351,14 +352,16 @@ class _SignUpPageState extends State<SignUpPage> {
               loading = true;
             });
             var res = (await UserService().registrationUser(
-              User(
-                firstName: nameController.text,
-                lastName: lastNameController.text,
+              UserInfo(
                 birthdate: birthDateController.text,
-                login: loginController.text,
                 phoneNumber: ApiFunctions.phoneFormatter(phoneController.text),
-                email: emailController.text,
-                password: passwordController.text,
+                user: User(
+                  firstName: nameController.text,
+                  lastName: lastNameController.text,
+                  login: loginController.text,
+                  email: emailController.text,
+                  password: passwordController.text,
+                ),
               ),
             ));
             setState(() {

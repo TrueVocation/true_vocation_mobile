@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:true_vocation_mobile/domain/model/user_info.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 
 class ApiConstants {
   static final Dio dio = Dio(BaseOptions(baseUrl: ApiConstants.baseUrl));
-  static const int getListSize = 8;
+  static int getListSize = 8;
+  static UserInfo currentUser = const UserInfo();
   static const double listPageIconOpacity = 0.7;
   static const double mainHorizontalPadding = 24;
   static TextStyle textButtonStyle = TextStyle(

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../university.dart';
+part of 'university.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

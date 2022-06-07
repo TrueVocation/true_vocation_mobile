@@ -88,6 +88,8 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
 
   @override
   Widget build(BuildContext context) {
+    var _singleNotifier = Provider.of<SingleNotifier>(context);
+
     return Scaffold(
       appBar: CustomAppBar(
         name: 'Специальности',
@@ -194,13 +196,13 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
           ),
           loading == true
               ? const Center(child: CircularProgressIndicator())
-              : getSpeciality(),
+              : getSpeciality(_singleNotifier.currentUser),
         ],
       ),
     );
   }
 
-  Widget getSpeciality() {
+  Widget getSpeciality(user) {
     return Expanded(
       child: RefreshTemplate(
         controller: _refreshController,
@@ -227,6 +229,7 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
                       MaterialPageRoute(
                         builder: (context) => AboutSpeciality(
                           speciality: list[index],
+                          user: user,
                         ),
                       ),
                     );

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of '../user.dart';
+part of 'user.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -22,8 +22,6 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   int? get id => throw _privateConstructorUsedError;
   String? get login => throw _privateConstructorUsedError;
-  String? get phoneNumber => throw _privateConstructorUsedError;
-  String? get birthdate => throw _privateConstructorUsedError;
   String? get firstName => throw _privateConstructorUsedError;
   String? get lastName => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
@@ -43,8 +41,6 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {int? id,
       String? login,
-      String? phoneNumber,
-      String? birthdate,
       String? firstName,
       String? lastName,
       String? password,
@@ -65,8 +61,6 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? login = freezed,
-    Object? phoneNumber = freezed,
-    Object? birthdate = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? password = freezed,
@@ -82,14 +76,6 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       login: login == freezed
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
-              as String?,
-      phoneNumber: phoneNumber == freezed
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      birthdate: birthdate == freezed
-          ? _value.birthdate
-          : birthdate // ignore: cast_nullable_to_non_nullable
               as String?,
       firstName: firstName == freezed
           ? _value.firstName
@@ -127,8 +113,6 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {int? id,
       String? login,
-      String? phoneNumber,
-      String? birthdate,
       String? firstName,
       String? lastName,
       String? password,
@@ -150,8 +134,6 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? login = freezed,
-    Object? phoneNumber = freezed,
-    Object? birthdate = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? password = freezed,
@@ -167,14 +149,6 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       login: login == freezed
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
-              as String?,
-      phoneNumber: phoneNumber == freezed
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      birthdate: birthdate == freezed
-          ? _value.birthdate
-          : birthdate // ignore: cast_nullable_to_non_nullable
               as String?,
       firstName: firstName == freezed
           ? _value.firstName
@@ -210,8 +184,6 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   const _$_User(
       {this.id,
       this.login,
-      this.phoneNumber,
-      this.birthdate,
       this.firstName,
       this.lastName,
       this.password,
@@ -225,10 +197,6 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   final int? id;
   @override
   final String? login;
-  @override
-  final String? phoneNumber;
-  @override
-  final String? birthdate;
   @override
   final String? firstName;
   @override
@@ -244,7 +212,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, login: $login, phoneNumber: $phoneNumber, birthdate: $birthdate, firstName: $firstName, lastName: $lastName, password: $password, email: $email, imageUrl: $imageUrl, activated: $activated)';
+    return 'User(id: $id, login: $login, firstName: $firstName, lastName: $lastName, password: $password, email: $email, imageUrl: $imageUrl, activated: $activated)';
   }
 
   @override
@@ -254,8 +222,6 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       ..add(DiagnosticsProperty('type', 'User'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('login', login))
-      ..add(DiagnosticsProperty('phoneNumber', phoneNumber))
-      ..add(DiagnosticsProperty('birthdate', birthdate))
       ..add(DiagnosticsProperty('firstName', firstName))
       ..add(DiagnosticsProperty('lastName', lastName))
       ..add(DiagnosticsProperty('password', password))
@@ -271,9 +237,6 @@ class _$_User with DiagnosticableTreeMixin implements _User {
             other is _$_User &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.login, login) &&
-            const DeepCollectionEquality()
-                .equals(other.phoneNumber, phoneNumber) &&
-            const DeepCollectionEquality().equals(other.birthdate, birthdate) &&
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality().equals(other.password, password) &&
@@ -288,8 +251,6 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(login),
-      const DeepCollectionEquality().hash(phoneNumber),
-      const DeepCollectionEquality().hash(birthdate),
       const DeepCollectionEquality().hash(firstName),
       const DeepCollectionEquality().hash(lastName),
       const DeepCollectionEquality().hash(password),
@@ -312,8 +273,6 @@ abstract class _User implements User {
   const factory _User(
       {final int? id,
       final String? login,
-      final String? phoneNumber,
-      final String? birthdate,
       final String? firstName,
       final String? lastName,
       final String? password,
@@ -327,10 +286,6 @@ abstract class _User implements User {
   int? get id => throw _privateConstructorUsedError;
   @override
   String? get login => throw _privateConstructorUsedError;
-  @override
-  String? get phoneNumber => throw _privateConstructorUsedError;
-  @override
-  String? get birthdate => throw _privateConstructorUsedError;
   @override
   String? get firstName => throw _privateConstructorUsedError;
   @override

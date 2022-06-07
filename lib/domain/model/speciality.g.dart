@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../speciality.dart';
+part of 'speciality.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

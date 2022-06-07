@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:true_vocation_mobile/data/api/service/favorite_service.dart';
 import 'package:true_vocation_mobile/data/api/service/profession_service.dart';
 import 'package:true_vocation_mobile/data/api/service/university_service.dart';
+import 'package:true_vocation_mobile/domain/model/favorites.dart';
 import 'package:true_vocation_mobile/domain/model/professions.dart';
+import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/domain/model/speciality.dart';
 import 'package:true_vocation_mobile/domain/model/subjects.dart';
 import 'package:true_vocation_mobile/domain/model/university.dart';
+import 'package:true_vocation_mobile/domain/model/user_info.dart';
+import 'package:true_vocation_mobile/presentation/authorization/sign_in_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_refresh_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_tabs_widget.dart';
@@ -17,9 +23,11 @@ import 'package:true_vocation_mobile/utils/functions.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 
 class AboutSpeciality extends StatefulWidget {
-  const AboutSpeciality({Key? key, this.speciality}) : super(key: key);
+  const AboutSpeciality({Key? key, this.speciality, this.user})
+      : super(key: key);
 
   final Speciality? speciality;
+  final UserInfo? user;
 
   @override
   State<AboutSpeciality> createState() => _AboutSpecialityState();
@@ -36,7 +44,9 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
   late List<Professions> listProf = [];
 
   bool loading = true;
+  bool favorite = false;
   int page = 0;
+
   final RefreshController _refreshControllerUni =
       RefreshController(initialRefresh: false);
 
@@ -61,6 +71,13 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
         },
       ),
     );
+
+    favorite = (await FavoriteService().checkFavoritesSpeciality(
+      Favorites(
+        specialty: widget.speciality,
+        user: ApiConstants.currentUser,
+      ),
+    ));
   }
 
   void _getDataProf() async {
@@ -126,7 +143,10 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
 
   @override
   Widget build(BuildContext context) {
+    var _singleNotifier = Provider.of<SingleNotifier>(context);
+
     return DetailPageTemplate(
+      favorite: favorite,
       objectName: widget.speciality!.name,
       objectNameShort: widget.speciality!.name,
       appBarName: 'О специальности',
@@ -217,6 +237,42 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
           ),
         ),
       ],
+      onPressed: () async {
+        if (_singleNotifier.currentUser.id == null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SignInPage(),
+            ),
+          );
+        } else {
+          if (favorite) {
+            var res = (await FavoriteService().deleteFavoritesSpeciality(
+              Favorites(
+                user: _singleNotifier.currentUser,
+                specialty: widget.speciality,
+              ),
+            ));
+            if (res.code == 200) {
+              setState(() {
+                favorite = false;
+              });
+            }
+          } else {
+            var res = (await FavoriteService().createFavorite(
+              Favorites(
+                user: _singleNotifier.currentUser,
+                specialty: widget.speciality,
+              ),
+            ));
+            if (res.code == 200) {
+              setState(() {
+                favorite = true;
+              });
+            }
+          }
+        }
+      },
     );
   }
 }

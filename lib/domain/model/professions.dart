@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-part 'generated/professions.freezed.dart';
-part 'generated/professions.g.dart';
+part 'professions.freezed.dart';
+part 'professions.g.dart';
 
 @freezed
 class Professions with _$Professions {
