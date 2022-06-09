@@ -6,14 +6,14 @@ import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/domain/model/user.dart';
 import 'package:true_vocation_mobile/domain/model/user_info.dart';
 import 'package:true_vocation_mobile/presentation/authorization/sign_up_page.dart';
-import 'package:true_vocation_mobile/presentation/home/home_page.dart';
-import 'package:true_vocation_mobile/presentation/home/navigation.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/enums.dart';
+import 'package:true_vocation_mobile/utils/icons.dart';
 import 'package:true_vocation_mobile/utils/routes.dart';
 
 class SignInPage extends StatefulWidget {
@@ -30,6 +30,7 @@ class _SignInPageState extends State<SignInPage> {
   final loginController = TextEditingController();
   final passwordController = TextEditingController();
   bool loading = false;
+  bool obscureText = true;
 
   @override
   void dispose() {
@@ -119,9 +120,20 @@ class _SignInPageState extends State<SignInPage> {
                     height: 16,
                   ),
                   CustomTextFormField(
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          obscureText = !obscureText;
+                        });
+                      },
+                      icon: CustomSvgIcon(
+                        preset: obscureText ? AppIcons.show : AppIcons.hide,
+                      ),
+                    ),
+                    obscureText: obscureText,
                     readOnly: false,
-                    labelText: 'Пароль',
                     controller: passwordController,
+                    labelText: 'Пароль',
                   ),
                   const SizedBox(
                     height: 48,
@@ -146,8 +158,7 @@ class _SignInPageState extends State<SignInPage> {
                               .getUser(_singleNotifier.token));
                           if (res.code == 200) {
                             User user = User.fromJson(res.body);
-                            res = (await UserService()
-                                .getUserInfo(user.id!));
+                            res = (await UserService().getUserInfo(user.id!));
                             AppUser userInfo = AppUser.fromJson(res.body);
                             _singleNotifier.updateUser(AppUser(
                               id: userInfo.id,
@@ -155,7 +166,8 @@ class _SignInPageState extends State<SignInPage> {
                               birthdate: userInfo.birthdate,
                               user: user,
                             ));
-                            AppConstants.currentUser = _singleNotifier.currentUser;
+                            AppConstants.currentUser =
+                                _singleNotifier.currentUser;
                             AppConstants.userToken = _singleNotifier.token;
                             Navigator.of(context, rootNavigator: true)
                                 .pushReplacementNamed(AppRoutes.mainPage);

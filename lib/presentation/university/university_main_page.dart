@@ -50,12 +50,14 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
       ),
     );
   }
+
   void _onRefresh() async {
     page = 0;
     _getData();
     _refreshController.refreshCompleted();
     _refreshController.loadComplete();
   }
+
   void _onLoading() async {
     page++;
     List<University> newList = await UniversityService()
@@ -99,6 +101,14 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
             child: Column(
               children: [
                 CustomTextFormField(
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    icon: CustomSvgIcon(
+                      preset: AppIcons.search,
+                    ),
+                  ),
                   readOnly: false,
                   controller: myController,
                   labelText: 'Поиск',
