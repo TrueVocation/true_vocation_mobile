@@ -13,9 +13,11 @@ import 'package:true_vocation_mobile/domain/model/university.dart';
 import 'package:true_vocation_mobile/domain/model/user_info.dart';
 import 'package:true_vocation_mobile/presentation/authorization/sign_in_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_icon_text_widget.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_refresh_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_tabs_widget.dart';
 import 'package:true_vocation_mobile/presentation/templates/detail_page_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/details_description_widget.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
@@ -188,11 +190,47 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
         Padding(
           padding: const EdgeInsets.symmetric(
               horizontal: AppConstants.mainHorizontalPadding, vertical: 16),
-          child: CustomPageScroll(
-            color: AppColors.whiteColor,
-            children: const [
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
-                  'gbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjv'),
+                'Описание',
+                style: TextStyle(
+                  color: AppColors.blackColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: CustomPageScroll(
+                      color: AppColors.whiteColor,
+                      children: [
+                        DetailsDescriptionWidget(
+                          text: widget.speciality!.description,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: AppConstants.mainHorizontalPadding),
+                      child: CustomPageScroll(
+                        children: getOtherInfo(),
+                        color: AppColors.whiteColor,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -274,5 +312,30 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
         }
       },
     );
+  }
+
+  List<Widget> getOtherInfo() {
+    return [
+      CustomIconTextWidget(
+        title: 'Мин. балл',
+        value: widget.speciality!.minScoreGeneral.toString(),
+        preset: AppIcons.down,
+      ),
+      const SizedBox(
+        height: 16,
+      ),
+      Column(
+        children: [
+          CustomIconTextWidget(
+            title: 'Кол. грантов',
+            value: widget.speciality!.totalGrants.toString(),
+            preset: AppIcons.grant,
+          ),
+          const SizedBox(
+            height: 16,
+          )
+        ],
+      ),
+    ];
   }
 }

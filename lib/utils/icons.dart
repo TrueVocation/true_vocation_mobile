@@ -24,4 +24,8 @@ class AppIcons {
   static String military = "military.svg";
   static String favoriteAdd = "favorite-add.svg";
   static String favoriteRemove = "favorite-remove.svg";
+  static String down = "down.svg";
+  static String grant = "grant.svg";
+  static String money = "money.svg";
+  static String check = "check.svg";
 }

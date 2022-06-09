@@ -15,6 +15,7 @@ import 'package:true_vocation_mobile/presentation/templates/custom_refresh_templ
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_tabs_widget.dart';
 import 'package:true_vocation_mobile/presentation/templates/detail_page_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/details_description_widget.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
@@ -129,31 +130,18 @@ class _AboutUniversityState extends State<AboutUniversity> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: CustomPageScroll(
                       color: AppColors.whiteColor,
                       children: [
-                        CustomContainer(
-                          color: AppColors.greyColor.withOpacity(0.1),
-                          width: double.maxFinite,
-                          borderRadius: BorderRadius.circular(10),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text(
-                              widget.university!.description,
-                              style: TextStyle(
-                                color: AppColors.blackColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                              ),
-                              softWrap: true,
-                            ),
-                          ),
+                        DetailsDescriptionWidget(
+                          text: widget.university!.description,
                         ),
                       ],
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: Padding(
                       padding: const EdgeInsets.only(
                           left: AppConstants.mainHorizontalPadding),
@@ -206,7 +194,7 @@ class _AboutUniversityState extends State<AboutUniversity> {
             ),
           );
         } else {
-          if (favorite){
+          if (favorite) {
             var res = (await FavoriteService().deleteFavoritesUniversity(
               Favorites(
                 user: _singleNotifier.currentUser,
@@ -214,11 +202,11 @@ class _AboutUniversityState extends State<AboutUniversity> {
               ),
             ));
             if (res.code == 200) {
-              setState((){
+              setState(() {
                 favorite = false;
               });
             }
-          } else{
+          } else {
             var res = (await FavoriteService().createFavorite(
               Favorites(
                 user: _singleNotifier.currentUser,
@@ -226,7 +214,7 @@ class _AboutUniversityState extends State<AboutUniversity> {
               ),
             ));
             if (res.code == 200) {
-              setState((){
+              setState(() {
                 favorite = true;
               });
             }
@@ -239,20 +227,9 @@ class _AboutUniversityState extends State<AboutUniversity> {
   List<Widget> getOtherInfo() {
     return [
       CustomIconTextWidget(
-        children: [
-          CustomSvgIcon(
-            preset: AppIcons.spec,
-            color: AppColors.blackColor,
-            size: 48,
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Text(
-            widget.university!.specialityCount.toString(),
-            textAlign: TextAlign.center,
-          ),
-        ],
+        title: 'Специальности',
+        preset: AppIcons.spec,
+        value: widget.university!.specialityCount.toString(),
       ),
       const SizedBox(
         height: 16,
@@ -261,20 +238,9 @@ class _AboutUniversityState extends State<AboutUniversity> {
         Column(
           children: [
             CustomIconTextWidget(
-              children: [
-                CustomSvgIcon(
-                  preset: AppIcons.military,
-                  color: AppColors.blackColor,
-                  size: 48,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                const Text(
-                  'Воен. кафедра',
-                  textAlign: TextAlign.center,
-                ),
-              ],
+              title: 'Воен. кафедра',
+              preset: AppIcons.military,
+              value: 'Есть',
             ),
             const SizedBox(
               height: 16,
@@ -282,19 +248,16 @@ class _AboutUniversityState extends State<AboutUniversity> {
           ],
         ),
       if (widget.university!.dormitory)
-        CustomIconTextWidget(
+        Column(
           children: [
-            CustomSvgIcon(
+            CustomIconTextWidget(
+              title: 'Общежитие',
               preset: AppIcons.dormitory,
-              color: AppColors.blackColor,
+              value: 'Есть',
             ),
             const SizedBox(
-              height: 8,
-            ),
-            const Text(
-              'Общежитие',
-              textAlign: TextAlign.center,
-            ),
+              height: 16,
+            )
           ],
         ),
     ];
