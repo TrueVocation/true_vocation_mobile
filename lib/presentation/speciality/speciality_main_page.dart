@@ -42,7 +42,7 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
 
   void _getData() async {
     list = (await SpecialityService()
-            .getSpecialities(page, ApiConstants.getListSize))
+            .getSpecialities(page, AppConstants.getListSize))
         .cast<Speciality>();
     Future.delayed(const Duration(seconds: 1)).then(
       (value) => setState(
@@ -65,7 +65,7 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
   void _onLoading() async {
     page++;
     List<Speciality> newList = await SpecialityService()
-        .getSpecialities(page, ApiConstants.getListSize);
+        .getSpecialities(page, AppConstants.getListSize);
     list.addAll(newList);
     if (newList.isEmpty) {
       setState(() {
@@ -102,7 +102,7 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: ApiConstants.mainHorizontalPadding),
+                horizontal: AppConstants.mainHorizontalPadding),
             child: Column(
               children: [
                 CustomTextFormField(
@@ -212,8 +212,8 @@ class _MainSpecialityPageState extends State<MainSpecialityPage> {
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                  left: ApiConstants.mainHorizontalPadding,
-                  right: ApiConstants.mainHorizontalPadding,
+                  left: AppConstants.mainHorizontalPadding,
+                  right: AppConstants.mainHorizontalPadding,
                   bottom: 24),
               child: ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),

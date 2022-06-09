@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:true_vocation_mobile/presentation/authorization/authorization_page.dart';
 import 'package:true_vocation_mobile/presentation/home/home_page.dart';
+import 'package:true_vocation_mobile/presentation/home/navigation.dart';
 import 'package:true_vocation_mobile/presentation/professions/profession_main_page.dart';
 import 'package:true_vocation_mobile/presentation/speciality/speciality_main_page.dart';
 import 'package:true_vocation_mobile/presentation/test/preview.dart';
 import 'package:true_vocation_mobile/presentation/university/university_main_page.dart';
 
-class ApiRoutes {
+class AppRoutes {
   static const String mainPage = '/main';
   static const String loginPage = '/login';
   static const String universityPage = '/university';
@@ -17,7 +18,7 @@ class ApiRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case mainPage:
-        return MaterialPageRoute(builder: (context) => const HomePage());
+        return MaterialPageRoute(builder: (context) => const Home());
 
       case loginPage:
         return MaterialPageRoute(builder: (context) => const AuthorizationPage());

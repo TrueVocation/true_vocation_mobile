@@ -3,7 +3,7 @@ import 'package:true_vocation_mobile/utils/constants.dart';
 
 class UniversityRepository {
   Future<University> getUniversity(var id) async {
-    final response = await ApiConstants.dio.get(
+    final response = await AppConstants.dio.get(
       '/api/university/$id',
     );
 
@@ -11,14 +11,14 @@ class UniversityRepository {
   }
 
   Future<List<University>> getUniversities(int page, size) async {
-    final response = await ApiConstants.dio
+    final response = await AppConstants.dio
         .get('/api/universities?page=$page&size=$size&sort=id&order=desc');
 
     return (response.data as List).map((e) => University.fromJson(e)).toList();
   }
 
   Future<List<University>> getUniversitiesBySpecialtyId(int page, size, id) async {
-    final response = await ApiConstants.dio
+    final response = await AppConstants.dio
         .get('/api/universities-by-speciality/$id?page=$page&size=$size&sort=id&order=desc');
 
     return (response.data as List).map((e) => University.fromJson(e)).toList();

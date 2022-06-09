@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:true_vocation_mobile/data/api/service/profession_service.dart';
+import 'package:true_vocation_mobile/data/api/service/test_service.dart';
 import 'package:true_vocation_mobile/domain/model/professions.dart';
 import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/domain/model/user_info.dart';
@@ -15,6 +16,7 @@ import 'package:true_vocation_mobile/presentation/templates/custom_container_but
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/presentation/test/preview.dart';
+import 'package:true_vocation_mobile/presentation/test/test_result_page.dart';
 import 'package:true_vocation_mobile/presentation/university/university_main_page.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
@@ -38,10 +40,9 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _getData();
   }
-
   void _getData() async {
     listProf = (await ProfessionService()
-            .getProfessions(page, ApiConstants.getListSize))
+            .getProfessions(page, AppConstants.getListSize))
         .cast<Professions>();
     Future.delayed(const Duration(seconds: 1)).then(
       (value) => setState(
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
     double cardWight = 164;
     double iconSize = 52;
     var _singleNotifier = Provider.of<SingleNotifier>(context);
-    UserInfo user = _singleNotifier.currentUser;
+    AppUser user = _singleNotifier.currentUser;
 
     return Scaffold(
       appBar: AppBar(
@@ -79,7 +80,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: ApiConstants.mainHorizontalPadding, vertical: 24),
+                horizontal: AppConstants.mainHorizontalPadding, vertical: 24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -416,13 +417,33 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
+                                  onPressed: () async {
+                                    if (AppConstants.currentUser.id != null){
+                                      var res = (await TestService().checkTestResult(AppConstants.currentUser.id));
+                                      if (res) {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
                                               const PreviewTestPage()),
-                                    );
+                                        );
+                                      } else {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                              const TestResultPage()),
+                                        );
+                                      }
+                                    }
+                                    else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                            const AuthorizationPage()),
+                                      );
+                                    }
                                   },
                                   style: ButtonStyle(
                                       backgroundColor:
@@ -471,7 +492,7 @@ class _HomePageState extends State<HomePage> {
               filter: ImageFilter.blur(sigmaY: 12, sigmaX: 12),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: ApiConstants.mainHorizontalPadding,
+                    horizontal: AppConstants.mainHorizontalPadding,
                     vertical: 16),
                 child: Column(
                   children: [
@@ -508,7 +529,7 @@ class _HomePageState extends State<HomePage> {
                           },
                           child: Text(
                             'See all',
-                            style: ApiConstants.textButtonStyle,
+                            style: AppConstants.textButtonStyle,
                           ),
                         ),
                       ],
@@ -590,7 +611,7 @@ class _HomePageState extends State<HomePage> {
     return color.withOpacity(0.6);
   }
 
-  Widget appBar(String name, BuildContext context, UserInfo user) {
+  Widget appBar(String name, BuildContext context, AppUser user) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -632,9 +653,9 @@ class _HomePageState extends State<HomePage> {
                 }
               },
               child: user.user?.imageUrl != null
-                  ? const Image(
+                  ? Image(
                       image: NetworkImage(
-                          'https://mfiles.alphacoders.com/631/631312.jpg'),
+                          user.user!.imageUrl!),
                     )
                   : CustomSvgIcon(
                       preset: AppIcons.login,

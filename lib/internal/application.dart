@@ -9,7 +9,7 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: ApiRoutes.generateRoute,
+      onGenerateRoute: AppRoutes.generateRoute,
       title: 'True Vocation',
       theme: ThemeData(
         fontFamily: 'Roboto',

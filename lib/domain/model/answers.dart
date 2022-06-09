@@ -9,7 +9,6 @@ class Answers with _$Answers {
   const factory Answers({
     required int id,
     required String answer,
-    required int questionId,
   }) = _Answers;
 
   factory Answers.fromJson(Map<String, Object?> json)

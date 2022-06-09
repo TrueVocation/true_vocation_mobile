@@ -30,4 +30,20 @@ class FavoriteService {
   Future<CustomResponse> deleteFavoritesSpeciality(Favorites favorites) async {
     return FavoriteRepository().deleteFavoritesSpeciality(favorites);
   }
+
+  Future<CustomResponse> getFavoriteUniversities(int page, size, userId) async {
+    return FavoriteRepository().getFavoriteUniversities(page, size, userId);
+  }
+
+  Future<CustomResponse> getFavoriteProfessions(int page, size, userId) async {
+    return FavoriteRepository().getFavoriteProfessions(page, size, userId);
+  }
+
+  Future<CustomResponse> getFavoriteSpecialities(int page, size, userId) async {
+    return FavoriteRepository().getFavoriteSpecialities(page, size, userId);
+  }
+
+  Future<CustomResponse> getFavoriteNews(int page, size, userId) async {
+    return FavoriteRepository().getFavoriteNews(page, size, userId);
+  }
 }

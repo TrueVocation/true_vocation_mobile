@@ -42,7 +42,7 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
 
   void _getData() async {
     list = (await ProfessionService()
-            .getProfessions(page, ApiConstants.getListSize))
+            .getProfessions(page, AppConstants.getListSize))
         .cast<Professions>();
     Future.delayed(const Duration(seconds: 1)).then(
       (value) => setState(
@@ -52,26 +52,23 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
       ),
     );
   }
-
   void _onRefresh() async {
     page = 0;
     _getData();
     _refreshController.refreshCompleted();
     _refreshController.loadComplete();
   }
-
   void _onLoading() async {
     page++;
     List<Professions> newList = await ProfessionService()
-        .getProfessions(page, ApiConstants.getListSize);
+        .getProfessions(page, AppConstants.getListSize);
     list.addAll(newList);
+    setState(() {
+      _refreshController.loadComplete();
+    });
     if (newList.isEmpty) {
       setState(() {
         _refreshController.loadNoData();
-      });
-    } else {
-      setState(() {
-        _refreshController.loadComplete();
       });
     }
   }
@@ -95,7 +92,7 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: ApiConstants.mainHorizontalPadding),
+                horizontal: AppConstants.mainHorizontalPadding),
             child: Column(
               children: [
                 CustomTextFormField(
@@ -194,8 +191,8 @@ class _ProfessionMainPage1State extends State<MainProfessionPage> {
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                  left: ApiConstants.mainHorizontalPadding,
-                  right: ApiConstants.mainHorizontalPadding,
+                  left: AppConstants.mainHorizontalPadding,
+                  right: AppConstants.mainHorizontalPadding,
                   bottom: 24),
               child: ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),

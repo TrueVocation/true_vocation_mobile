@@ -15,7 +15,7 @@ class Favorites with _$Favorites {
     int? id,
     String? type,
     University? university,
-    UserInfo? user,
+    AppUser? user,
     Professions? profession,
     News? post,
     Speciality? specialty,

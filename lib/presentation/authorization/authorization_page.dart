@@ -43,12 +43,12 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
         leading: true,
         name: '',
         color: AppColors.backgroundColor,
-        routeName: ApiRoutes.mainPage,
+        routeName: AppRoutes.mainPage,
       ),
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(
-            horizontal: ApiConstants.mainHorizontalPadding),
+            horizontal: AppConstants.mainHorizontalPadding),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [

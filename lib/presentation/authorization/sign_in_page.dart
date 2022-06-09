@@ -7,6 +7,7 @@ import 'package:true_vocation_mobile/domain/model/user.dart';
 import 'package:true_vocation_mobile/domain/model/user_info.dart';
 import 'package:true_vocation_mobile/presentation/authorization/sign_up_page.dart';
 import 'package:true_vocation_mobile/presentation/home/home_page.dart';
+import 'package:true_vocation_mobile/presentation/home/navigation.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_text_form_field_template.dart';
@@ -49,12 +50,12 @@ class _SignInPageState extends State<SignInPage> {
         name: '',
         color: AppColors.backgroundColor,
         leading: true,
-        routeName: ApiRoutes.loginPage,
+        routeName: AppRoutes.loginPage,
       ),
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(
-            horizontal: ApiConstants.mainHorizontalPadding),
+            horizontal: AppConstants.mainHorizontalPadding),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -147,19 +148,17 @@ class _SignInPageState extends State<SignInPage> {
                             User user = User.fromJson(res.body);
                             res = (await UserService()
                                 .getUserInfo(user.id!));
-                            UserInfo userInfo = UserInfo.fromJson(res.body);
-                            _singleNotifier.updateUser(UserInfo(
+                            AppUser userInfo = AppUser.fromJson(res.body);
+                            _singleNotifier.updateUser(AppUser(
                               id: userInfo.id,
                               phoneNumber: userInfo.phoneNumber,
                               birthdate: userInfo.birthdate,
                               user: user,
                             ));
-                            ApiConstants.currentUser = _singleNotifier.currentUser;
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomePage()),
-                            );
+                            AppConstants.currentUser = _singleNotifier.currentUser;
+                            AppConstants.userToken = _singleNotifier.token;
+                            Navigator.of(context, rootNavigator: true)
+                                .pushReplacementNamed(AppRoutes.mainPage);
                           }
                         } else {}
                       }

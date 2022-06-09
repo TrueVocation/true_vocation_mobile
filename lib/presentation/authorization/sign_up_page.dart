@@ -77,12 +77,12 @@ class _SignUpPageState extends State<SignUpPage> {
         name: '',
         color: AppColors.backgroundColor,
         leading: true,
-        routeName: ApiRoutes.loginPage,
+        routeName: AppRoutes.loginPage,
       ),
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(
-            horizontal: ApiConstants.mainHorizontalPadding),
+            horizontal: AppConstants.mainHorizontalPadding),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -352,9 +352,14 @@ class _SignUpPageState extends State<SignUpPage> {
               loading = true;
             });
             var res = (await UserService().registrationUser(
-              UserInfo(
+              AppUser(
                 birthdate: birthDateController.text,
                 phoneNumber: ApiFunctions.phoneFormatter(phoneController.text),
+                firstName: nameController.text,
+                lastName: lastNameController.text,
+                login: loginController.text,
+                email: emailController.text,
+                password: passwordController.text,
                 user: User(
                   firstName: nameController.text,
                   lastName: lastNameController.text,
@@ -391,7 +396,7 @@ class _SignUpPageState extends State<SignUpPage> {
           onPressed: functionBack,
           child: Text(
             'Назад',
-            style: ApiConstants.textButtonStyle,
+            style: AppConstants.textButtonStyle,
           ),
         ),
         CustomButton(

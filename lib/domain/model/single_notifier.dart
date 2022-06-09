@@ -14,9 +14,9 @@ class SingleNotifier extends ChangeNotifier {
     }
   }
 
-  UserInfo _currentUser = const UserInfo();
-  UserInfo get currentUser => _currentUser;
-  updateUser(UserInfo value) {
+  AppUser _currentUser = const AppUser();
+  AppUser get currentUser => _currentUser;
+  updateUser(AppUser value) {
     if (value != _currentUser) {
       _currentUser = value;
       notifyListeners();

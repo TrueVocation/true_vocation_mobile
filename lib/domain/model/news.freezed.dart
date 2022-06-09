@@ -26,7 +26,7 @@ mixin _$News {
   String? get description => throw _privateConstructorUsedError;
   String? get picture => throw _privateConstructorUsedError;
   String? get tag => throw _privateConstructorUsedError;
-  DateTime? get createdDate => throw _privateConstructorUsedError;
+  String? get createdDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +44,7 @@ abstract class $NewsCopyWith<$Res> {
       String? description,
       String? picture,
       String? tag,
-      DateTime? createdDate});
+      String? createdDate});
 }
 
 /// @nodoc
@@ -93,7 +93,7 @@ class _$NewsCopyWithImpl<$Res> implements $NewsCopyWith<$Res> {
       createdDate: createdDate == freezed
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
     ));
   }
 }
@@ -110,7 +110,7 @@ abstract class _$$_NewsCopyWith<$Res> implements $NewsCopyWith<$Res> {
       String? description,
       String? picture,
       String? tag,
-      DateTime? createdDate});
+      String? createdDate});
 }
 
 /// @nodoc
@@ -160,7 +160,7 @@ class __$$_NewsCopyWithImpl<$Res> extends _$NewsCopyWithImpl<$Res>
       createdDate: createdDate == freezed
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
     ));
   }
 }
@@ -192,7 +192,7 @@ class _$_News with DiagnosticableTreeMixin implements _News {
   @override
   final String? tag;
   @override
-  final DateTime? createdDate;
+  final String? createdDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -261,7 +261,7 @@ abstract class _News implements News {
       final String? description,
       final String? picture,
       final String? tag,
-      final DateTime? createdDate}) = _$_News;
+      final String? createdDate}) = _$_News;
 
   factory _News.fromJson(Map<String, dynamic> json) = _$_News.fromJson;
 
@@ -278,7 +278,7 @@ abstract class _News implements News {
   @override
   String? get tag => throw _privateConstructorUsedError;
   @override
-  DateTime? get createdDate => throw _privateConstructorUsedError;
+  String? get createdDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_NewsCopyWith<_$_News> get copyWith => throw _privateConstructorUsedError;

@@ -25,7 +25,7 @@ class AboutUniversity extends StatefulWidget {
   const AboutUniversity({Key? key, this.university, this.user})
       : super(key: key);
   final University? university;
-  final UserInfo? user;
+  final AppUser? user;
 
   @override
   State<AboutUniversity> createState() => _AboutUniversityState();
@@ -48,7 +48,7 @@ class _AboutUniversityState extends State<AboutUniversity> {
 
   void _getData() async {
     list = (await SpecialityService().getSpecialitiesByUniversity(
-            page, ApiConstants.getListSize, widget.university!.id))
+            page, AppConstants.getListSize, widget.university!.id))
         .cast<Speciality>();
     Future.delayed(const Duration(seconds: 1)).then(
       (value) => setState(
@@ -61,7 +61,7 @@ class _AboutUniversityState extends State<AboutUniversity> {
     favorite = (await FavoriteService().checkFavoritesUniversity(
       Favorites(
         university: widget.university,
-        user: ApiConstants.currentUser,
+        user: AppConstants.currentUser,
       ),
     ));
   }
@@ -77,7 +77,7 @@ class _AboutUniversityState extends State<AboutUniversity> {
     page++;
     List<Speciality> newList = await SpecialityService()
         .getSpecialitiesByUniversity(
-            page, ApiConstants.getListSize, widget.university!.id);
+            page, AppConstants.getListSize, widget.university!.id);
     list.addAll(newList);
     if (newList.isEmpty) {
       setState(() {
@@ -110,7 +110,7 @@ class _AboutUniversityState extends State<AboutUniversity> {
       tabBarView: [
         Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: ApiConstants.mainHorizontalPadding, vertical: 24),
+              horizontal: AppConstants.mainHorizontalPadding, vertical: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -156,7 +156,7 @@ class _AboutUniversityState extends State<AboutUniversity> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          left: ApiConstants.mainHorizontalPadding),
+                          left: AppConstants.mainHorizontalPadding),
                       child: CustomPageScroll(
                         children: getOtherInfo(),
                         color: AppColors.whiteColor,
@@ -177,7 +177,7 @@ class _AboutUniversityState extends State<AboutUniversity> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: ApiConstants.mainHorizontalPadding,
+                    horizontal: AppConstants.mainHorizontalPadding,
                     vertical: 16),
                 child: loading == true
                     ? const Center(
@@ -243,6 +243,7 @@ class _AboutUniversityState extends State<AboutUniversity> {
           CustomSvgIcon(
             preset: AppIcons.spec,
             color: AppColors.blackColor,
+            size: 48,
           ),
           const SizedBox(
             height: 8,
@@ -264,6 +265,7 @@ class _AboutUniversityState extends State<AboutUniversity> {
                 CustomSvgIcon(
                   preset: AppIcons.military,
                   color: AppColors.blackColor,
+                  size: 48,
                 ),
                 const SizedBox(
                   height: 8,

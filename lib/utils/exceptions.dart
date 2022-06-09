@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 
-class ApiExceptions {
+class AppExceptions {
 
   static Widget serverError(int code) {
     return custom('На стороне сервера возникла ошибка', code);

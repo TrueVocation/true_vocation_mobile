@@ -13,9 +13,7 @@ _$_News _$$_NewsFromJson(Map<String, dynamic> json) => _$_News(
       description: json['description'] as String?,
       picture: json['picture'] as String?,
       tag: json['tag'] as String?,
-      createdDate: json['createdDate'] == null
-          ? null
-          : DateTime.parse(json['createdDate'] as String),
+      createdDate: json['createdDate'] as String?,
     );
 
 Map<String, dynamic> _$$_NewsToJson(_$_News instance) => <String, dynamic>{
@@ -25,5 +23,5 @@ Map<String, dynamic> _$$_NewsToJson(_$_News instance) => <String, dynamic>{
       'description': instance.description,
       'picture': instance.picture,
       'tag': instance.tag,
-      'createdDate': instance.createdDate?.toIso8601String(),
+      'createdDate': instance.createdDate,
     };

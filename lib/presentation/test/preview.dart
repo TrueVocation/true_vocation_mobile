@@ -26,7 +26,7 @@ class _PreviewTestPageState extends State<PreviewTestPage> {
       ),
       body: Container(
         padding:
-            const EdgeInsets.only(left: ApiConstants.mainHorizontalPadding, right: ApiConstants.mainHorizontalPadding, top: 48, bottom: 48),
+            const EdgeInsets.only(left: AppConstants.mainHorizontalPadding, right: AppConstants.mainHorizontalPadding, top: 48, bottom: 48),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

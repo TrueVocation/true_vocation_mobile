@@ -27,7 +27,7 @@ class AboutSpeciality extends StatefulWidget {
       : super(key: key);
 
   final Speciality? speciality;
-  final UserInfo? user;
+  final AppUser? user;
 
   @override
   State<AboutSpeciality> createState() => _AboutSpecialityState();
@@ -62,7 +62,7 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
 
   void _getDataUni() async {
     listUni = (await UniversityService().getUniversitiesBySpecialtyId(
-            page, ApiConstants.getListSize, widget.speciality!.id))
+            page, AppConstants.getListSize, widget.speciality!.id))
         .cast<University>();
     Future.delayed(const Duration(seconds: 1)).then(
       (value) => setState(
@@ -75,14 +75,14 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
     favorite = (await FavoriteService().checkFavoritesSpeciality(
       Favorites(
         specialty: widget.speciality,
-        user: ApiConstants.currentUser,
+        user: AppConstants.currentUser,
       ),
     ));
   }
 
   void _getDataProf() async {
     listProf = (await ProfessionService().getProfessionsBySpeciality(
-            page, ApiConstants.getListSize, widget.speciality!.id))
+            page, AppConstants.getListSize, widget.speciality!.id))
         .cast<Professions>();
     Future.delayed(const Duration(seconds: 1)).then(
       (value) => setState(
@@ -104,7 +104,7 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
     page++;
     List<University> newList = await UniversityService()
         .getUniversitiesBySpecialtyId(
-            page, ApiConstants.getListSize, widget.speciality!.id);
+            page, AppConstants.getListSize, widget.speciality!.id);
     listUni.addAll(newList);
     if (newList.isEmpty) {
       setState(() {
@@ -128,7 +128,7 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
     page++;
     List<Professions> newList = await ProfessionService()
         .getProfessionsBySpeciality(
-            page, ApiConstants.getListSize, widget.speciality!.id);
+            page, AppConstants.getListSize, widget.speciality!.id);
     listProf.addAll(newList);
     if (newList.isEmpty) {
       setState(() {
@@ -187,7 +187,7 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
       tabBarView: [
         Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: ApiConstants.mainHorizontalPadding, vertical: 16),
+              horizontal: AppConstants.mainHorizontalPadding, vertical: 16),
           child: CustomPageScroll(
             color: AppColors.whiteColor,
             children: const [
@@ -205,7 +205,7 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: ApiConstants.mainHorizontalPadding,
+                    horizontal: AppConstants.mainHorizontalPadding,
                     vertical: 16),
                 child: loading == true
                     ? const Center(
@@ -225,7 +225,7 @@ class _AboutSpecialityState extends State<AboutSpeciality> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: ApiConstants.mainHorizontalPadding,
+                    horizontal: AppConstants.mainHorizontalPadding,
                     vertical: 16),
                 child: loading == true
                     ? const Center(

@@ -23,7 +23,7 @@ mixin _$Favorites {
   int? get id => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
   University? get university => throw _privateConstructorUsedError;
-  UserInfo? get user => throw _privateConstructorUsedError;
+  AppUser? get user => throw _privateConstructorUsedError;
   Professions? get profession => throw _privateConstructorUsedError;
   News? get post => throw _privateConstructorUsedError;
   Speciality? get specialty => throw _privateConstructorUsedError;
@@ -42,13 +42,13 @@ abstract class $FavoritesCopyWith<$Res> {
       {int? id,
       String? type,
       University? university,
-      UserInfo? user,
+      AppUser? user,
       Professions? profession,
       News? post,
       Speciality? specialty});
 
   $UniversityCopyWith<$Res>? get university;
-  $UserInfoCopyWith<$Res>? get user;
+  $AppUserCopyWith<$Res>? get user;
   $ProfessionsCopyWith<$Res>? get profession;
   $NewsCopyWith<$Res>? get post;
   $SpecialityCopyWith<$Res>? get specialty;
@@ -88,7 +88,7 @@ class _$FavoritesCopyWithImpl<$Res> implements $FavoritesCopyWith<$Res> {
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserInfo?,
+              as AppUser?,
       profession: profession == freezed
           ? _value.profession
           : profession // ignore: cast_nullable_to_non_nullable
@@ -116,12 +116,12 @@ class _$FavoritesCopyWithImpl<$Res> implements $FavoritesCopyWith<$Res> {
   }
 
   @override
-  $UserInfoCopyWith<$Res>? get user {
+  $AppUserCopyWith<$Res>? get user {
     if (_value.user == null) {
       return null;
     }
 
-    return $UserInfoCopyWith<$Res>(_value.user!, (value) {
+    return $AppUserCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value));
     });
   }
@@ -170,7 +170,7 @@ abstract class _$$_FavoritesCopyWith<$Res> implements $FavoritesCopyWith<$Res> {
       {int? id,
       String? type,
       University? university,
-      UserInfo? user,
+      AppUser? user,
       Professions? profession,
       News? post,
       Speciality? specialty});
@@ -178,7 +178,7 @@ abstract class _$$_FavoritesCopyWith<$Res> implements $FavoritesCopyWith<$Res> {
   @override
   $UniversityCopyWith<$Res>? get university;
   @override
-  $UserInfoCopyWith<$Res>? get user;
+  $AppUserCopyWith<$Res>? get user;
   @override
   $ProfessionsCopyWith<$Res>? get profession;
   @override
@@ -223,7 +223,7 @@ class __$$_FavoritesCopyWithImpl<$Res> extends _$FavoritesCopyWithImpl<$Res>
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserInfo?,
+              as AppUser?,
       profession: profession == freezed
           ? _value.profession
           : profession // ignore: cast_nullable_to_non_nullable
@@ -262,7 +262,7 @@ class _$_Favorites with DiagnosticableTreeMixin implements _Favorites {
   @override
   final University? university;
   @override
-  final UserInfo? user;
+  final AppUser? user;
   @override
   final Professions? profession;
   @override
@@ -333,7 +333,7 @@ abstract class _Favorites implements Favorites {
       {final int? id,
       final String? type,
       final University? university,
-      final UserInfo? user,
+      final AppUser? user,
       final Professions? profession,
       final News? post,
       final Speciality? specialty}) = _$_Favorites;
@@ -348,7 +348,7 @@ abstract class _Favorites implements Favorites {
   @override
   University? get university => throw _privateConstructorUsedError;
   @override
-  UserInfo? get user => throw _privateConstructorUsedError;
+  AppUser? get user => throw _privateConstructorUsedError;
   @override
   Professions? get profession => throw _privateConstructorUsedError;
   @override

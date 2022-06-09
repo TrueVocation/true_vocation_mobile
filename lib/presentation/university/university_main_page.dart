@@ -40,7 +40,7 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
 
   void _getData() async {
     list = (await UniversityService()
-            .getUniversities(page, ApiConstants.getListSize))
+            .getUniversities(page, AppConstants.getListSize))
         .cast<University>();
     Future.delayed(const Duration(seconds: 1)).then(
       (value) => setState(
@@ -50,18 +50,16 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
       ),
     );
   }
-
   void _onRefresh() async {
     page = 0;
     _getData();
     _refreshController.refreshCompleted();
     _refreshController.loadComplete();
   }
-
   void _onLoading() async {
     page++;
     List<University> newList = await UniversityService()
-        .getUniversities(page, ApiConstants.getListSize);
+        .getUniversities(page, AppConstants.getListSize);
     list.addAll(newList);
     if (newList.isEmpty) {
       setState(() {
@@ -75,9 +73,9 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
   }
 
   List<Regions> regions = [
-    Regions(id: 1, name: ''),
-    Regions(id: 2, name: ''),
-    Regions(id: 3, name: ''),
+    const Regions(id: 1, name: ''),
+    const Regions(id: 2, name: ''),
+    const Regions(id: 3, name: ''),
   ];
 
   final myController = TextEditingController();
@@ -97,7 +95,7 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: ApiConstants.mainHorizontalPadding),
+                horizontal: AppConstants.mainHorizontalPadding),
             child: Column(
               children: [
                 CustomTextFormField(
@@ -212,8 +210,8 @@ class _MainUniversityPageState extends State<MainUniversityPage> {
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                  left: ApiConstants.mainHorizontalPadding,
-                  right: ApiConstants.mainHorizontalPadding,
+                  left: AppConstants.mainHorizontalPadding,
+                  right: AppConstants.mainHorizontalPadding,
                   bottom: 24),
               child: ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),

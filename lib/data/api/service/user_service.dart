@@ -20,7 +20,7 @@ class UserService {
         .checkLogin(login);
   }
 
-  Future<CustomResponse> registrationUser(UserInfo user) async {
+  Future<CustomResponse> registrationUser(AppUser user) async {
     return UserRepository().registrationUser(user);
   }
 

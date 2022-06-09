@@ -20,7 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
         name: '',
         color: AppColors.whiteColor,
         leading: true,
-        routeName: ApiRoutes.mainPage,
+        routeName: AppRoutes.mainPage,
       ),
       backgroundColor: AppColors.whiteColor,
     );

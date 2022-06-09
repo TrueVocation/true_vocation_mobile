@@ -26,7 +26,7 @@ class AboutProfession extends StatefulWidget {
       : super(key: key);
 
   final Professions? profession;
-  final UserInfo? user;
+  final AppUser? user;
 
   @override
   State<AboutProfession> createState() => _AboutProfessionState();
@@ -49,7 +49,7 @@ class _AboutProfessionState extends State<AboutProfession> {
 
   void _getData() async {
     list = (await SpecialityService().getSpecialitiesByProfession(
-            page, ApiConstants.getListSize, widget.profession!.id))
+            page, AppConstants.getListSize, widget.profession!.id))
         .cast<Speciality>();
     Future.delayed(const Duration(seconds: 1)).then(
       (value) => setState(
@@ -62,7 +62,7 @@ class _AboutProfessionState extends State<AboutProfession> {
     favorite = (await FavoriteService().checkFavoritesProfession(
       Favorites(
         profession: widget.profession,
-        user: ApiConstants.currentUser,
+        user: AppConstants.currentUser,
       ),
     ));
   }
@@ -78,7 +78,7 @@ class _AboutProfessionState extends State<AboutProfession> {
     page++;
     List<Speciality> newList = await SpecialityService()
         .getSpecialitiesByProfession(
-            page, ApiConstants.getListSize, widget.profession!.id);
+            page, AppConstants.getListSize, widget.profession!.id);
     list.addAll(newList);
     if (newList.isEmpty) {
       setState(() {
@@ -139,7 +139,7 @@ class _AboutProfessionState extends State<AboutProfession> {
       tabBarView: [
         Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: ApiConstants.mainHorizontalPadding, vertical: 16),
+              horizontal: AppConstants.mainHorizontalPadding, vertical: 16),
           child: CustomPageScroll(color: AppColors.whiteColor, children: const [
             Text(
                 'gbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjgbyjnjv'),
@@ -154,7 +154,7 @@ class _AboutProfessionState extends State<AboutProfession> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: ApiConstants.mainHorizontalPadding,
+                    horizontal: AppConstants.mainHorizontalPadding,
                     vertical: 16),
                 child: loading == true
                     ? const Center(

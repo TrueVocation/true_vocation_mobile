@@ -14,11 +14,11 @@ class ApiFunctions {
   static Widget getError(int code, String title){
     switch (code) {
       case 500:
-        return ApiExceptions.serverError(code);
+        return AppExceptions.serverError(code);
       case 201:
-        return ApiExceptions.successRegistration(code);
+        return AppExceptions.successRegistration(code);
       default:
-        return ApiExceptions.custom(title, code);
+        return AppExceptions.custom(title, code);
     }
   }
 

@@ -6,14 +6,21 @@ part 'user_info.freezed.dart';
 part 'user_info.g.dart';
 
 @freezed
-class UserInfo with _$UserInfo {
-  const factory UserInfo({
+class AppUser with _$AppUser {
+  const factory AppUser({
     int? id,
     String? phoneNumber,
     String? birthdate,
+    String? login,
+    String? firstName,
+    String? lastName,
+    String? password,
+    String? email,
+    String? imageUrl,
+    bool? activated,
     User? user,
-  }) = _UserInfo;
+  }) = _AppUser;
 
-  factory UserInfo.fromJson(Map<String, Object?> json)
-  => _$UserInfoFromJson(json);
+  factory AppUser.fromJson(Map<String, Object?> json)
+  => _$AppUserFromJson(json);
 }

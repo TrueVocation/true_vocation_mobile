@@ -13,7 +13,7 @@ class News with _$News {
     String? description,
     String? picture,
     String? tag,
-    DateTime? createdDate,
+    String? createdDate,
   }) = _News;
 
   factory News.fromJson(Map<String, Object?> json)

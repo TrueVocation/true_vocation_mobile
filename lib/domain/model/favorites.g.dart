@@ -14,7 +14,7 @@ _$_Favorites _$$_FavoritesFromJson(Map<String, dynamic> json) => _$_Favorites(
           : University.fromJson(json['university'] as Map<String, dynamic>),
       user: json['user'] == null
           ? null
-          : UserInfo.fromJson(json['user'] as Map<String, dynamic>),
+          : AppUser.fromJson(json['user'] as Map<String, dynamic>),
       profession: json['profession'] == null
           ? null
           : Professions.fromJson(json['profession'] as Map<String, dynamic>),

@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:true_vocation_mobile/data/api/service/favorite_service.dart';
-import 'package:true_vocation_mobile/domain/model/favorites.dart';
 import 'package:true_vocation_mobile/domain/model/news.dart';
 import 'package:true_vocation_mobile/domain/model/professions.dart';
-import 'package:true_vocation_mobile/domain/model/single_notifier.dart';
 import 'package:true_vocation_mobile/domain/model/speciality.dart';
 import 'package:true_vocation_mobile/domain/model/university.dart';
-import 'package:true_vocation_mobile/presentation/authorization/sign_in_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
@@ -16,7 +11,7 @@ import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 
 class DetailPageTemplate extends StatefulWidget {
-   const DetailPageTemplate({
+  const DetailPageTemplate({
     Key? key,
     required this.objectName,
     this.fontSize,
@@ -33,7 +28,7 @@ class DetailPageTemplate extends StatefulWidget {
     this.speciality,
     this.news,
     required this.favorite,
-     required this.onPressed,
+    required this.onPressed,
   }) : super(key: key);
 
   final String? objectName;
@@ -60,13 +55,13 @@ class DetailPageTemplate extends StatefulWidget {
 class _DetailPageTemplateState extends State<DetailPageTemplate> {
   @override
   Widget build(BuildContext context) {
-    var _singleNotifier = Provider.of<SingleNotifier>(context);
-
     return Scaffold(
       floatingActionButton: IconButton(
         onPressed: widget.onPressed,
         icon: CustomSvgIcon(
-          preset: widget.favorite == false ? AppIcons.favoriteAdd : AppIcons.favoriteRemove,
+          preset: widget.favorite == false
+              ? AppIcons.favoriteAdd
+              : AppIcons.favoriteRemove,
           color: AppColors.purple,
         ),
       ),
@@ -80,7 +75,7 @@ class _DetailPageTemplateState extends State<DetailPageTemplate> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(
-                horizontal: ApiConstants.mainHorizontalPadding, vertical: 16),
+                horizontal: AppConstants.mainHorizontalPadding, vertical: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -131,8 +126,8 @@ class _DetailPageTemplateState extends State<DetailPageTemplate> {
           ),
           Padding(
             padding: const EdgeInsets.only(
-                left: ApiConstants.mainHorizontalPadding,
-                right: ApiConstants.mainHorizontalPadding,
+                left: AppConstants.mainHorizontalPadding,
+                right: AppConstants.mainHorizontalPadding,
                 bottom: 24),
             child: widget.appBarBody!,
           ),
@@ -158,7 +153,9 @@ class _DetailPageTemplateState extends State<DetailPageTemplate> {
                         tabs: widget.tabs!,
                       ),
                       Expanded(
-                        child: TabBarView(children: widget.tabBarView!),
+                        child: TabBarView(
+                          children: widget.tabBarView!,
+                        ),
                       ),
                     ],
                   ),
