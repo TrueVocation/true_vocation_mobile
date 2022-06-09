@@ -8,6 +8,7 @@ import 'package:true_vocation_mobile/presentation/templates/container_custom_tem
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
+import 'package:true_vocation_mobile/presentation/test/test_result_page.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
 
@@ -41,7 +42,7 @@ class _MainTestPageState extends State<MainTestPage> {
     Future.delayed(const Duration(seconds: 1)).then(
       (value) => setState(
         () {
-          constant = 1 / questions.length-1;
+          constant = 1 / 23;
           loading = false;
         },
       ),
@@ -128,19 +129,27 @@ class _MainTestPageState extends State<MainTestPage> {
               if (pageViewIndex == questions.length - 1)
                 CustomButton(
                   onPressed: () async {
-                    setState(() {
-                      loading = true;
-                    });
-                    var res =
-                        (await TestService().saveUserAnswers(answersUser));
-                    if (res.code == 200) {
+                    if (validate()) {
                       setState(() {
-                        loading = false;
+                        loadingButton = true;
                       });
-                    } else {
-                      setState(() {
-                        loading = false;
-                      });
+                      var res =
+                      (await TestService().saveUserAnswers(answersUser));
+                      if (res.code == 200) {
+                        setState(() {
+                          loadingButton = false;
+                        });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                              const TestResultPage()),
+                        );
+                      } else {
+                        setState(() {
+                          loadingButton = false;
+                        });
+                      }
                     }
                   },
                   borderColor: AppColors.blueColor,
@@ -165,6 +174,17 @@ class _MainTestPageState extends State<MainTestPage> {
         },
       ),
     );
+  }
+
+  bool validate() {
+    answersUser.sort((a,b) => a.question.id.compareTo(b.question.id));
+    for (int i = 0; i < questions.length; i++){
+      if (answersUser[i].question.id != questions[i].id) {
+        buttonCarouselController.animateToPage(i);
+        return false;
+      }
+    }
+    return true;
   }
 
   Widget getAnswers(List<Answers> answers, int questionIndex, pageViewIndex) {
