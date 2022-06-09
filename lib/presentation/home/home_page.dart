@@ -12,6 +12,7 @@ import 'package:true_vocation_mobile/presentation/professions/about_professions_
 import 'package:true_vocation_mobile/presentation/professions/profession_main_page.dart';
 import 'package:true_vocation_mobile/presentation/speciality/speciality_main_page.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_container_button_tabbar_view.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_svg_icon.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
@@ -21,6 +22,7 @@ import 'package:true_vocation_mobile/presentation/university/university_main_pag
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
+import 'package:true_vocation_mobile/utils/routes.dart';
 import 'package:true_vocation_mobile/utils/shadows.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,6 +35,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Professions> listProf = [];
   bool loading = true;
+  bool loadingTest = false;
   int page = 0;
 
   @override
@@ -416,10 +419,16 @@ class _HomePageState extends State<HomePage> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                ElevatedButton(
+                                CustomButton(
                                   onPressed: () async {
                                     if (AppConstants.currentUser.id != null){
+                                      setState(() {
+                                        loadingTest = true;
+                                      });
                                       var res = (await TestService().checkTestResult(AppConstants.currentUser.id));
+                                      setState(() {
+                                        loadingTest = false;
+                                      });
                                       if (res) {
                                         Navigator.push(
                                           context,
@@ -445,25 +454,13 @@ class _HomePageState extends State<HomePage> {
                                       );
                                     }
                                   },
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              AppColors.whiteColor),
-                                      shape: MaterialStateProperty.all(
-                                          RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ))),
-                                  child: SizedBox(
-                                    height: 48,
-                                    child: Center(
-                                      child: Text(
-                                        'Get started',
-                                        style: TextStyle(
-                                            color: AppColors.darkPurple,
-                                            fontSize: 16),
-                                      ),
-                                    ),
-                                  ),
+                                  borderColor: AppColors.whiteColor,
+                                  color: AppColors.whiteColor,
+                                  radius: 10,
+                                  text: 'Get started',
+                                  textColor: AppColors.purple,
+                                  loadingColor: AppColors.purple,
+                                  loading: loadingTest,
                                 ),
                               ],
                             ),
@@ -612,6 +609,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget appBar(String name, BuildContext context, AppUser user) {
+    var _singleNotifier = Provider.of<SingleNotifier>(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -649,6 +647,27 @@ class _HomePageState extends State<HomePage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => const AuthorizationPage()),
+                  );
+                } else {
+                  Widget okButton = TextButton(
+                    child: const Text("Да"),
+                    onPressed: () {
+                      _singleNotifier.updateUser(const AppUser());
+                      Navigator.of(context, rootNavigator: true)
+                          .pushReplacementNamed(AppRoutes.mainPage);
+                    },
+                  );
+                  AlertDialog alert = AlertDialog(
+                    content: const Text("Выйти из аккаунта?"),
+                    actions: [
+                      okButton,
+                    ],
+                  );
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return alert;
+                    },
                   );
                 }
               },

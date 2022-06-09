@@ -127,36 +127,39 @@ class _MainTestPageState extends State<MainTestPage> {
             spacing: 48,
             children: [
               if (pageViewIndex == questions.length - 1)
-                CustomButton(
-                  onPressed: () async {
-                    if (validate()) {
-                      setState(() {
-                        loadingButton = true;
-                      });
-                      var res =
-                      (await TestService().saveUserAnswers(answersUser));
-                      if (res.code == 200) {
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: AppConstants.mainHorizontalPadding),
+                  child: CustomButton(
+                    onPressed: () async {
+                      if (validate()) {
                         setState(() {
-                          loadingButton = false;
+                          loadingButton = true;
                         });
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                              const TestResultPage()),
-                        );
-                      } else {
-                        setState(() {
-                          loadingButton = false;
-                        });
+                        var res =
+                        (await TestService().saveUserAnswers(answersUser));
+                        if (res.code == 200) {
+                          setState(() {
+                            loadingButton = false;
+                          });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                const TestResultPage()),
+                          );
+                        } else {
+                          setState(() {
+                            loadingButton = false;
+                          });
+                        }
                       }
-                    }
-                  },
-                  borderColor: AppColors.blueColor,
-                  color: AppColors.blueColor,
-                  radius: 10,
-                  loading: loadingButton,
-                  text: 'Отправить',
+                    },
+                    borderColor: AppColors.blueColor,
+                    color: AppColors.blueColor,
+                    radius: 10,
+                    loading: loadingButton,
+                    text: 'Отправить',
+                  ),
                 ),
             ],
           ),
@@ -164,7 +167,7 @@ class _MainTestPageState extends State<MainTestPage> {
       ),
       options: CarouselOptions(
         height: 500,
-        viewportFraction: 0.8,
+        viewportFraction: 1,
         enableInfiniteScroll: false,
         onPageChanged: (index, reason) {
           setState(() {

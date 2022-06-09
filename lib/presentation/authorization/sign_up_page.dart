@@ -243,50 +243,43 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
       getButtons(_formKey, () async {
         if (_formKey.currentState!.validate()) {
-          setState(() {
-            loading = true;
-          });
           var email = (await UserService().checkEmail(emailController.text));
           var login = (await UserService().checkLogin(loginController.text));
           setState(() {
-            loading = false;
+            loading = true;
+            borderColorEmail = AppColors.greyColor;
+            errorEmail = null;
+            borderColorLogin = AppColors.greyColor;
+            errorLogin = null;
           });
-          if (email) {
-            setState(() {
-              borderColorEmail = AppColors.redColor;
-              errorEmail = 'Этот email уже используется';
-            });
-          }
-          if (login) {
-            setState(() {
-              borderColorLogin = AppColors.redColor;
-              errorLogin = 'Этот логин уже используется';
-            });
-          }
+          setState(() {
+            loading = false;
+            borderColorEmail = email == true ? AppColors.redColor : AppColors.greyColor;
+            errorEmail = email == true ?  'Этот email уже используется' : null;
+            borderColorLogin = login == true ? AppColors.redColor : AppColors.greyColor;
+            errorLogin = login == true ? 'Этот логин уже используется' : null;
+          });
           if (email == false && login == false) {
             _onItemTapped(2);
           }
-        } else {
+        }
+        else {
           setState(() {
             loading = true;
+            borderColorEmail = AppColors.greyColor;
+            errorEmail = null;
+            borderColorLogin = AppColors.greyColor;
+            errorLogin = null;
           });
           var email = (await UserService().checkEmail(emailController.text));
           var login = (await UserService().checkLogin(loginController.text));
           setState(() {
             loading = false;
+            borderColorEmail = email == true ? AppColors.redColor : AppColors.greyColor;
+            errorEmail = email == true ?  'Этот email уже используется' : null;
+            borderColorLogin = login == true ? AppColors.redColor : AppColors.greyColor;
+            errorLogin = login == true ? 'Этот логин уже используется' : null;
           });
-          if (!email) {
-            setState(() {
-              borderColorEmail = AppColors.greyColor;
-              errorEmail = null;
-            });
-          }
-          if (!login) {
-            setState(() {
-              borderColorLogin = AppColors.greyColor;
-              errorLogin = null;
-            });
-          }
           if (email == false && login == false) {
             _onItemTapped(2);
           }

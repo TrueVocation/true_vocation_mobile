@@ -4,6 +4,7 @@ import 'package:true_vocation_mobile/domain/model/test_result.dart';
 import 'package:true_vocation_mobile/domain/model/user_aptitudes.dart';
 import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
 import 'package:true_vocation_mobile/presentation/templates/custom_appbar_template.dart';
+import 'package:true_vocation_mobile/presentation/templates/custom_button.dart';
 import 'package:true_vocation_mobile/presentation/templates/page_with_scroll_template.dart';
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
@@ -56,7 +57,7 @@ class _TestResultPageState extends State<TestResultPage> {
     );
   }
 
-  Widget getResults (){
+  Widget getResults() {
     return CustomPageScroll(
       children: [
         Padding(
@@ -79,26 +80,33 @@ class _TestResultPageState extends State<TestResultPage> {
                   children: [
                     Row(
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              aptitudes[index].score.toString(),
-                              style: TextStyle(
-                                  color: AppColors.blueColor, fontSize: 16),
-                            ),
-                            Text(
-                              '/12',
-                              style: TextStyle(color: AppColors.blackColor),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          aptitudes[index].aptitudeDTO!.name!,
-                          style: TextStyle(
-                              color: AppColors.blackColor,
-                              fontWeight: FontWeight.w500
+                        Expanded(
+                          flex: 1,
+                          child: Row(
+                            children: [
+                              Text(
+                                aptitudes[index].score.toString(),
+                                style: TextStyle(
+                                    color: AppColors.blueColor, fontSize: 16),
+                              ),
+                              Text(
+                                '/12',
+                                style: TextStyle(color: AppColors.blackColor),
+                              ),
+                            ],
                           ),
-                          softWrap: true,
+                        ),
+                        Expanded(
+                          flex: 4,
+                          child: Text(
+                            aptitudes[index].aptitudeDTO!.name!,
+                            style: TextStyle(
+                              color: AppColors.blackColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            softWrap: true,
+                            textAlign: TextAlign.end,
+                          ),
                         ),
                       ],
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -118,7 +126,24 @@ class _TestResultPageState extends State<TestResultPage> {
               ),
             ),
           ),
-        )
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+              left: AppConstants.mainHorizontalPadding,
+              right: AppConstants.mainHorizontalPadding,
+              bottom: 16),
+          child: CustomButton(
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true)
+                  .pushReplacementNamed(AppRoutes.testPage);
+            },
+            color: AppColors.blueColor,
+            radius: 10,
+            text: 'Пройти тест снова',
+            borderColor: AppColors.blueColor,
+            loading: false,
+          ),
+        ),
       ],
     );
   }
