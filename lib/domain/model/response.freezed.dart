@@ -20,8 +20,8 @@ CustomResponse _$CustomResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CustomResponse {
-  int get code => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
+  int? get code => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
   dynamic get body => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $CustomResponseCopyWith<$Res> {
   factory $CustomResponseCopyWith(
           CustomResponse value, $Res Function(CustomResponse) then) =
       _$CustomResponseCopyWithImpl<$Res>;
-  $Res call({int code, String title, dynamic body});
+  $Res call({int? code, String? title, dynamic body});
 }
 
 /// @nodoc
@@ -57,11 +57,11 @@ class _$CustomResponseCopyWithImpl<$Res>
       code: code == freezed
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       body: body == freezed
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
@@ -77,7 +77,7 @@ abstract class _$$_CustomResponseCopyWith<$Res>
           _$_CustomResponse value, $Res Function(_$_CustomResponse) then) =
       __$$_CustomResponseCopyWithImpl<$Res>;
   @override
-  $Res call({int code, String title, dynamic body});
+  $Res call({int? code, String? title, dynamic body});
 }
 
 /// @nodoc
@@ -101,11 +101,11 @@ class __$$_CustomResponseCopyWithImpl<$Res>
       code: code == freezed
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       body: body == freezed
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
@@ -119,15 +119,15 @@ class __$$_CustomResponseCopyWithImpl<$Res>
 class _$_CustomResponse
     with DiagnosticableTreeMixin
     implements _CustomResponse {
-  const _$_CustomResponse({required this.code, required this.title, this.body});
+  const _$_CustomResponse({this.code, this.title, this.body});
 
   factory _$_CustomResponse.fromJson(Map<String, dynamic> json) =>
       _$$_CustomResponseFromJson(json);
 
   @override
-  final int code;
+  final int? code;
   @override
-  final String title;
+  final String? title;
   @override
   final dynamic body;
 
@@ -177,17 +177,17 @@ class _$_CustomResponse
 
 abstract class _CustomResponse implements CustomResponse {
   const factory _CustomResponse(
-      {required final int code,
-      required final String title,
+      {final int? code,
+      final String? title,
       final dynamic body}) = _$_CustomResponse;
 
   factory _CustomResponse.fromJson(Map<String, dynamic> json) =
       _$_CustomResponse.fromJson;
 
   @override
-  int get code => throw _privateConstructorUsedError;
+  int? get code => throw _privateConstructorUsedError;
   @override
-  String get title => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
   @override
   dynamic get body => throw _privateConstructorUsedError;
   @override

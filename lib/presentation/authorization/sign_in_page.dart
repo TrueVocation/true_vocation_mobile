@@ -31,6 +31,7 @@ class _SignInPageState extends State<SignInPage> {
   final passwordController = TextEditingController();
   bool loading = false;
   bool obscureText = true;
+  Color borderColor = AppColors.greyColor;
 
   @override
   void dispose() {
@@ -115,6 +116,7 @@ class _SignInPageState extends State<SignInPage> {
                     labelText: 'Ваш логин',
                     controller: loginController,
                     keyboardType: InputTypes.text.toString(),
+                    borderColor: borderColor,
                   ),
                   const SizedBox(
                     height: 16,
@@ -134,6 +136,7 @@ class _SignInPageState extends State<SignInPage> {
                     readOnly: false,
                     controller: passwordController,
                     labelText: 'Пароль',
+                    borderColor: borderColor,
                   ),
                   const SizedBox(
                     height: 48,
@@ -150,7 +153,7 @@ class _SignInPageState extends State<SignInPage> {
                             username: loginController.text,
                             password: passwordController.text)));
                         if (res.code == 200) {
-                          _singleNotifier.updateTokenValue(res.title);
+                          _singleNotifier.updateTokenValue(res.title!);
                           res = (await UserService()
                               .getUser(_singleNotifier.token));
                           if (res.code == 200) {
@@ -172,7 +175,17 @@ class _SignInPageState extends State<SignInPage> {
                             Navigator.of(context, rootNavigator: true)
                                 .pushReplacementNamed(AppRoutes.mainPage);
                           }
-                        } else {}
+                        } else {
+                          setState(() {
+                            loading = false;
+                          });
+                          changeBorderColor(AppColors.redColor);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text(
+                                    'Неверные учетные данные пользователя')),
+                          );
+                        }
                       }
                     },
                     color: AppColors.blueColor,
@@ -186,5 +199,11 @@ class _SignInPageState extends State<SignInPage> {
         ),
       ),
     );
+  }
+
+  void changeBorderColor(color) {
+    setState(() {
+      borderColor = color;
+    });
   }
 }

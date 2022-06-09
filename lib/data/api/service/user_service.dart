@@ -11,13 +11,11 @@ class UserService {
   }
 
   Future<bool> checkEmail(String email) async {
-    return UserRepository()
-        .checkEmail(email);
+    return UserRepository().checkEmail(email);
   }
 
   Future<bool> checkLogin(String login) async {
-    return UserRepository()
-        .checkLogin(login);
+    return UserRepository().checkLogin(login);
   }
 
   Future<CustomResponse> registrationUser(AppUser user) async {

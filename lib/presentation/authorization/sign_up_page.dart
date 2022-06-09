@@ -14,6 +14,7 @@ import 'package:true_vocation_mobile/presentation/templates/custom_text_form_fie
 import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/constants.dart';
 import 'package:true_vocation_mobile/utils/enums.dart';
+import 'package:true_vocation_mobile/utils/exceptions.dart';
 import 'package:true_vocation_mobile/utils/functions.dart';
 import 'package:true_vocation_mobile/utils/icons.dart';
 import 'package:true_vocation_mobile/utils/routes.dart';
@@ -254,16 +255,17 @@ class _SignUpPageState extends State<SignUpPage> {
           });
           setState(() {
             loading = false;
-            borderColorEmail = email == true ? AppColors.redColor : AppColors.greyColor;
-            errorEmail = email == true ?  'Этот email уже используется' : null;
-            borderColorLogin = login == true ? AppColors.redColor : AppColors.greyColor;
+            borderColorEmail =
+                email == true ? AppColors.redColor : AppColors.greyColor;
+            errorEmail = email == true ? 'Этот email уже используется' : null;
+            borderColorLogin =
+                login == true ? AppColors.redColor : AppColors.greyColor;
             errorLogin = login == true ? 'Этот логин уже используется' : null;
           });
           if (email == false && login == false) {
             _onItemTapped(2);
           }
-        }
-        else {
+        } else {
           setState(() {
             loading = true;
             borderColorEmail = AppColors.greyColor;
@@ -275,9 +277,11 @@ class _SignUpPageState extends State<SignUpPage> {
           var login = (await UserService().checkLogin(loginController.text));
           setState(() {
             loading = false;
-            borderColorEmail = email == true ? AppColors.redColor : AppColors.greyColor;
-            errorEmail = email == true ?  'Этот email уже используется' : null;
-            borderColorLogin = login == true ? AppColors.redColor : AppColors.greyColor;
+            borderColorEmail =
+                email == true ? AppColors.redColor : AppColors.greyColor;
+            errorEmail = email == true ? 'Этот email уже используется' : null;
+            borderColorLogin =
+                login == true ? AppColors.redColor : AppColors.greyColor;
             errorLogin = login == true ? 'Этот логин уже используется' : null;
           });
           if (email == false && login == false) {
@@ -374,7 +378,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 },
               );
               AlertDialog alert = AlertDialog(
-                content: const Text("На указанную почту было отправлено письмо для активации аккаунта"),
+                content: const Text(
+                    "На указанную почту было отправлено письмо для активации аккаунта"),
                 actions: [
                   okButton,
                 ],
@@ -386,25 +391,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 },
               );
             } else {
-              Widget okButton = TextButton(
-                child: const Text("OK"),
-                onPressed: () {
-                  Navigator.of(context, rootNavigator: true)
-                      .pushReplacementNamed(AppRoutes.mainPage);
-                },
-              );
-              AlertDialog alert = AlertDialog(
-                content: Text(res.title),
-                actions: [
-                  okButton,
-                ],
-              );
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return alert;
-                },
-              );
+              AppExceptions.custom(
+                  'На указанную почту было отправлено письмо для активации аккаунта',
+                  context,
+                  AppRoutes.mainPage,
+                  true);
             }
           }
         }

@@ -27,48 +27,49 @@ class UserRepository {
   }
 
   Future<CustomResponse> registrationUser(AppUser user) async {
-    final response = await AppConstants.dio.post(
-        '/api/account/registration', data: user.toJson());
-
-    if (response.statusCode! >= 400) {
-      return CustomResponse.fromJson(response.data);
-    } else {
+    try {
+      await AppConstants.dio
+          .post('/api/account/registration', data: user.toJson());
       return const CustomResponse(title: '', code: 200);
+    } on DioError catch (e) {
+      return const CustomResponse(title: '', code: 400);
     }
   }
 
   Future<CustomResponse> authenticateUser(Login login) async {
-    final response = await AppConstants.dio.post(
-        '/api/authenticate', data: login.toJson());
-
-    if (response.statusCode! >= 400) {
-      return CustomResponse.fromJson(response.data);
-    } else {
-      return CustomResponse(code: 200, title: response.headers.value('Authorization')!);
+    try {
+      final response = await AppConstants.dio.post(
+        '/api/authenticate',
+        data: login.toJson(),
+      );
+      return CustomResponse(
+          code: 200, title: response.headers.value('Authorization')!);
+    } on DioError catch (e) {
+      return const CustomResponse(code: 400, title: '');
     }
   }
 
   Future<CustomResponse> getUser(String token) async {
-    final response = await AppConstants.dio.get(
-        '/api/account/user', options: Options(
-      headers: {"Authorization": token},
-    ));
-
-    if (response.statusCode! >= 400) {
-      return CustomResponse.fromJson(response.data);
-    } else {
-      return CustomResponse(code: 200, title: response.statusMessage!, body: response.data);
+    try {
+      final response = await AppConstants.dio.get('/api/account/user',
+          options: Options(
+            headers: {"Authorization": token},
+          ));
+      return CustomResponse(
+          code: 200, title: response.statusMessage!, body: response.data);
+    } on DioError catch (e) {
+      return const CustomResponse(code: 400, title: '');
     }
   }
 
   Future<CustomResponse> getUserInfo(int id) async {
-    final response = await AppConstants.dio.get(
-        '/api/app-users-by-user/$id');
+    final response = await AppConstants.dio.get('/api/app-users-by-user/$id');
 
     if (response.statusCode! >= 400) {
       return CustomResponse.fromJson(response.data);
     } else {
-      return CustomResponse(code: 200, title: response.statusMessage!, body: response.data);
+      return CustomResponse(
+          code: 200, title: response.statusMessage!, body: response.data);
     }
   }
 }

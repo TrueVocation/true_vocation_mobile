@@ -10,19 +10,18 @@ import 'package:true_vocation_mobile/utils/colors.dart';
 import 'package:true_vocation_mobile/utils/exceptions.dart';
 
 class ApiFunctions {
-
-  static Widget getError(int code, String title){
+  static void getError(int code, String title, BuildContext context) {
     switch (code) {
       case 500:
-        return AppExceptions.serverError(code);
+        return AppExceptions.serverError(context);
       case 201:
-        return AppExceptions.successRegistration(code);
+        return AppExceptions.successRegistration(context);
       default:
-        return AppExceptions.custom(title, code);
+        return AppExceptions.custom(title, context, '', false);
     }
   }
 
-  static Color getColorEmployee(String value){
+  static Color getColorEmployee(String value) {
     switch (value) {
       case 'низкое':
         return AppColors.redColor;

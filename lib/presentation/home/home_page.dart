@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _getData();
   }
+
   void _getData() async {
     listProf = (await ProfessionService()
             .getProfessions(page, AppConstants.getListSize))
@@ -421,11 +422,13 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 CustomButton(
                                   onPressed: () async {
-                                    if (AppConstants.currentUser.id != null){
+                                    if (AppConstants.currentUser.id != null) {
                                       setState(() {
                                         loadingTest = true;
                                       });
-                                      var res = (await TestService().checkTestResult(AppConstants.currentUser.id));
+                                      var res = (await TestService()
+                                          .checkTestResult(
+                                              AppConstants.currentUser.id));
                                       setState(() {
                                         loadingTest = false;
                                       });
@@ -434,23 +437,22 @@ class _HomePageState extends State<HomePage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                              const PreviewTestPage()),
+                                                  const PreviewTestPage()),
                                         );
                                       } else {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                              const TestResultPage()),
+                                                  const TestResultPage()),
                                         );
                                       }
-                                    }
-                                    else {
+                                    } else {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                            const AuthorizationPage()),
+                                                const AuthorizationPage()),
                                       );
                                     }
                                   },
@@ -642,7 +644,7 @@ class _HomePageState extends State<HomePage> {
             borderRadius: const BorderRadius.all(Radius.circular(50)),
             child: GestureDetector(
               onTap: () {
-                if (user.id == null){
+                if (user.id == null) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -673,8 +675,7 @@ class _HomePageState extends State<HomePage> {
               },
               child: user.user?.imageUrl != null
                   ? Image(
-                      image: NetworkImage(
-                          user.user!.imageUrl!),
+                      image: NetworkImage(user.user!.imageUrl!),
                     )
                   : CustomSvgIcon(
                       preset: AppIcons.login,

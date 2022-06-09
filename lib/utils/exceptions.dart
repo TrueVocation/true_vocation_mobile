@@ -1,27 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:true_vocation_mobile/presentation/templates/container_custom_template.dart';
-import 'package:true_vocation_mobile/utils/colors.dart';
+import 'package:true_vocation_mobile/utils/routes.dart';
 
 class AppExceptions {
-
-  static Widget serverError(int code) {
-    return custom('На стороне сервера возникла ошибка', code);
+  static void serverError(BuildContext context) {
+    return custom('На стороне сервера возникла ошибка', context, '', false);
   }
 
-  static Widget successRegistration(int code) {
-    return custom('На указанную почту было отправлено письмо для активации аккаунта', code);
+  static void successRegistration(BuildContext context) {
+    return custom(
+        'На указанную почту было отправлено письмо для активации аккаунта',
+        context,
+        AppRoutes.mainPage,
+        true);
   }
 
-  static Widget custom(String? text, int code) {
-     return CustomContainer(
-       child: Text(
-         text!,
-         style: TextStyle(
-           color: AppColors.blackColor,
-           fontSize: 16,
-         ),
-       ),
-       borderRadius: BorderRadius.circular(10),
-     );
+  static void custom(String text, context, routeName, bool action) {
+    Widget okButton = TextButton(
+      child: const Text("Да"),
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true)
+            .pushReplacementNamed(routeName);
+      },
+    );
+    AlertDialog alert = AlertDialog(
+      content: Text(text),
+      actions: [
+        if (action) okButton,
+      ],
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }

@@ -7,8 +7,8 @@ part 'response.g.dart';
 @freezed
 class CustomResponse with _$CustomResponse {
   const factory CustomResponse({
-    required int code,
-    required String title,
+    int? code,
+    String? title,
     dynamic body,
   }) = _CustomResponse;
 
