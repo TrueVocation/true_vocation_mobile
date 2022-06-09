@@ -11,7 +11,7 @@ class AppConstants {
   static const double mainHorizontalPadding = 24;
   static TextStyle textButtonStyle = TextStyle(
       color: AppColors.greyColor, fontSize: 16, fontWeight: FontWeight.normal);
-  static const String baseUrl = "http://192.168.0.181:8080";
+  //static const String baseUrl = "http://192.168.0.181:8080";
   static String userToken = '';
-//static const String baseUrl = "https://true-vocation.herokuapp.com";
+  static const String baseUrl = "https://true-vocation.herokuapp.com";
 }

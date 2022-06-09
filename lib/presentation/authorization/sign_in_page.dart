@@ -149,9 +149,6 @@ class _SignInPageState extends State<SignInPage> {
                         var res = (await UserService().authenticateUser(Login(
                             username: loginController.text,
                             password: passwordController.text)));
-                        setState(() {
-                          loading = false;
-                        });
                         if (res.code == 200) {
                           _singleNotifier.updateTokenValue(res.title);
                           res = (await UserService()
@@ -169,6 +166,9 @@ class _SignInPageState extends State<SignInPage> {
                             AppConstants.currentUser =
                                 _singleNotifier.currentUser;
                             AppConstants.userToken = _singleNotifier.token;
+                            setState(() {
+                              loading = false;
+                            });
                             Navigator.of(context, rootNavigator: true)
                                 .pushReplacementNamed(AppRoutes.mainPage);
                           }

@@ -372,7 +372,47 @@ class _SignUpPageState extends State<SignUpPage> {
             setState(() {
               loading = false;
             });
-            ApiFunctions.getError(res.code, res.title);
+            if (res.code == 200) {
+              Widget okButton = TextButton(
+                child: const Text("OK"),
+                onPressed: () {
+                  Navigator.of(context, rootNavigator: true)
+                      .pushReplacementNamed(AppRoutes.mainPage);
+                },
+              );
+              AlertDialog alert = AlertDialog(
+                content: const Text("На указанную почту было отправлено письмо для активации аккаунта"),
+                actions: [
+                  okButton,
+                ],
+              );
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return alert;
+                },
+              );
+            } else {
+              Widget okButton = TextButton(
+                child: const Text("OK"),
+                onPressed: () {
+                  Navigator.of(context, rootNavigator: true)
+                      .pushReplacementNamed(AppRoutes.mainPage);
+                },
+              );
+              AlertDialog alert = AlertDialog(
+                content: Text(res.title),
+                actions: [
+                  okButton,
+                ],
+              );
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return alert;
+                },
+              );
+            }
           }
         }
       }, () {
